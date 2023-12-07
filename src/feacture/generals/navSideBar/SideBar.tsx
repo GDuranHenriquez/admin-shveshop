@@ -6,7 +6,6 @@ import styles from './sideBar.module.css'
 import './SideBar.css'
 import {
   DesktopOutlined,
-  FileOutlined,
   PieChartOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';

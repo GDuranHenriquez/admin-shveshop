@@ -3,9 +3,11 @@ import styled from 'styled-components'
 export const ContainerSidebar = styled.div`
   position: sticky;
   height: 100%;
+  min-height: 100%;
   width: max-content;
   .menu{
     height: 100%;
+    min-height: 100%;
     .ant-menu-item{
       margin-bottom: 30px;
     }

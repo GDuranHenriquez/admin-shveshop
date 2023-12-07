@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { styled } from "styled-components";
 import { useState } from 'react'
 import './App.css'
@@ -31,6 +31,7 @@ function App() {
             <Routes>
               <Route path='/panel' element={<PanelPage></PanelPage>} ></Route>
               <Route path='/addProduct' element={<AddProductPage></AddProductPage>}></Route>
+              <Route path="/" element={<Navigate to="/panel"/>} />
             </Routes>  
           </Container> 
         </div>        

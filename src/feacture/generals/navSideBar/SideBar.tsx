@@ -52,7 +52,7 @@ const  getClasseIcon = (item:string)=> {
 const items: MenuItem[] = [
   getItem('Historico', 'panel', <PieChartOutlined className={getClasseIcon(theme)}/>),
   getItem('Add/Edit Productos', 'addProduct', <DesktopOutlined className={getClasseIcon(theme)}/>),
-  getItem('Edit Precios', 'editPrecios', <FileOutlined className={getClasseIcon(theme)}/>),
+  /* getItem('Edit Precios', 'editPrecios', <FileOutlined className={getClasseIcon(theme)}/>), */
   /* getItem('Team', 'sub2', <TeamOutlined className={getClasseIcon(theme)}/>, [getItem('Team 1', '6'), getItem('Team 2', '8')]), */
   /* getItem('Administar usuarios', 'sub1', <UserOutlined className={getClasseIcon(theme)}/>, [
     getItem('Tom', '4'),
@@ -120,7 +120,10 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
           <span>{openMenu}</span>
         </div>
         <div className="demo-logo" />
-        <Menu className={theme+'Menu'} defaultSelectedKeys={['panel']} mode="horizontal" items={items} onClick={onClick}/>
+        <div className='containerMenuBar'>
+          <Menu className={`${theme+'Menu'} menuBar`} defaultSelectedKeys={['panel']} mode="horizontal" items={items} onClick={onClick}/>
+        </div>
+        
       </Header>
     </Layout>
   );

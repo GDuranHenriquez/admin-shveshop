@@ -6,6 +6,13 @@
   --backgrounMenuSH: transparent;
   --colorSH: rgba(0, 0, 0, 1);
 }
+.menuBar{
+  max-width: 100px;
+}
+.containerMenuBar{
+  max-width: 100px;
+}
+
 .responseBar{
   display: none;
 }
@@ -91,12 +98,16 @@
   .noResponse{
     display: none;
   }
+  .containerMenuBar{
+    max-width: 100px;
+  }
   .responseBar{
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
     width: 100%; 
+    max-width: 100%;
     padding: 0px 25px 0 25px;   
   }
   .mukafeMenu > li > .ant-menu-submenu-title > .anticon svg{
@@ -107,6 +118,7 @@
   }
   .responseHeaderVarmukafe{
     width: 100%;
+    max-width: 100%;
     background: var(--backgrounMenuMK);
     color: var(--colorMK);
     font-weight: bold;
@@ -158,7 +170,7 @@
     display: none !important;
   }
    
-  .responseBar  > .ant-menu-horizontal > .ant-menu-overflow-item::after {
+  .responseBar > .containerMenuBar  > .ant-menu-horizontal > .ant-menu-overflow-item::after {
     display: none !important;
   } 
 }
@@ -167,6 +179,10 @@
   .noResponse{
     display: none;
   }
+  
+  .containerMenuBar{
+    max-width: 100px;
+  }
   .responseBar{
     display: flex;
     flex-wrap: nowrap;
@@ -234,7 +250,7 @@
     display: none !important;
   }
    
-  .responseBar  > .ant-menu-horizontal > .ant-menu-overflow-item::after {
+  .responseBar > .containerMenuBar  > .ant-menu-horizontal > .ant-menu-overflow-item::after {
     display: none !important;
   }
 }

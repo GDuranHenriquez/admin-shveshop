@@ -1,0 +1,44 @@
+:root {
+  --backgroundLogoMK : rgba(28, 19, 22, 1);
+  --backgrounMenuMK: transparent;
+  --colorMK: rgba(255, 179, 123, 1);
+  --colorBorder: rgba(239, 125, 0 , 1)
+  --backgrounMenuSH: transparent;
+  --colorSH: rgba(0, 0, 0, 1);
+  --backgroundLogoSH : rgba(254 , 208, 208, 1);
+}
+
+.ant-spin-nested-loading > 
+.ant-spin-container > .ant-table > .ant-table-container > .ant-table-header > 
+table > .ant-table-thead > tr > th{
+  margin: 0 !important;
+  padding: 3px 5px 3px 10px  !important;
+  
+}
+.ant-spin-nested-loading > 
+.ant-spin-container > .ant-table > .ant-table-container > .ant-table-body 
+> table > .ant-table-tbody > tr > .ant-table-cell{
+  margin: 0 !important;
+  padding: 5px 5px 5px 5px  !important;
+
+}
+
+.ant-table-container{
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+}
+
+@media (max-width: 768px){
+  .columnData{
+    font-size: 10px;
+    padding: 0;
+    margin: 0;
+  }
+}
+@media screen and (max-width: 768px){
+  .columnData{
+    font-size: 10px;
+    padding: 0;
+    margin: 0;
+  }
+}

@@ -1,0 +1,52 @@
+:root {
+  --backGroundBarSideMK: rgba(28, 19, 22, 1),
+  --backGroundBarSideSH: rgba(254 , 208, 208, 1),
+  --backgrounMenuMK: transparent;
+  --colorMK: rgba(255, 179, 123, 1);
+  --colorBorderMK: rgba(239, 125, 0 , 1);
+  --contornoLogoMK: rgba(196, 179, 153, 1);
+  --backgrounMenuSH: transparent;
+  --colorSH: rgba(0, 0, 0, 1);
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+}
+
+
+body{
+  margin: 0;
+  padding: 0;
+}
+.mukafeAppBody > div > .ant-menu-submenu > .ant-menu > .ant-menu-item-selected{
+  border: 1px solid rgba(255, 179, 123, 0.2);
+  background: transparent;
+}
+
+.mukafeAppBody > div > .ant-menu-submenu > .ant-menu >
+ .ant-menu-item-selected> .ant-menu-title-content {
+  font-weight: bold;
+  color: rgba(255, 179, 123, 1) !important;
+}
+.mukafeAppBody > div > .ant-menu-submenu > .ant-menu-sub {
+  color: var(--colorMK);
+  background: rgba(28, 19, 22, 1) !important;
+}
+
+.shAppBody > div > .ant-menu-submenu > .ant-menu > .ant-menu-item-selected{
+  border: 1px solid rgba(196, 179, 153, 0.7);
+  background: transparent;
+}
+
+.shAppBody > div > .ant-menu-submenu > .ant-menu >
+ .ant-menu-item-selected> .ant-menu-title-content {
+  font-weight: bold;
+  color: var(--colorSH) !important;
+}
+.shAppBody > div > .ant-menu-submenu > .ant-menu-sub {
+  color: var(--colorSH);
+  background: rgba(254 , 208, 208, 1) !important;
+}
+
+

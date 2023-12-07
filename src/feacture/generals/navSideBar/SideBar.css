@@ -1,0 +1,244 @@
+:root {
+  --backgrounMenuMK: transparent;
+  --colorMK: rgba(255, 179, 123, 1);
+  --colorBorderMK: rgba(239, 125, 0 , 1);
+  --contornoLogoMK: rgba(196, 179, 153, 1);
+  --backgrounMenuSH: transparent;
+  --colorSH: rgba(0, 0, 0, 1);
+}
+.responseBar{
+  display: none;
+}
+.unCollapsed{
+  flex: 0 0 220px!important;
+  width: 220px !important;
+  max-width: 220px !important;
+  min-width: 220px !important;
+}
+
+.mukafe  > .ant-layout-sider-trigger{
+  border-top: 2px solid rgba(239, 125, 0, 1) !important;
+  background: transparent !important;
+}
+.mukafe > .ant-layout-sider-trigger > span > svg{
+  fill: var(--colorMK) !important;
+}
+.sh  > .ant-layout-sider-trigger{
+  border-top: 2px solid rgba(0, 0, 0, 1) !important;
+  background: transparent !important;
+}
+.sh > .ant-layout-sider-trigger > span > svg{
+  fill: black !important;
+}
+
+.unCollapsed > .ant-layout-sider-trigger{
+  width: 220px !important;
+}
+.ant-menu-title-content{
+  font-size: 12px;
+  font-weight: bold;
+}
+.ant-menu-item > span{
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.mukafeLogo{
+  border-bottom: 2px solid rgba(239, 125, 0, 1);
+}
+.shLogo{
+  border-bottom: 2px solid rgba(0, 0, 0, 1);
+}
+
+.mukafeIconBar{
+  fill: rgba(239, 125, 0, 1) !important;
+}
+.shIconBar{
+  fill: rgba(0, 0, 0, 1) !important;
+}
+
+.mukafeMenu{
+  background: var(--backgrounMenuMK);
+  color: var(--colorMK);
+  font-weight: bold;
+}
+.shMenu{
+  background: var(--backgrounMenuSH);
+  color: var(--colorSH);
+  font-weight: bold;
+}
+
+.mukafeMenu > .ant-menu-item:hover{
+  background: rgba(255, 255, 255, 0.5) !important;
+  color: var(--colorMK) !important;
+}
+.mukafeMenu > .ant-menu-item-selected{
+  background: white !important;
+  color: var(--colorBorder);
+  font-weight: bold;
+}
+
+.shMenu > .ant-menu-item:hover{
+  background: rgba(196, 179, 153, 0.7) !important;
+  color: var(--colorSH) !important;
+}
+.shMenu > .ant-menu-item-selected{
+  background: rgba(196, 179, 153, 1) !important;
+  color: var(--colorBorder);
+}
+
+@media (max-width: 768px) {
+  .noResponse{
+    display: none;
+  }
+  .responseBar{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+    padding: 0px 25px 0 25px;   
+  }
+  .mukafeMenu > li > .ant-menu-submenu-title > .anticon svg{
+    fill: var(--colorBorderMK) !important;
+  }
+  .shMenu > li > .ant-menu-submenu-title > .anticon svg{
+    fill: var(--colorSH) !important;
+  }
+  .responseHeaderVarmukafe{
+    width: 100%;
+    background: var(--backgrounMenuMK);
+    color: var(--colorMK);
+    font-weight: bold;
+  }
+  .responseHeaderVarsh{
+    width: 100%;
+    background: var(--backgrounMenuSH);
+    color: var(--colorSH);
+    font-weight: bold;
+  }
+  .mukafeLogo{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+  }
+  .mukafeLogo > img{
+    width: 48px;
+    height: 48px;
+  }
+  .mukafeIconBar > svg{
+    fill: var(--colorBorderMK) !important;
+  }
+  .shIconBar > svg{
+    fill: black !important;
+  }
+  .shLogo{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+  }
+  .shLogo > img{
+    width: 48px;
+    height: 48px;
+  }
+  .ant-menu-submenu-arrow::before{
+    display: none !important;
+  }
+  .ant-menu-submenu-arrow::after{
+    display: none !important;
+  }
+   
+  .responseBar  > .ant-menu-horizontal > .ant-menu-overflow-item::after {
+    display: none !important;
+  } 
+}
+
+@media screen and (max-width: 768px) {
+  .noResponse{
+    display: none;
+  }
+  .responseBar{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+    padding: 0px 25px 0 25px;   
+  }
+  .mukafeMenu > li > .ant-menu-submenu-title > .anticon svg{
+    fill: var(--colorBorderMK) !important;
+  }
+  .shMenu > li > .ant-menu-submenu-title > .anticon svg{
+    fill: var(--colorSH) !important;
+  }
+  .responseHeaderVarmukafe{
+    width: 100%;
+    background: var(--backgrounMenuMK);
+    color: var(--colorMK);
+    font-weight: bold;
+  }
+  .responseHeaderVarsh{
+    width: 100%;
+    background: var(--backgrounMenuSH);
+    color: var(--colorSH);
+    font-weight: bold;
+  }
+  .mukafeLogo{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+  }
+  .mukafeLogo > img{
+    width: 48px;
+    height: 48px;
+  }
+  .mukafeIconBar > svg{
+    fill: var(--colorBorderMK) !important;
+  }
+  .shIconBar > svg{
+    fill: black !important;
+  }
+  .shLogo{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+  }
+  .shLogo > img{
+    width: 48px;
+    height: 48px;
+  }
+  .ant-menu-submenu-arrow::before{
+    display: none !important;
+  }
+  .ant-menu-submenu-arrow::after{
+    display: none !important;
+  }
+   
+  .responseBar  > .ant-menu-horizontal > .ant-menu-overflow-item::after {
+    display: none !important;
+  }
+}
+
+
+
+

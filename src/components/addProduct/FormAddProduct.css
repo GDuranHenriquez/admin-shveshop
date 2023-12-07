@@ -1,0 +1,24 @@
+
+.ant-row{
+  margin: 0px !important; 
+}
+.ant-row > .ant-col{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.buttonCategory{
+  display: flex;
+  border-radius: 5px;
+  width: 18px;
+  height: 18px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  padding: 2px;
+  margin: 0;
+}
+

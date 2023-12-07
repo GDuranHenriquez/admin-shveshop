@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { styled } from "styled-components";
 import { useState } from 'react'
@@ -27,7 +27,7 @@ function App() {
         <div>
           <Container className={`${theme+'App'} ${sidebarOpen?'sidebarState active':''} containerApp`}>
             {/* <SideBar sidebarOpen = {sidebarOpen} setSidebaropen = {setSidebaropen} /> */}
-            <SideBar sidebarOpen = {sidebarOpen} setSidebaropen = {setSidebaropen}/>
+            <SideBar _sidebarOpen = {sidebarOpen} setSidebaropen = {setSidebaropen}/>
             <Routes>
               <Route path='/panel' element={<PanelPage></PanelPage>} ></Route>
               <Route path='/addProduct' element={<AddProductPage></AddProductPage>}></Route>

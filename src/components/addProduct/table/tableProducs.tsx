@@ -271,7 +271,7 @@ const TableProducts: React.FC<Props> = ( {data , setDataProduct, setProductEdit}
       key: 'x',
       width: 80,
       fixed: 'right',
-      render: (name, record) => {
+      render: (_name, record) => {
         // Renderiza un botón o un componente de acción personalizado
         return (
           <button key={'btnEdit' + record.id} id="btnEdit" onClick={() => handleEditar(record)} style={{border: 'none', cursor: 'pointer', width: '36px', height: '24px', background:'transparent'}}>

@@ -8,19 +8,18 @@ import {
   DesktopOutlined,
   FileOutlined,
   PieChartOutlined,
-  MenuFoldOutlined ,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
 
 interface Props{
-  sidebarOpen: boolean,
+  _sidebarOpen: boolean,
   setSidebaropen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const  theme  = import.meta.env.VITE_TEMA;
 
-const { Sider, Header, Content, Footer } = Layout;
+const { Sider, Header } = Layout;
 
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -68,7 +67,7 @@ const layoutTheme = {
   fontWeight: 'bold',
 }
 
-const SideBar: React.FC<Props> = ({ sidebarOpen, setSidebaropen }) => {
+const SideBar: React.FC<Props> = ({ _sidebarOpen, setSidebaropen }) => {
   const location = useLocation(); 
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false); 

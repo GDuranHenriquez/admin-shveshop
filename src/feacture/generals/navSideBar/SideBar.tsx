@@ -81,6 +81,16 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
         return '' ;
     }
   }
+  const getMenuDefaultSelect = () =>{
+    switch (location.pathname) {
+      case '/addProduct':
+        return 'addProduct';  
+      case '/panel':
+        return 'panel';   
+      default:
+        return '' ;
+    }
+  }
   const [openMenu, setOpenMenu] = useState<string>(getLocation());
 
   const onClick: MenuProps['onClick'] = (e) =>{
@@ -109,7 +119,7 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
           <img src={getLogo(theme)} alt="Logo Mukafe" />
         </div>
         <div className="demo-logo-vertical" />
-        <Menu className={theme+'Menu'} defaultSelectedKeys={['panel']} mode="inline" items={items} onClick={onClick}/>
+        <Menu className={theme+'Menu'} defaultSelectedKeys={[getMenuDefaultSelect()]} mode="inline" items={items} onClick={onClick}/>
       </Sider>
       <Header className={`responseBar ${'responseHeaderVar' + theme}`} style={{...layoutTheme}}>
         <div className={`${styles.logo} ${theme+'Logo'}`}>
@@ -120,7 +130,7 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
         </div>
         <div className="demo-logo" />
         <div className='containerMenuBar'>
-          <Menu className={`${theme+'Menu'} menuBar`} defaultSelectedKeys={['panel']} mode="horizontal" items={items} onClick={onClick}/>
+          <Menu className={`${theme+'Menu'} menuBar`} defaultSelectedKeys={[getMenuDefaultSelect()]} mode="horizontal" items={items} onClick={onClick}/>
         </div>
         
       </Header>

@@ -67,7 +67,7 @@ const layoutTheme = {
   fontWeight: 'bold',
 }
 
-const SideBar: React.FC<Props> = ({ _sidebarOpen, setSidebaropen }) => {
+const SideBar: React.FC<Props> = ({setSidebaropen }) => {
   const location = useLocation(); 
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false); 

@@ -35,6 +35,6 @@ export const getTheme = (themeName: string) =>{
     case 'sh':
       return theme_sh;     
     default:
-      return theme_mukafe
+      return defaultTheme
   }
 }

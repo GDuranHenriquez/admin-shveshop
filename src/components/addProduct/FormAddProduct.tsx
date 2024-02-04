@@ -8,7 +8,7 @@ import ModalCategori from "./modalCategori/ModalCategori";
 import ModalPresentacion from "./modalPresentacion/ModaPresentacion";
 import SubmitButton from "./SubmitButton";
 import { Button, Form, Input, Space, Col, Row, Select } from 'antd';
-import { Product } from "../../redux/slices/products/typesProducts";
+import { Product, ventasPor } from "../../redux/slices/products/typesProducts";
 import TableProducts from "./table/tableProducs";
 import './FormAddProduct.css'
 //import { getBase64Image } from '../../assets/imagedefaultBS64'
@@ -34,12 +34,18 @@ const FormAddProducts: React.FC = () => {
     nombre:'', codigo:'', descripcion:'', 
     lote:'', categoria:[] , p_com_bulto: 0, unidad_p_bulto: 0,
     p_venta_bulto: 0, p_venta_unidad: 0, iva: 0, 
-    total_bulto: 0, cantidad_unidad: 0, observacion:'', img: productDefault, ProductoPresentacion: null
-  };
+    total_bulto: 0, cantidad_unidad: 0, observacion:'', img: productDefault, ProductoPresentacion: null, 
+    cant_min_mayoreo: 0, p_venta_mayor: 0, venta_por: null };
   const errorsData: {[key: string]: number} = {
     nombre:1, codigo:1, descripcion:1, lote:0, categoria:1 , p_com_bulto: 0,
     unidad_p_bulto: 1, p_venta_bulto: 0, p_venta_unidad: 1, iva:0, 
-    total_bulto: 1, cantidad_unidad: 0, observacion:0, presentacion: 1};
+    total_bulto: 1, cantidad_unidad: 0, observacion:0, presentacion: 1, cant_min_mayoreo: 0, p_venta_mayor: 0, venta_por: 1  
+  };
+  const optionsVentaPor = [
+    {label: '', value:''},
+    {label: "unit", value:'1'},
+    {label: "divisible", value:'2'}
+  ]
 
   const [options, setOptions] =  useState<{label: string, value: string}[] | undefined>([]);
   const [optionsPresentacion, setOptionsPresentacion] = useState<{label: string, value: string}[] | undefined>([]);
@@ -54,7 +60,7 @@ const FormAddProducts: React.FC = () => {
 
 
   const inpNumericosObli = ['unidad_p_bulto', 'p_venta_bulto', 'p_venta_unidad',  
-  'p_com_bulto', 'total_bulto', 'cantidad_unidad', 'iva'];
+  'p_com_bulto', 'total_bulto', 'cantidad_unidad', 'iva', 'p_venta_mayor', 'cant_min_mayoreo'];
   const inpStringObli = ['nombre', 'codigo', 'descripcion'];
     
   function setImgDefault(e: React.MouseEvent<HTMLButtonElement>){
@@ -130,6 +136,15 @@ const FormAddProducts: React.FC = () => {
         return {...error, categoria : 1}
       })
     }
+    if(dataForm.venta_por !== ''){
+      setErrors((error) => {
+        return {...error, venta_por : 0}
+      })
+    }else{
+      setErrors((error) => {
+        return {...error, venta_por : 1}
+      })
+    }
   }
   
   //SelectCategoria
@@ -150,6 +165,17 @@ const FormAddProducts: React.FC = () => {
     }else{
       setDataProduct({ ...dataProduct,  ProductoPresentacion: null });
       setErrors({...errors, presentacion: 1})
+    }
+  }
+  //select ventas por
+  const onChangeVentasPor = (value: string) => {
+    if(Number(value) > 0){
+      const selecVentasPor = ventasPor.filter((tipoVenta) => tipoVenta.id === Number(value));
+      setDataProduct({ ...dataProduct,  venta_por: selecVentasPor[0].nombre });
+      setErrors({...errors, venta_por: 0})
+    }else{
+      setDataProduct({ ...dataProduct,  venta_por: null });
+      setErrors({...errors, venta_por: 1})
     }
   }
   // Filter `option.label` match the user type `input`
@@ -180,7 +206,7 @@ const FormAddProducts: React.FC = () => {
         setErrors({...errors, [nameInput] : 0});
         form.setFieldValue(nameInput, valueInput);
       }else{
-        form.setFieldValue(nameInput, valueInput);
+        form.setFieldValue(nameInput, dataProduct[nameInput]);
       }
          
     }else if(inpStringObli.includes(nameInput)){
@@ -226,6 +252,7 @@ const FormAddProducts: React.FC = () => {
         }
       }      
     });
+    console.log(dataProduct)
   }, [dataProduct]);
   
   useEffect(() => {
@@ -233,10 +260,12 @@ const FormAddProducts: React.FC = () => {
       form.setFieldsValue(null);
       form.setFieldValue('categoria', '');
       form.setFieldValue('ProductoPresentacion', '');
+      form.setFieldValue('venta_por', '');
     }else{
       form.setFieldsValue(dataProduct);
       const categoria = dataProduct.categoria[0];
       const presentacion = dataProduct.ProductoPresentacion?.nombre;
+      const tipoVenta = dataProduct.venta_por;
       if(presentacion){
         form.setFieldValue('ProductoPresentacion', presentacion);
       }else{
@@ -251,10 +280,14 @@ const FormAddProducts: React.FC = () => {
           form.setFieldValue('categoria', '')
         }
       }
+      if(tipoVenta){
+        form.setFieldValue('venta_por', tipoVenta);
+      }else{
+        form.setFieldValue('venta_por', '')
+      }
     }
     getErrosFromForm();
   }, [productEdit])
-
 
   const getForm = (typeForm:boolean) =>{
     if(!typeForm){
@@ -435,6 +468,46 @@ const FormAddProducts: React.FC = () => {
             <TextArea rows={2} />
           </Form.Item>
         </Col>
+      </Row>
+
+      {/*Fila 6*/}
+      <Row gutter={24}>
+        <Col span={8}>
+          <Form.Item name = "p_venta_mayor" label="Pr. Venta Mayor" rules={[
+            { required: true, message: 'Este campo es obligatorio' },
+            {
+              pattern: regexNumberDecimal,
+              message: 'Ingresa un numero valido',
+            }
+          ]} initialValue={dataProduct.p_venta_mayor} >
+            <Input/>
+          </Form.Item>
+        </Col>
+
+        <Col span={8}>
+          <Form.Item name='cant_min_mayoreo' label="Cant. Min. Mayoreo" rules={[
+            { required: true, message: 'Este campo es obligatorio' },
+            {
+              pattern: regexNumberDecimal,
+              message: 'Ingresa un numero valido',
+            }
+            ]} initialValue={dataProduct.cant_min_mayoreo} >
+              <Input />
+          </Form.Item>
+        </Col>
+        
+        <Col span={8}>                 
+          <Form.Item name="venta_por" label="Tipo de Venta" rules={[{ required: true }]} tooltip="El tipo de venta se refiere a si el producto de vende en partes unitarias o se vende de acuerdo a una medida de esa porción)">            
+                <Select
+                  showSearch
+                  placeholder="Select. tipo de venta"
+                  optionFilterProp="children"
+                  onChange={onChangeVentasPor}
+                  filterOption={filterOption}
+                  options={optionsVentaPor}                      
+                />                
+          </Form.Item>   
+        </Col>
       </Row>      
 
       <Form.Item>
@@ -551,6 +624,33 @@ const FormAddProducts: React.FC = () => {
       {/*Fila 5*/}
       <Row gutter={24}>
         <Col span={12}>
+          <Form.Item name = "p_venta_mayor" label="Pr. Venta Mayor" rules={[
+            { required: true, message: 'Este campo es obligatorio' },
+            {
+              pattern: regexNumberDecimal,
+              message: 'Ingresa un numero valido',
+            }
+          ]} initialValue={dataProduct.p_venta_mayor} >
+            <Input/>
+          </Form.Item>
+        </Col>
+
+        <Col span={12}>
+          <Form.Item name='cant_min_mayoreo' label="Cant. Min. Mayoreo" rules={[
+            { required: true, message: 'Este campo es obligatorio' },
+            {
+              pattern: regexNumberDecimal,
+              message: 'Ingresa un numero valido',
+            }
+            ]} initialValue={dataProduct.cant_min_mayoreo} >
+              <Input />
+          </Form.Item>
+        </Col>
+      </Row>
+
+      {/*Fila 6*/}
+      <Row gutter={24}>
+        <Col span={12}>
           <Form.Item name = "p_com_bulto" label="Precio de compra por bulto" rules={[
             { required: true, message: 'Este campo es obligatorio' },
             {
@@ -574,7 +674,7 @@ const FormAddProducts: React.FC = () => {
         </Col>
       </Row>
 
-      {/*Fila 6*/}
+      {/*Fila 7*/}
       <Row gutter={24}>
 
         <Col span={12}>
@@ -602,7 +702,7 @@ const FormAddProducts: React.FC = () => {
         </Col>
       </Row>
 
-      {/*Fila 5*/}
+      {/*Fila 8*/}
       <Row gutter={24}>
         <Col span={12}>
           <Form.Item name='total_bulto' label="Total bultos" rules={[
@@ -627,7 +727,23 @@ const FormAddProducts: React.FC = () => {
               <Input />
           </Form.Item>
         </Col>
+      </Row>
+      {/*Fila 8*/}
+      <Row gutter={24}>
+        <Col span={12}>                 
+          <Form.Item name="venta_por" label="Tipo de Venta" rules={[{ required: true }]} tooltip="El tipo de venta se refiere a si el producto de vende en partes unitarias o se vende de acuerdo a una medida de esa porción)">            
+            <Select
+              showSearch
+              placeholder="Select. tipo de venta"
+              optionFilterProp="children"
+              onChange={onChangeVentasPor}
+              filterOption={filterOption}
+              options={optionsVentaPor}                      
+            />                
+          </Form.Item>   
+        </Col>
       </Row>      
+      
 
       <Form.Item>
         <Space>
@@ -640,8 +756,7 @@ const FormAddProducts: React.FC = () => {
          
   }
   
-  //table
-  
+  //table 
 
   const getDataTable = () =>{
     const dataTable = allProduct.map((element, index) => ({...element, key: index}))
@@ -798,6 +913,7 @@ const Container = styled.div`
     flex-wrap: nowrap;
     align-items: start;
     width: 98%;
+    margin-bottom: 40px;
   }
   @media (max-width: 950px){
     width: 100%;

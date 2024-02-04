@@ -1,0 +1,93 @@
+.ant-modal-title{
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+.modalPresentacion{
+  width: 60% !important;
+}
+.ant-modal-body{
+  width: 100% !important;
+}
+.bodyContainer{
+  width: 100%;
+}
+
+.tss-hj53wm-MUIDataTableToolbar-titleText{
+  font-size: 14px !important;
+}
+
+
+@media (max-width: 950px){
+  .ant-modal-title{
+    font-size: 15px !important;
+    font-weight: bold !important;
+  }
+  .tss-hj53wm-MUIDataTableToolbar-titleText{
+    font-size: 13px !important;
+  }
+ .modalPresentacion{
+  width: 60% !important;
+ }  
+ .ant-modal-body{
+  width: 100% !important;
+  }
+  .colTwo{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 950px){
+  .tss-hj53wm-MUIDataTableToolbar-titleText{
+    font-size: 13px !important;
+  }
+  .ant-modal-title{
+    font-size: 15px !important;
+    font-weight: bold !important;
+  }
+  .modalPresentacion{
+    width: 60% !important;
+  }
+  .ant-modal-body{
+    width: 100% !important;
+  }
+  .colTwo{
+    width: 100%;
+  }
+}
+
+@media (max-width: 580px){
+  .tss-hj53wm-MUIDataTableToolbar-titleText{
+    font-size: 12px !important;
+  }
+  .ant-modal-title{
+    font-size: 13px !important;
+    font-weight: bold !important;
+  }
+  .modalPresentacion{
+   width: 90% !important;
+  }  
+  .ant-modal-body{
+   width: 100% !important;
+   }
+   .colTwo{
+     width: 100%;
+   }
+ }
+ @media screen and (max-width: 580px){
+  .tss-hj53wm-MUIDataTableToolbar-titleText{
+    font-size: 12px !important;
+  }
+  .ant-modal-title{
+    font-size: 13px !important;
+    font-weight: bold !important;
+  }
+   .modalPresentacion{
+     width: 90% !important;
+   }
+   .ant-modal-body{
+     width: 100% !important;
+   }
+   .colTwo{
+     width: 100%;
+   }
+ }
+ 

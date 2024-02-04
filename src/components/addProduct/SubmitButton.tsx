@@ -29,7 +29,8 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
     nombre:'', codigo:'', descripcion:'', 
     lote:'', categoria:[] , p_com_bulto: 0, unidad_p_bulto: 0,
     p_venta_bulto: 0, p_venta_unidad: 0, iva: 0, 
-    total_bulto: 0, cantidad_unidad: 0, observacion:'', img: imgDefault, ProductoPresentacion: null
+    total_bulto: 0, cantidad_unidad: 0, observacion:'', img: imgDefault, ProductoPresentacion: null,
+    cant_min_mayoreo: 0, p_venta_mayor: 0, venta_por: null
   };
 
   // Watch all values
@@ -61,6 +62,7 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
   }
   
   const submit = () =>{
+    console.log(errors)
     let isError = false;
     for(const key in errors) {
       if (errors[key] === 1) {     
@@ -86,6 +88,9 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
         observacion: data.observacion === "" ? null : data.observacion,
         categorias: getCategori(data.categoria),
         img: data.img === imgDefault ? null : data.img,
+        p_venta_mayor: data.p_venta_mayor,
+        cant_min_mayoreo: data.cant_min_mayoreo,
+        venta_por: data.venta_por? data.venta_por : ''
       }
       if(data.ProductoPresentacion){
         postProduct(dispatch, newProduct, data.ProductoPresentacion).then((res) =>{
@@ -127,7 +132,10 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
         observacion: data.observacion === "" ? null : data.observacion,
         categorias: getCategori(data.categoria),
         img: data.img === imgDefault ? null : data.img,
-        presentacion: data.ProductoPresentacion?.id
+        presentacion: data.ProductoPresentacion?.id,
+        p_venta_mayor: data.p_venta_mayor,
+        cant_min_mayoreo: data.cant_min_mayoreo,
+        venta_por: data.venta_por? data.venta_por : '',
       }
 
       putUpdateProduct(dispatch, productEdit).then((res) =>{

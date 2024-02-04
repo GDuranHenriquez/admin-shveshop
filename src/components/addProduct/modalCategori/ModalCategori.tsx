@@ -6,9 +6,10 @@ import { useCustomDispatch, useCustomSelector } from "../../../hooks/redux";
 import { AxiosError } from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import MUIDataTable, { MUIDataTableColumn, MUIDataTableState } from "mui-datatables";
+import MUIDataTable, { MUIDataTableColumn, MUIDataTableState, Responsive } from "mui-datatables";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {EditOutlined} from '@ant-design/icons';
+import './modalCategoria.css'
 
 
 type Props = {
@@ -27,6 +28,7 @@ interface CustomTableMeta {
 const ModalCategori : React.FC<Props> = ({openModalCategori, setOpenModalCategori}) =>{
   const dispatch = useCustomDispatch();
   const allCategori = useCustomSelector((state) => state.product.allCategori);
+  const themeSelect = import.meta.env.VITE_TEMA;
 
   const [categori, setCategori] = useState<string>('')
   const [editCategory, setEditCategory] = useState<Array<number | boolean | string> | null>(null);
@@ -115,21 +117,6 @@ const ModalCategori : React.FC<Props> = ({openModalCategori, setOpenModalCategor
     })    
   }
   
-
-  const stylesModal = {    
-    body: { 
-      display: 'flex',       
-      justifyItems: 'center',
-      alignItems: 'center',
-      minWidth: 'calc(100% * 1)',
-      width: 'calc(100% * 1)'
-    },
-    footer:{
-      display: 'flex', 
-      justifyContent: 'center'
-    }
-  }
-
   //table
   const handleEditRow = (rowData: [number, string]) => {
     setCategori(rowData[1]);
@@ -145,6 +132,7 @@ const ModalCategori : React.FC<Props> = ({openModalCategori, setOpenModalCategor
     selectableRowsHideCheckboxes: true,
     rowsPerPage: 5,
     rowsPerPageOptions: [],
+    responsive: "standard" as Responsive,
     //pagination: false, // Deshabilita la paginación
     //customFooter: () => null, // Elimina el pie de página
     customHeadRender: (columnMeta: any) => (
@@ -169,13 +157,13 @@ const ModalCategori : React.FC<Props> = ({openModalCategori, setOpenModalCategor
       options: {
         filter: true,
         sort: false,
-        customHeadRender: (columnMeta : any) => {
+        /* customHeadRender: (columnMeta : any) => {
           return (
             <th key={columnMeta.name} className="headerCell">
               {columnMeta.label}
             </th>
           );
-        },
+        }, */
       }
     },
     {
@@ -185,13 +173,13 @@ const ModalCategori : React.FC<Props> = ({openModalCategori, setOpenModalCategor
       options: {
         filter: false,
         sort: false,
-        customHeadRender: (columnMeta : any) => {
+        /* customHeadRender: (columnMeta : any) => {
           return (
             <th key={columnMeta.name} className="headerCell">
               {columnMeta.label}
             </th>
           );
-        },
+        }, */
         customBodyRender: (_value: any, tableMeta: CustomTableMeta) => {
           // Renderiza un botón o un componente de acción personalizado
           return (
@@ -226,40 +214,43 @@ const ModalCategori : React.FC<Props> = ({openModalCategori, setOpenModalCategor
   })  
 
   return <>
-    <Modal width={'50%'} styles={ {body: {...stylesModal.body, flexDirection: 'column'}, footer: {...stylesModal.footer}} } title="Categorías" open={openModalCategori} onCancel={handleCancel} okText='Agregar categoria' cancelText='Limpliar campo' footer = {null}
+    <Modal className="modalCategoria" title="Categorías" open={openModalCategori} onCancel={handleCancel} okText='Agregar categoria' cancelText='Limpliar campo' footer = {null}
     > 
-      <ContainerBody>
-        <div className="colOne">
-          {editCategory? <div className="editCategory">
-            <label htmlFor=""><span id="strict">*</span> Editando la categoría: <span>{categori}</span></label>            
-            <Input value={editCategory[1].toString()} placeholder="Escribe una categoria" onChange={handleInputEdit}></Input>
-          </div> : 
-          <div className="createCategory">
-            <label><span>*</span> Creando Categoría</label>
-            <Input value={categori} placeholder="Escribe una categoria" onChange={handleInput}></Input>
+      <div className="bodyContainer">
+          <ContainerBody>
+          <div className="colOne">
+            {editCategory? <div className="editCategory">
+              <label htmlFor=""><span id="strict">*</span> Editando la categoría: <span>{categori}</span></label>            
+              <Input value={editCategory[1].toString()} placeholder="Escribe una categoria" onChange={handleInputEdit}></Input>
+            </div> : 
+            <div className="createCategory">
+              <label><span>*</span> Creando Categoría</label>
+              <Input value={categori} placeholder="Escribe una categoria" onChange={handleInput}></Input>
+            </div>
+            }
+            
           </div>
-          }
-          
-        </div>
-        <div className="colTwo">
-          <ThemeProvider theme={getMuiTheme()}>
-            <MUIDataTable
-              title = {"Lista de Categorias"}
-              data={allCategori.map((categori) => ({
-                ...categori,
-                key: categori.id,
-                editar: `editar${categori.id}`
-              }))}
-              columns={columnsTable}
-              options={options}
-            ></MUIDataTable>
-          </ThemeProvider> 
-        </div>
-      </ContainerBody>
+          <div className="colTwo">
+            <ThemeProvider theme={getMuiTheme()}>
+              <MUIDataTable
+                title = {"Lista de Categorias"}
+                data={allCategori.map((categori) => ({
+                  ...categori,
+                  key: categori.id,
+                  editar: `editar${categori.id}`
+                }))}
+                columns={columnsTable}
+                options={options}
+              ></MUIDataTable>
+            </ThemeProvider> 
+          </div>
+        </ContainerBody>
+      </div>
+      
       <FooterContainer>
-      {editCategory? <Button id="clear" onClick={clearInput}>Cancelar edición</Button> : <Button id="clear" onClick={clearInput}>Limpiar Campo</Button>}
+      {editCategory? <Button className={`${'clear'+themeSelect}`} id="clear" onClick={clearInput}>Cancelar edición</Button> : <Button className={`${'clear'+themeSelect}`} id="clear" onClick={clearInput}>Limpiar Campo</Button>}
 
-        {editCategory? <Button id="ok" onClick={handleEditCategory}>Editar categoría</Button> : <Button id="ok" onClick={handleOk}>Agregar categoría</Button>}
+        {editCategory? <Button className={`${'ok'+themeSelect}`} id="ok" onClick={handleEditCategory}>Editar categoría</Button> : <Button className={`${'ok'+themeSelect}`} id="ok" onClick={handleOk}>Agregar categoría</Button>}
       </FooterContainer>
     </Modal>
     <ToastContainer></ToastContainer>

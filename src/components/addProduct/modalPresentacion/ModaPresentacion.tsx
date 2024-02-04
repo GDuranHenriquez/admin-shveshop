@@ -6,10 +6,10 @@ import { useCustomDispatch, useCustomSelector } from "../../../hooks/redux";
 import { AxiosError } from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import MUIDataTable, { MUIDataTableColumn, MUIDataTableState } from "mui-datatables";
+import MUIDataTable, { MUIDataTableColumn, MUIDataTableState, Responsive } from "mui-datatables";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {EditOutlined} from '@ant-design/icons';
-
+import './modalPresentacion.css'
 
 type Props = {
   openModalPresentacion: boolean;
@@ -27,6 +27,7 @@ interface CustomTableMeta {
 const ModalPresentacion: React.FC<Props> = ({openModalPresentacion, setOpenModalPresentacion}) =>{
   const dispatch = useCustomDispatch();
   const allPresentacion = useCustomSelector((state) => state.product.allPresentacion);
+  const themeSelect = import.meta.env.VITE_TEMA;
 
   const [presentacion, setPresentacion] = useState<string>('')
   const [editPresentacion, setEditPresentacion] = useState<Array<number | boolean | string> | null>(null);
@@ -115,21 +116,6 @@ const ModalPresentacion: React.FC<Props> = ({openModalPresentacion, setOpenModal
     })    
   }
   
-
-  const stylesModal = {    
-    body: { 
-      display: 'flex',       
-      justifyItems: 'center',
-      alignItems: 'center',
-      minWidth: 'calc(100% * 1)',
-      width: 'calc(100% * 1)'
-    },
-    footer:{
-      display: 'flex', 
-      justifyContent: 'center'
-    }
-  }
-
   //table
   const handleEditRow = (rowData: [number, string]) => {
     setPresentacion(rowData[1]);
@@ -145,6 +131,8 @@ const ModalPresentacion: React.FC<Props> = ({openModalPresentacion, setOpenModal
     selectableRowsHideCheckboxes: true,
     rowsPerPage: 5,
     rowsPerPageOptions: [],
+    rowHover: true,
+    responsive: "standard" as Responsive,
     //pagination: false, // Deshabilita la paginación
     //customFooter: () => null, // Elimina el pie de página
     customHeadRender: (columnMeta: any) => (
@@ -169,13 +157,13 @@ const ModalPresentacion: React.FC<Props> = ({openModalPresentacion, setOpenModal
       options: {
         filter: true,
         sort: false,
-        customHeadRender: (columnMeta : any) => {
+        /* customHeadRender: (columnMeta : any) => {
           return (
             <th key={columnMeta.name} className="headerCell">
               {columnMeta.label}
             </th>
           );
-        },
+        }, */
       }
     },
     {
@@ -185,19 +173,21 @@ const ModalPresentacion: React.FC<Props> = ({openModalPresentacion, setOpenModal
       options: {
         filter: false,
         sort: false,
-        customHeadRender: (columnMeta : any) => {
+        /* customHeadRender: (columnMeta : any) => {
           return (
             <th key={columnMeta.name} className="headerCell">
               {columnMeta.label}
             </th>
           );
-        },
+        }, */
         customBodyRender: (_value: any, tableMeta: CustomTableMeta) => {
           // Renderiza un botón o un componente de acción personalizado
-          return (
-            <button key={'btnEdit' + tableMeta.rowIndex} id="btnEdit" onClick={() => handleEditRow([tableMeta.rowData[0], tableMeta.rowData[1]])} style={{border: 'none', cursor: 'pointer', width: '36px', height: '24px', background:'transparent'}}>
+          return ( <div className="customCell">
+            <button className="btnTableEdtPres" key={'btnEdit' + tableMeta.rowIndex} id="btnEdit" onClick={() => handleEditRow([tableMeta.rowData[0], tableMeta.rowData[1]])} style={{border: 'none', cursor: 'pointer', width: '36px', height: '24px', background:'transparent'}}>
               <EditOutlined />
             </button>
+          </div>
+            
           );
         },
       }
@@ -226,40 +216,42 @@ const ModalPresentacion: React.FC<Props> = ({openModalPresentacion, setOpenModal
   })  
 
   return <>
-    <Modal width={'50%'} styles={ {body: {...stylesModal.body, flexDirection: 'column'}, footer: {...stylesModal.footer}} } title="Tipos de presentación de los productos" open={openModalPresentacion} onCancel={handleCancel} okText='Agregar presentación' cancelText='Limpliar campo' footer = {null}
+    <Modal className="modalPresentacion"  title="Tipos de presentación de los productos" open={openModalPresentacion} onCancel={handleCancel} okText='Agregar presentación' cancelText='Limpliar campo' footer = {null}
     > 
-      <ContainerBody>
-        <div className="colOne">
-          {editPresentacion? <div className="editPresentacion">
-            <label htmlFor=""><span id="strict">*</span> Editando la Presentación: <span>{presentacion}</span></label>            
-            <Input value={editPresentacion[1].toString()} placeholder="Escribe un tipo de presentación" onChange={handleInputEdit}></Input>
-          </div> : 
-          <div className="createPresentacion">
-            <label><span>*</span> Creando Presentacion</label>
-            <Input value={presentacion} placeholder="Escribe un tipo de presentacion" onChange={handleInput}></Input>
+      <div className="bodyContainer">
+        <ContainerBody>
+          <div className="colOne">
+            {editPresentacion? <div className="editPresentacion">
+              <label htmlFor=""><span id="strict">*</span> Editando la Presentación: <span>{presentacion}</span></label>            
+              <Input value={editPresentacion[1].toString()} placeholder="Escribe un tipo de presentación" onChange={handleInputEdit}></Input>
+            </div> : 
+            <div className="createPresentacion">
+              <label><span>*</span> Creando Presentacion</label>
+              <Input value={presentacion} placeholder="Escribe un tipo de presentacion" onChange={handleInput}></Input>
+            </div>
+            }          
           </div>
-          }
-          
-        </div>
-        <div className="colTwo">
-          <ThemeProvider theme={getMuiTheme()}>
-            <MUIDataTable
-              title = {"Lista de Presentaciones"}
-              data={allPresentacion.map((present) => ({
-                ...present,
-                key: present.id,
-                editar: `editar${present.id}`
-              }))}
-              columns={columnsTable}
-              options={options}
-            ></MUIDataTable>
-          </ThemeProvider> 
-        </div>
-      </ContainerBody>
+          <div className="colTwo">
+            <ThemeProvider theme={getMuiTheme()}>
+              <MUIDataTable
+                title = {"Lista de Presentaciones"}
+                data={allPresentacion.map((present) => ({
+                  ...present,
+                  key: present.id,
+                  editar: `editar${present.id}`
+                }))}
+                columns={columnsTable}
+                options={options}
+              ></MUIDataTable>
+            </ThemeProvider> 
+          </div>
+        </ContainerBody>
+      </div>
+      
       <FooterContainer>
-      {editPresentacion? <Button id="clear" onClick={clearInput}>Cancelar edición</Button> : <Button id="clear" onClick={clearInput}>Limpiar Campo</Button>}
+      {editPresentacion? <Button className={`${'clear'+themeSelect}`} id="clear" onClick={clearInput}>Cancelar edición</Button> : <Button className={`${'clear'+themeSelect}`} id="clear" onClick={clearInput}>Limpiar Campo</Button>}
 
-        {editPresentacion? <Button id="ok" onClick={handleEditPresentacion}>Editar presentación</Button> : <Button id="ok" onClick={handleOk}>Agregar presentación</Button>}
+        {editPresentacion? <Button className={`${'ok'+themeSelect}`} id="ok" onClick={handleEditPresentacion}>Editar presentación</Button> : <Button className={`${'ok'+themeSelect}`} id="ok" onClick={handleOk}>Agregar presentación</Button>}
       </FooterContainer>
     </Modal>
     <ToastContainer></ToastContainer>

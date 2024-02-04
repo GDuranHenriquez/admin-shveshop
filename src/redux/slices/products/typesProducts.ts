@@ -24,7 +24,11 @@ export type Product = {
   observacion: string | null;
   categoria: [number] | [] | Category[];
   ProductoPresentacion: Presentacion | null;
+  p_venta_mayor: number;
+  cant_min_mayoreo: number;
+  total_v_mayor?: number;
   delete?: boolean;
+  venta_por: string | null;
   [key: string]: boolean | string | number | null | [number] | Buffer | undefined | [] | Category[] | Presentacion;
 }
 
@@ -43,6 +47,9 @@ export type RegisterProduct = {
   img: string | Buffer | null,
   observacion: string | null,
   categorias: number[] | [],
+  p_venta_mayor: number;
+  cant_min_mayoreo: number;
+  venta_por: string;
 }
 
 export type EditProduct = RegisterProduct & {
@@ -64,3 +71,14 @@ export type ImageProduct = {
   type: string;
   data: number[];
 }
+
+export const ventasPor = [
+  {
+    id: 1,
+    nombre: "unit"
+  },
+  {
+    id: 2,
+    nombre: "divisible"
+  }
+]

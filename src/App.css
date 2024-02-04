@@ -19,6 +19,8 @@ body{
   margin: 0;
   padding: 0;
 }
+
+/*Mukafe*/
 .mukafeAppBody > div > .ant-menu-submenu > .ant-menu > .ant-menu-item-selected{
   border: 1px solid rgba(255, 179, 123, 0.2);
   background: transparent;
@@ -34,6 +36,7 @@ body{
   background: rgba(28, 19, 22, 1) !important;
 }
 
+/*SH*/
 .shAppBody > div > .ant-menu-submenu > .ant-menu > .ant-menu-item-selected{
   border: 1px solid rgba(196, 179, 153, 0.7);
   background: transparent;
@@ -49,4 +52,23 @@ body{
   background: rgba(254 , 208, 208, 1) !important;
 }
 
+/*Davirton*/
+.davirtonAppBody > div > .ant-menu-submenu > .ant-menu > .ant-menu-item-selected{
+  border: 1px solid rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 1);
+}
+
+.davirtonAppBody > div > .ant-menu-submenu > .ant-menu >
+ .ant-menu-item-selected> .ant-menu-title-content {
+  font-weight: bold;
+  color: black !important;
+}
+.davirtonAppBody > div > .ant-menu-submenu > .ant-menu >
+ .ant-menu-item-selected> .anticon > svg {
+  fill: black;
+}
+.davirtonAppBody > div > .ant-menu-submenu > .ant-menu-sub {
+  color: rgba(255, 255, 255, 1) !important; 
+  background: rgba(0 , 0, 0, 1) !important;
+}
 

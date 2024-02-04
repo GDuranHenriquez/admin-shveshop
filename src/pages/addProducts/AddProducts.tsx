@@ -8,12 +8,25 @@ import FormAddProducts from '../../components/addProduct/FormAddProduct';
 const AddProductPage: React.FC = () => {
   const dispatch = useCustomDispatch();
   const [isLoadin, setIsLoadin] = useState(false);
+
   useEffect(() =>{
-    setIsLoadin(true)
-    getAllProducts(dispatch);
-    getAllCategori(dispatch);
-    getAllPresentacion(dispatch);
-    setIsLoadin(false)
+    const fetchData = async () => {
+      try {
+        setIsLoadin(true);
+        await Promise.all([
+          getAllProducts(dispatch),
+          getAllCategori(dispatch),
+          getAllPresentacion(dispatch),
+        ]);
+
+        // Una vez que todas las funciones se resuelven, cambiar el estado a false
+        setIsLoadin(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setIsLoadin(false); // Asegúrate de cambiar el estado en caso de error
+      }
+    }
+    fetchData()   
   }, [])
   
   return <Container>

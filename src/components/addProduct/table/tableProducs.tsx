@@ -223,7 +223,7 @@ const TableProducts: React.FC<Props> = ( {data , setDataProduct, setProductEdit}
       className:'columnData'
     },
     {
-      title: 'Unidades por bulto',
+      title: 'Cant. unid.',
       width: 100,
       dataIndex: 'cantidad_unidad',
       key: 'cantidad_unidad',
@@ -256,6 +256,27 @@ const TableProducts: React.FC<Props> = ( {data , setDataProduct, setProductEdit}
       width: 150,
       dataIndex: 'p_v_total_unidad',
       key: 'p_v_total_unidad',
+      className:'columnData'
+    },
+    {
+      title: 'Cant. Min. Mayoreo.',
+      width: 150,
+      dataIndex: 'cant_min_mayoreo',
+      key: 'cant_min_mayoreo',
+      className:'columnData'
+    },
+    {
+      title: 'Pr. Venta Mayor.',
+      width: 150,
+      dataIndex: 'p_venta_mayor',
+      key: 'p_venta_mayor',
+      className:'columnData'
+    },
+    {
+      title: 'Tipo de Venta.',
+      width: 150,
+      dataIndex: 'venta_por',
+      key: 'venta_por',
       className:'columnData'
     },
     {

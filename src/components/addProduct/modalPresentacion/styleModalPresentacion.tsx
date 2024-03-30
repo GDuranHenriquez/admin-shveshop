@@ -230,6 +230,10 @@ export const FooterContainer = styled.div`
     background: white !important;
     color: black !important;
   }
+  .clearferedie{
+    background: white !important;
+    color: black !important;
+  }
   .clearmukafe{
     background: white !important;
     color: black !important;
@@ -246,7 +250,15 @@ export const FooterContainer = styled.div`
     background: rgba(0 , 0, 0, 0.9) !important;
     color: white !important;
   }
+  .okferedie{
+    background: rgba(0 , 0, 0, 0.9) !important;
+    color: white !important;
+  }
   .okdavirton:hover{
+    border-color: white !important;
+    background: rgba(0 , 0, 0, 0.8) !important;
+  }
+  .okferedie:hover{
     border-color: white !important;
     background: rgba(0 , 0, 0, 0.8) !important;
   }

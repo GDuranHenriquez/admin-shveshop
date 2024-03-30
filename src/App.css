@@ -72,3 +72,23 @@ body{
   background: rgba(0 , 0, 0, 1) !important;
 }
 
+/*feredie*/
+.feredieAppBody > div > .ant-menu-submenu > .ant-menu > .ant-menu-item-selected{
+  border: 1px solid rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 1);
+}
+
+.feredieAppBody > div > .ant-menu-submenu > .ant-menu >
+ .ant-menu-item-selected> .ant-menu-title-content {
+  font-weight: bold;
+  color: black !important;
+}
+.feredieAppBody > div > .ant-menu-submenu > .ant-menu >
+ .ant-menu-item-selected> .anticon > svg {
+  fill: black;
+}
+.feredieAppBody > div > .ant-menu-submenu > .ant-menu-sub {
+  color: rgba(255, 255, 255, 1) !important; 
+  background: rgba(0 , 0, 0, 1) !important;
+}
+

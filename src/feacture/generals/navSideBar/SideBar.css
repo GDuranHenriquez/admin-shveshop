@@ -30,6 +30,13 @@
 .mukafe > .ant-layout-sider-trigger > span > svg{
   fill: var(--colorMK) !important;
 }
+.feredie > .ant-layout-sider-trigger{
+  border-top: 2px solid rgba(255, 255, 255, 1) !important;
+  background: transparent !important;
+}
+.feredie > .ant-layout-sider-trigger > span > svg{
+  fill: white !important;
+}
 .davirton  > .ant-layout-sider-trigger{
   border-top: 2px solid rgba(255, 255, 255, 1) !important;
   background: transparent !important;
@@ -66,6 +73,9 @@
 .davirtonLogo{
   border-bottom: 2px solid rgba(255, 255, 255, 1);
 }
+.feredieLogo{
+  border-bottom: 2px solid rgba(255, 255, 255, 1);
+}
 
 .mukafeIconBar{
   fill: rgba(239, 125, 0, 1) !important;
@@ -92,6 +102,11 @@
   color: rgba(255, 255, 255, 1);
   font-weight: bold;
 }
+.feredieMenu{
+  background: var(--backgrounMenuSH);
+  color: rgba(255, 255, 255, 1);
+  font-weight: bold;
+}
 .mukafeMenu > .ant-menu-item:hover{
   background: rgba(255, 255, 255, 0.5) !important;
   color: var(--colorMK) !important;
@@ -107,6 +122,15 @@
   font-weight: bold;
 }
 .davirtonMenu > .ant-menu-item:hover{
+  background: rgba(255, 255, 255, 0.8) !important;
+  color: black !important;
+}
+.feredieMenu > .ant-menu-item-selected{
+  background: rgba(255, 255, 255, 1) !important;
+  color: black !important;
+  font-weight: bold;
+}
+.feredieMenu > .ant-menu-item:hover{
   background: rgba(255, 255, 255, 0.8) !important;
   color: black !important;
 }
@@ -193,6 +217,9 @@
   .davirtonMenu > li > .ant-menu-submenu-title > .anticon svg{
     fill: white !important;
   }
+  .feredieMenu > li > .ant-menu-submenu-title > .anticon svg{
+    fill: white !important;
+  }
   .responseHeaderVarmukafe{
     width: 100%;
     max-width: 100%;
@@ -207,6 +234,12 @@
     font-weight: bold;
   }
   .responseHeaderVardavirton{
+    width: 100%;
+    background: black;
+    color: white;
+    font-weight: bold;
+  }
+  .responseHeaderVarferedie{
     width: 100%;
     background: black;
     color: white;
@@ -260,6 +293,24 @@
     border-bottom: none;
   }
   .davirtonLogo > img{
+    width: 48px;
+    height: 48px;
+  }
+
+  .feredieIconBar > svg{
+    fill: white !important;
+  }
+  .feredieLogo{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+  }
+  .feredieLogo > img{
     width: 48px;
     height: 48px;
   }
@@ -300,6 +351,9 @@
   .davirtonMenu > li > .ant-menu-submenu-title > .anticon svg{
     fill: white !important;
   }
+  .feredieonMenu > li > .ant-menu-submenu-title > .anticon svg{
+    fill: white !important;
+  }
   .responseHeaderVarmukafe{
     width: 100%;
     background: var(--backgrounMenuMK);
@@ -313,6 +367,12 @@
     font-weight: bold;
   }
   .responseHeaderVardavirton{
+    width: 100%;
+    background: black;
+    color: white;
+    font-weight: bold;
+  }
+  .responseHeaderVarferedie{
     width: 100%;
     background: black;
     color: white;
@@ -366,6 +426,24 @@
     border-bottom: none;
   }
   .davirtonLogo > img{
+    width: 48px;
+    height: 48px;
+  }
+
+  .feredieIconBar > svg{
+    fill: white !important;
+  }
+  .feredieLogo{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+  }
+  .feredieLogo > img{
     width: 48px;
     height: 48px;
   }

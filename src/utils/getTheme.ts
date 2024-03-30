@@ -1,6 +1,7 @@
 import logoMukafe from '../assets/logos/LogoMukafe.png';
 import logoSH from '../assets/logos/sh.png';
 import logoDavirton from '../assets/logos/logo64x64.png';
+import logoFeredie from '../assets/logos/RFeredie2.png';
 
 export const getLogo = (nameTheme: string) => {
   switch (nameTheme) {
@@ -10,6 +11,8 @@ export const getLogo = (nameTheme: string) => {
       return logoSH;   
     case 'davirton':
       return logoDavirton;
+    case 'feredie':
+      return logoFeredie
     default:
       return logoMukafe;  
   }
@@ -37,13 +40,20 @@ export const getTheme = (themeName: string) =>{
     letraLogo: 'rgba(235, 143, 74, 1)',
     contornoLogo: 'rgba(239, 125, 0, 1)'
   }
+  const theme_feredie = {
+    backGroundBarSide: 'rgba(0, 0, 0, 1)',
+    letraLogo: 'rgba(0, 0 ,0 ,1)',
+    contornoLogo: 'rgba(196, 179, 153, 1)'
+  }
   switch (themeName) {
     case 'mukafe':
       return theme_mukafe;
     case 'sh':
       return theme_sh; 
     case 'davirton':
-      return theme_davirton;    
+      return theme_davirton;  
+    case 'feredie':
+      return theme_feredie  
     default:
       return defaultTheme
   }

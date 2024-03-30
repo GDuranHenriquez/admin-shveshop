@@ -48,6 +48,8 @@ const  getClasseIcon = (item:string)=> {
       return 'shIconBar'
     case 'davirton':
       return 'davirtonIconBar'
+    case 'feredie':
+      return 'feredieIconBar'
     default:
       return ''
   }

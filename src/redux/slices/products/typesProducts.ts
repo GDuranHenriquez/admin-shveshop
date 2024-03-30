@@ -2,6 +2,7 @@ export interface ProductState{
   allProducts: Product[] | [];
   allCategori: Category[] | [];
   allPresentacion: Presentacion[] | [];
+  rate : TypeRate | null;
 }
 
 export type Product = {
@@ -82,3 +83,52 @@ export const ventasPor = [
     nombre: "divisible"
   }
 ]
+
+export type Categoria = {
+  id: number,
+  nombre: string
+}
+
+export type ProductoPresentacion = {
+  id: number,
+  nombre: string
+}
+
+export type ProductSearch = {
+  id: number,
+  codigo: string,
+  nombre: string,
+  descripcion: string,
+  unidad_p_bulto: number,
+  iva: number,
+  total_bulto: number,
+  cantidad_unidad: number,
+  total_unidades: number;
+  img: string | null,
+  p_v_total_bulto: number,
+  p_v_total_unidad: number,
+  observacion: string,
+  ProductoPresentacion: ProductoPresentacion,
+  categoria: Categoria[],
+  cant_min_mayoreo: number,
+  total_v_mayor: number,
+  venta_por: string;
+}
+
+export type TypeGetTotalPrice = {
+  subTotal: number,
+  total: number,
+  subTotal_ref: number,
+  totalFact_ref: number
+}
+
+export type TypeRate = {
+  id: number,
+  tasa: number
+}
+
+export type TypeAddSubProduct = {
+  idProduct: number,
+  cant: number,
+  tipo: string
+}

@@ -1,16 +1,32 @@
 import axios, { AxiosError } from "axios";
-import { setAllProduct, setNewCategori, setAllCategori, setUpdateCategori, setNewProduct, setNewPresentacion, setAllPresentacion, setUpdatePresentacion, setUpdateProduct } from ".";
+import { setAllProduct, 
+  setNewCategori, 
+  setAllCategori, 
+  setUpdateCategori, 
+  setNewProduct, 
+  setNewPresentacion, 
+  setAllPresentacion, 
+  setUpdatePresentacion, 
+  setUpdateProduct,
+  setRate
+} from ".";
+
 import { Dispatch } from "../../store/store";
-import { Category, Presentacion, EditProduct, RegisterProduct } from "./typesProducts";
+import { Category, Presentacion, EditProduct, RegisterProduct, TypeAddSubProduct, ProductSearch } from "./typesProducts";
 
 const basePoint = import.meta.env.VITE_BASENDPOINT_BACK;
 
 //Productos
-export const getAllProducts = async (dispatch: Dispatch) => {
+export const getAllProducts = async (refreshToken : string, dispatch: Dispatch) => {
   try {
     const endpoint = basePoint + `/productos`;
-    
-    const { data } = await axios.get(endpoint); 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+      data: null
+    };
+    const { data } = await axios.get(endpoint, config); 
     dispatch(setAllProduct(data));
   } catch (error) {
     if (typeof error === "string") {
@@ -25,10 +41,16 @@ export const getAllProducts = async (dispatch: Dispatch) => {
   
 };
 
-export const postProduct = async (dispatch: Dispatch, newProduct: RegisterProduct, presentacion: Presentacion) => {
+export const postProduct = async (dispatch: Dispatch, refreshToken : string, newProduct: RegisterProduct, presentacion: Presentacion) => {
   try {
     const endpoint = basePoint + '/productos';
-    const response = await axios.post(endpoint, { newProduct, presentacion});
+    const config = {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+      data: null
+    };
+    const response = await axios.post(endpoint, { newProduct, presentacion}, config);
     dispatch(setNewProduct(response.data));
     return response.status;
   } catch (error) {
@@ -36,14 +58,43 @@ export const postProduct = async (dispatch: Dispatch, newProduct: RegisterProduc
   }
 }
 
-export const putUpdateProduct = async (dispatch: Dispatch, productEdit: EditProduct) => {
+export const putUpdateProduct = async (dispatch: Dispatch, refreshToken : string, productEdit: EditProduct) => {
   try {
     const endpoint = basePoint + '/productos';
-    const response = await axios.put(endpoint, productEdit);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+      data: null
+    };
+    const response = await axios.put(endpoint, productEdit, config);
     dispatch(setUpdateProduct(response.data));
     return response.status;
   } catch (error) {
     return error;
+  }
+}
+
+export const putAddSubStock = async (refreshToken: string, data: TypeAddSubProduct): Promise<ProductSearch | {error: string}> => {
+  try {
+    const endpoint = basePoint + '/productos/addSubProduct';
+    const config = {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+      data: null
+    };
+    const response = await axios.put(endpoint, data, config);
+    return response.data as ProductSearch;
+  } catch (error) {
+    if (typeof error === "string") {
+      return {error: error};
+    } else if (error instanceof Error) {
+      const message = error.message;
+      return {error: message};
+    } else {
+      return {error: 'Algo ha salido mal'}
+    }
   }
 }
 
@@ -130,6 +181,31 @@ export const putUpdatePresentacion = async (dispatch: Dispatch, body: Presentaci
     return response.status
   } catch (error) {
     return error;
+  }
+}
+
+export const getRateBCVRedux = async (refreshToken : string,dispatch:Dispatch):Promise<any> =>{
+  try {
+    const endPoint = basePoint + '/venta/get-rate-dollar'
+    const config = {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+      data: null
+    };
+    const response = await axios.get(endPoint, config);
+    const dollar = response.data;
+    dispatch(setRate(dollar))
+    return dollar;
+  } catch (error) {
+    if (typeof error === "string") {
+      return {error: error};
+    } else if (error instanceof Error) {
+      const message = error.message;
+      return {error: message};
+    } else {
+      return {error: 'Algo ha salido mal'}
+    }
   }
 }
 

@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useCustomDispatch } from '../../hooks/redux';
 import { postProduct, putUpdateProduct } from '../../redux/slices/products/actionsProducts';
 import { AxiosError } from "axios";
+import { useAuth } from '../../auth/authPro';
 
 type Props = { 
   form: FormInstance, 
@@ -24,6 +25,7 @@ type Props = {
 const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, updateForm, imgDefault, textButton, action, setDataProduct, setProductEdit }) => {
   const [submittable, setSubmittable] = React.useState(false);
   const dispatch = useCustomDispatch();
+  const auth = useAuth()
 
   const clearDataProducts: Product  = {
     nombre:'', codigo:'', descripcion:'', 
@@ -93,7 +95,8 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
         venta_por: data.venta_por? data.venta_por : ''
       }
       if(data.ProductoPresentacion){
-        postProduct(dispatch, newProduct, data.ProductoPresentacion).then((res) =>{
+        const tkn = auth.getAccessToken()
+        postProduct(dispatch, tkn, newProduct, data.ProductoPresentacion).then((res) =>{
           if(res instanceof AxiosError){
             if(res.response?.status === 404){
               const error = res.response?.data          
@@ -138,7 +141,9 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
         venta_por: data.venta_por? data.venta_por : '',
       }
 
-      putUpdateProduct(dispatch, productEdit).then((res) =>{
+      const tkn = auth.getAccessToken()
+
+      putUpdateProduct(dispatch, tkn, productEdit).then((res) =>{
         if(res instanceof AxiosError){
           if(res.response?.status === 404){
             const error = res.response?.data          

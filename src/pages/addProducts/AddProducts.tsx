@@ -4,8 +4,10 @@ import { useCustomDispatch } from '../../hooks/redux';
 import { getAllProducts, getAllCategori, getAllPresentacion } from '../../redux/slices/products/actionsProducts';
 import Loading from '../../Loading/Loading';
 import FormAddProducts from '../../components/addProduct/FormAddProduct';
+import { useAuth } from '../../auth/authPro';
 
 const AddProductPage: React.FC = () => {
+  const auth = useAuth()
   const dispatch = useCustomDispatch();
   const [isLoadin, setIsLoadin] = useState(false);
 
@@ -13,8 +15,9 @@ const AddProductPage: React.FC = () => {
     const fetchData = async () => {
       try {
         setIsLoadin(true);
+        const tkn = auth.getAccessToken()
         await Promise.all([
-          getAllProducts(dispatch),
+          getAllProducts(tkn, dispatch),
           getAllCategori(dispatch),
           getAllPresentacion(dispatch),
         ]);

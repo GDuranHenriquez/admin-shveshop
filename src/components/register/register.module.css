@@ -1,0 +1,354 @@
+.containerLogin{
+  width: 500px;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0,0,0, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px 10px;
+  margin: 20px 0;
+}
+
+.bodyLoginContainer{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.containerForm{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+.containerForm > h3 {
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 10px 0 10px 0;
+  color: black;
+}
+.containerFomRegister{
+  width: 90%;
+  padding: 10px;
+  background: transparent;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerInputs{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: start;
+  justify-content: center;
+}
+.containerSeletTipeDni{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: start;
+}
+
+.containerInputs > select{ 
+  border: none;
+  padding-left: 5px;
+  background: transparent;
+  border-bottom: 1px solid rgba(0,0,0, 0.6);
+  width: 100%;
+  height: 30px;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: black;
+}
+.containerInputs > select:focus{
+  outline: none;
+  border-bottom: 2px solid rgba(0,0,0, 1);
+}
+
+.containerSeletTipeDni > select{
+  border: none;
+  padding-left: 5px;
+  background: transparent;
+  border-bottom: 1px solid rgba(0,0,0, 0.6);
+  width: 64px;
+  height: 30px;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: black;
+}
+
+.containerSeletTipeDni > select:focus{
+  outline: none;
+  border-bottom: 2px solid rgba(0,0,0, 1);
+}
+
+.containerInputs > label{
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+}
+.containerInputs > input{
+  width: 100%;
+  height: 30px;
+  font-size: 12px;
+  border: 1px solid rgba(0,0,0,0.6);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-left: 10px;
+  font-family: 'Roboto', sans-serif;
+  background: transparent;
+  color: black;
+  letter-spacing: 0.04em;
+}
+.containerSeletTipeDni > input{
+  width: calc(100% - 64px);
+  height: 30px;
+  font-size: 12px;
+  border: 1px solid rgba(0,0,0,0.6);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-left: 10px;
+  font-family: 'Roboto', sans-serif;
+  background: transparent;
+  color: black;
+  letter-spacing: 0.04em;
+}
+
+.containerSeletTipeDni > input:active{  
+  background: transparent;
+  background-color: transparent;
+}
+.containerSeletTipeDni > input:focus{
+  outline: none;
+  border-bottom: 2px solid rgba(0,0,0, 1);
+  background-color: transparent;
+}
+
+.containerInputs > input:active{  
+  background: transparent;
+  background-color: transparent;
+}
+.containerInputs > input:focus{
+  outline: none;
+  border-bottom: 2px solid rgba(0,0,0, 1);
+  background-color: transparent;
+}
+.containerInputPassword{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: start;
+  justify-content: center;
+}
+.containerInputPassword > input{
+  width: 100%;
+  height: 30px;
+  font-size: 12px;
+  border: 1px solid rgba(0,0,0,0.6);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-left: 10px;
+  font-family: 'Roboto', sans-serif;
+  background: transparent;
+  background-color: transparent !important;
+  color: black;
+  letter-spacing: 0.04em;
+}
+
+.inputPasswordContainer{
+  position: relative;
+}
+.inputPasswordContainer > input:focus{  
+  outline: none;
+  border-bottom: 2px solid rgba(0,0,0, 1);
+  background: transparent;
+}
+
+.containerEye{
+  position: absolute;
+  right: -15px;
+  background: transparent;
+  width: 24px;
+  height: 24px;
+}
+.containerEye:hover{
+  cursor: pointer;
+}
+
+.conatinerButtons{
+  width: 80%;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 25px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+}
+.conatinerButtons > button{
+  width: 120px;
+  display: flex;
+  flex-wrap: nowrap;
+  border: 1px solid rgba(0,0,0,0.4);
+  border-radius: 5px;
+  padding: 8px;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+  transition: transform 0.1s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+}
+
+#btnCancel{
+  background: transparent;
+  color: red;
+  font-weight: 700;
+  border-color: red;
+  font-family: 'Roboto', sans-serif;
+}
+#btnCancel:active{
+  background: rgba(191, 2, 0, 0.3) !important;
+  transform: scale(0.9);
+}
+#btnCancel:focus{ 
+  border-color: red;
+  outline: 1px solid black;
+}
+#btnRegister{
+  background: rgb(0, 32, 88);
+  color: white;
+  font-weight: 700;
+  border-color: white;
+  font-family: 'Roboto', sans-serif;
+}
+#btnRegister:not([disabled]):active {
+  background: rgb(32, 94, 32) !important;
+  transform: scale(0.9);
+}
+#btnRegister:focus{ 
+  border-color: white;
+  outline: 1px solid black;
+}
+.conatinerButtons > button[disabled]:active {
+  transform: none !important;
+}
+.conatinerButtons > button[disabled]{
+  cursor: not-allowed; 
+  transition: none;
+  background: rgba(0,0,0, 0.3) !important;
+  transform: scale(1) !important;  
+}
+
+.linkRegistro{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.linkRegistro > span{
+  width: 100%;
+  text-align: center;
+  color: black;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  margin-left: 5px;
+  outline: none;
+  border: none;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+}
+.linkRegistro > span > button{
+  color: blue;
+  font-weight: 700;
+  padding: 2px 5px;
+  margin: 0;
+  margin-left: 5px;
+  outline: none;
+  border: none;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  background: transparent;
+}
+.linkRegistro > span > button:hover{
+  cursor: pointer;
+  outline: none;
+}
+.linkRegistro > span > button:focus{
+  outline: 1px solid rgba(0,0,0, 0.5);
+}
+
+.changeCreateSesion{
+  width: max-content;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+
+}
+
+.changeCreateSesion > span{
+  margin: 0;
+  padding: 0;
+  width: max-content;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+}
+
+.changeCreateSesion > button{
+  margin: 0;
+  padding: 0;
+  width: max-content;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(14, 77, 148);
+  border: none;
+  background: transparent;
+}
+.changeCreateSesion > button:hover{
+  cursor: pointer;
+}
+
+.containerError{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.containerError > span{
+  width: 80%;
+  text-align: center;
+  font-weight: 500;
+  font-size: 10px;
+  color: red;
+  padding: 0;
+  margin: 0;
+  margin-top: 5px;
+}

@@ -1,0 +1,22 @@
+.containerLoginPage{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.imgBackGround{
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1000;
+}
+.imgBackGround > img {
+  width: 100%;
+  height: 100%;
+}

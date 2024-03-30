@@ -7,9 +7,14 @@ import './SideBar.css'
 import {
   DesktopOutlined,
   PieChartOutlined,
+  CalculatorOutlined,
+  LogoutOutlined
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
+import { singOut } from '../../../redux/slices/user/actionUser';
+import Loading from '../../../Loading/Loading';
+import { useAuth } from '../../../auth/authPro'
 
 interface Props{
   _sidebarOpen: boolean,
@@ -17,9 +22,7 @@ interface Props{
 }
 
 const  theme  = import.meta.env.VITE_TEMA;
-
 const { Sider, Header } = Layout;
-
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -43,6 +46,8 @@ const  getClasseIcon = (item:string)=> {
       return 'mukafeIconBar'
     case 'sh':
       return 'shIconBar'
+    case 'davirton':
+      return 'davirtonIconBar'
     default:
       return ''
   }
@@ -51,6 +56,8 @@ const  getClasseIcon = (item:string)=> {
 const items: MenuItem[] = [
   getItem('Historico', 'panel', <PieChartOutlined className={getClasseIcon(theme)}/>),
   getItem('Add/Edit Productos', 'addProduct', <DesktopOutlined className={getClasseIcon(theme)}/>),
+  getItem('Agregar / Restar Stock', 'addSubStock', <CalculatorOutlined className={getClasseIcon(theme)}/>),
+  //getItem('Cerrar sesion', 'logout', <LogoutOutlined className = {`${getClasseIcon(theme)} 'containerLogout'`} />)
   /* getItem('Edit Precios', 'editPrecios', <FileOutlined className={getClasseIcon(theme)}/>), */
   /* getItem('Team', 'sub2', <TeamOutlined className={getClasseIcon(theme)}/>, [getItem('Team 1', '6'), getItem('Team 2', '8')]), */
   /* getItem('Administar usuarios', 'sub1', <UserOutlined className={getClasseIcon(theme)}/>, [
@@ -67,16 +74,21 @@ const layoutTheme = {
 }
 
 const SideBar: React.FC<Props> = ({setSidebaropen }) => {
+
+  const auth = useAuth()
   const location = useLocation(); 
   const navigate = useNavigate();
-  const [collapsed, setCollapsed] = useState(false); 
+  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false) 
 
   const getLocation = () =>{
     switch (location.pathname) {
       case '/addProduct':
         return 'Add/Edit Productos';  
       case '/panel':
-        return 'Historico';   
+        return 'Historico';
+      case '/addSubStock':
+        return 'Atualizar stock';      
       default:
         return '' ;
     }
@@ -86,7 +98,9 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
       case '/addProduct':
         return 'addProduct';  
       case '/panel':
-        return 'panel';   
+        return 'panel';
+      case '/addSubStock':
+        return 'addSubStock';   
       default:
         return '' ;
     }
@@ -94,8 +108,40 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
   const [openMenu, setOpenMenu] = useState<string>(getLocation());
 
   const onClick: MenuProps['onClick'] = (e) =>{
-    setOpenMenu(e.key);
-    navigate('/' + e.key);
+    if(e.key === 'logout'){
+
+    }else{
+      setOpenMenu(e.key);
+      navigate('/' + e.key);
+    }
+  }
+
+  const handleSingOut = async () => {
+    try {
+      setLoading(true)
+      const refressToken = auth.getRefreshToken();
+      if(refressToken){
+        const resp = await singOut(refressToken)
+        if(resp){
+          if('message' in resp){
+            if(resp.message === 'Token deleted'){
+              setLoading(false)
+              auth.signOut()
+            }else{
+              console.log(resp.message )
+            }
+          }
+        }
+      }else{
+        setLoading(false)
+        auth.signOut()
+      }     
+
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setLoading(false)
+    }
   }
 
   useEffect(()=>{
@@ -114,26 +160,42 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
   
   return (
     <Layout className='layout' >
-      <Sider className={`${theme} ${collapsed? '' : 'unCollapsed'} noResponse`} style={{...layoutTheme,}} collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+      <Sider className={`${theme} ${collapsed? '' : 'unCollapsed'} noResponse`} 
+        style={{...layoutTheme,}} collapsible collapsed={collapsed} 
+        onCollapse={(value) => setCollapsed(value)}
+        >
         <div className={`${styles.logo} ${collapsed? styles.collapsed :''} ${theme+'Logo'}`}>
           <img src={getLogo(theme)} alt="Logo Mukafe" />
         </div>
         <div className="demo-logo-vertical" />
-        <Menu className={theme+'Menu'} defaultSelectedKeys={[getMenuDefaultSelect()]} mode="inline" items={items} onClick={onClick}/>
+          <Menu className={theme+'Menu'} defaultSelectedKeys={[getMenuDefaultSelect()]} 
+            mode="inline" items={items} onClick={onClick}
+          />
+
+        <div className="logoutMenuContainer">
+          <button className='btnLogout' onClick={handleSingOut}>
+            <LogoutOutlined className = {getClasseIcon(theme)} />
+            <span>Salir</span>
+          </button>          
+        </div>
+        
       </Sider>
       <Header className={`responseBar ${'responseHeaderVar' + theme}`} style={{...layoutTheme}}>
         <div className={`${styles.logo} ${theme+'Logo'}`}>
-          <img src={getLogo(theme)} alt="Logo Mukafe" />
+          <img src={getLogo(theme)} alt="Logo" />
         </div>
         <div className={`${styles.titleSidebar} ${theme+'TitleSidebar'}`}>
           <span>{openMenu}</span>
         </div>
         <div className="demo-logo" />
         <div className='containerMenuBar'>
-          <Menu className={`${theme+'Menu'} menuBar`} defaultSelectedKeys={[getMenuDefaultSelect()]} mode="horizontal" items={items} onClick={onClick}/>
+          <Menu className={`${theme+'Menu'} menuBar`} defaultSelectedKeys={[getMenuDefaultSelect()]} 
+            mode="horizontal" items={items} onClick={onClick}
+          />
         </div>
         
       </Header>
+      {loading ? <Loading/> : null}
     </Layout>
   );
 };

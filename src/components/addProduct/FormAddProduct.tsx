@@ -252,7 +252,6 @@ const FormAddProducts: React.FC = () => {
         }
       }      
     });
-    console.log(dataProduct)
   }, [dataProduct]);
   
   useEffect(() => {

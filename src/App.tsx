@@ -1,16 +1,20 @@
 import {useEffect} from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { styled } from "styled-components";
+/* import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom' */
 import { useState } from 'react'
+import { createBrowserRouter, RouterProvider} from 'react-router-dom'
+import { AuthProvider } from './auth/authPro.tsx';
+import ProtectedRoute from './auth/ProtectedRoute.tsx';
 import './App.css'
 
 
 
 //ImportFeactures and pages
 //import SideBar from './feacture/sideBar/SideBar'
-import SideBar from './feacture/generals/navSideBar/SideBar.tsx';
+/* import SideBar from './feacture/generals/navSideBar/SideBar.tsx'; */
 import PanelPage from './pages/panel/Panel'
 import AddProductPage from './pages/addProducts/AddProducts'
+import LoginPage from './pages/loginPage/LoginPage.tsx';
+import AddSubStockPage from './pages/addSubStock/AddSubStock.tsx';
 
 function App() {
   const [sidebarOpen, setSidebaropen] = useState(true);
@@ -24,11 +28,35 @@ function App() {
     };
   }, []);
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <LoginPage/>,
+    },
+    {
+      path: "/",
+      element: <ProtectedRoute _sidebarOpen={sidebarOpen} setSidebaropen={setSidebaropen}/>,
+      children: [
+        {
+          path: '/panel',
+          element: <PanelPage/>
+        },
+        {
+          path: '/addProduct',
+          element: <AddProductPage/>
+        },
+        {
+          path: '/addSubStock',
+          element: <AddSubStockPage/>
+        }
+      ]
+    }
+  ])
+
   return (<>
-      <BrowserRouter>
+      {/* {<BrowserRouter>
         <div>
           <Container className={`${theme+'App'} ${sidebarOpen?'sidebarState active':''} containerApp`}>
-            {/* <SideBar sidebarOpen = {sidebarOpen} setSidebaropen = {setSidebaropen} /> */}
             <SideBar _sidebarOpen = {sidebarOpen} setSidebaropen = {setSidebaropen}/>
             <Routes>
               <Route path='/panel' element={<PanelPage></PanelPage>} ></Route>
@@ -37,48 +65,14 @@ function App() {
             </Routes>  
           </Container> 
         </div>        
-      </BrowserRouter>
+      </BrowserRouter>} */}
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </>
   )
 }
 
-const Container = styled.div`
-  display: grid;
-  min-height: 100%;
-  width: 100%;
-  max-width: 100vw;
-  grid-template-columns: 80px calc(100vw - 120px);
-  grid-template-rows: auto;
-  background: white;
-  color: black;
-  transition: all 0.2s;
-  /* overflow-x: auto; */
-  //overflow-y: auto;
-  &.active{
-    grid-template-columns: 220px calc(100vw - 250px);
-  }
-  @media (max-width: 768px) {  
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 100%;
-    background: white;
-    color: black;
-    transition: all 0.2s;
-    justify-content: center;
-    align-content: center;
-  }
-  @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 100%;
-    background: white;
-    color: black;
-    transition: all 0.2s;
-    justify-content: center;
-    align-content: center;
-  }
-`;
+
 
 export default App

@@ -44,10 +44,10 @@ const AddSubStockPage: React.FC = () => {
     }
   }
 
-  const cleanData = async () => {
+  /* const cleanData = async () => {
     setListProductSearch(null)
     setDetailProduct(null)
-  }
+  } */
 
   const handleSubmit = async () => {
     try {

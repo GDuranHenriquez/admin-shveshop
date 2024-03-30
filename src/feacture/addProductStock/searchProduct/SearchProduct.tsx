@@ -15,9 +15,9 @@ const SearchProduct: React.FC<Props> = ({ setListProductSearch, setDetailProduct
   const inpSearchProduct = useRef<HTMLInputElement>(null);
   const [textInpSearch, setTextImputSearch] = useState<string>('');
   
-  const handleCancel = () =>{
+  /* const handleCancel = () =>{
     cleanData();
-  }
+  } */
 
   const handleOk = async () => {
     await searchProduct()

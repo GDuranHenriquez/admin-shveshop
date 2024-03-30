@@ -1,4 +1,4 @@
-import React, { useState, useEffect, SetStateAction } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './login.module.css'
 import Loading from '../../Loading/Loading';
 import { useAuth } from '../../auth/authPro';

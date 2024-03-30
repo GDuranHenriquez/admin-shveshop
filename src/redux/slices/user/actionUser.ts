@@ -9,10 +9,10 @@ type DataLoginUser = {
   email?: string,
   token?: string
 }
-interface RespLogout {
+/* interface RespLogout {
   message?: string; // La propiedad 'message' es opcional
   // Otras propiedades si las hay
-}
+} */
 
 const baseEndPoint = import.meta.env.VITE_BASENDPOINT_BACK
 

@@ -17,10 +17,15 @@ export type DataType = Product & {
   key: React.Key;
 }
 
+interface Props {
+  setIsLoadin : React.Dispatch<React.SetStateAction<boolean>>
+}
+
 const theme = import.meta.env.VITE_TEMA;
 
 
-const FormAddProducts: React.FC = () => {
+const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
+
   type TablePaginationPosition = "bottomCenter";
   const [form] = Form.useForm();
   const { TextArea } = Input;
@@ -70,6 +75,7 @@ const FormAddProducts: React.FC = () => {
   async function fileSelectedHandler(event: React.ChangeEvent<HTMLInputElement>){
     if(event.target.files && event.target.files[0]){
       try {
+        setIsLoadin(true)
         const fileImg = event.target.files[0];
         /* getBase64Image(fileImg); */
         const refArchivo = ref(storage, `${theme+'Images'}/${fileImg.name}`);
@@ -80,6 +86,8 @@ const FormAddProducts: React.FC = () => {
         event.target.value = '';
       } catch (error) {
         console.log(error)
+      }finally{
+        setIsLoadin(false)
       }
       
     }
@@ -511,7 +519,10 @@ const FormAddProducts: React.FC = () => {
 
       <Form.Item>
         <Space>
-          <SubmitButton setDataProduct={setDataProduct} setProductEdit={setProductEdit} imgDefault={productDefault} form={form} data={dataProduct} errors={errors} dataProducts={dataProducts} updateForm={updateForm} textButton={productEdit? 'Editar Producto': 'Crear producto'} action={productEdit? 'editProduct': 'createProduct'} />
+          <SubmitButton setDataProduct={setDataProduct} setProductEdit={setProductEdit} imgDefault={productDefault} 
+            form={form} data={dataProduct} errors={errors} dataProducts={dataProducts} 
+            updateForm={updateForm} textButton={productEdit? 'Editar Producto': 'Crear producto'} 
+            action={productEdit? 'editProduct': 'createProduct'} setIsLoadin ={setIsLoadin}/>
           <Button htmlType="reset" onClick={clearDataProduct}>{productEdit? 'Cancelar': 'Limpiar Campos'}</Button>
         </Space>
       </Form.Item>
@@ -746,7 +757,12 @@ const FormAddProducts: React.FC = () => {
 
       <Form.Item>
         <Space>
-          <SubmitButton setDataProduct={setDataProduct} setProductEdit={setProductEdit} imgDefault={productDefault} form={form} data={dataProduct} errors={errors} dataProducts={dataProducts} updateForm={updateForm} textButton={productEdit? 'Editar Producto': 'Crear producto'} action={productEdit? 'editProduct': 'createProduct'} />
+          <SubmitButton setDataProduct={setDataProduct} setProductEdit={setProductEdit} 
+            imgDefault={productDefault} form={form} data={dataProduct} errors={errors} 
+            dataProducts={dataProducts} updateForm={updateForm} 
+            textButton={productEdit? 'Editar Producto': 'Crear producto'} 
+            action={productEdit? 'editProduct': 'createProduct'} setIsLoadin ={setIsLoadin}
+          />
           <Button htmlType="reset" onClick={clearDataProduct}>{productEdit? 'Cancelar': 'Limpiar Campos'}</Button>
         </Space>
       </Form.Item>

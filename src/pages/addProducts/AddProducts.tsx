@@ -27,13 +27,15 @@ const AddProductPage: React.FC = () => {
       } catch (error) {
         console.error('Error fetching data:', error);
         setIsLoadin(false); // Asegúrate de cambiar el estado en caso de error
+      }finally{
+        setIsLoadin(false)
       }
     }
     fetchData()   
   }, [])
   
   return <Container>
-    <FormAddProducts></FormAddProducts>
+    <FormAddProducts setIsLoadin={setIsLoadin}></FormAddProducts>
     {isLoadin && <Loading/>}
   </Container>
 }

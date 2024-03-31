@@ -44,3 +44,25 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig); */
+
+
+//Feredie
+/* 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyC_EJa-LrOtqI9_2_VhYDksuOXzTOyPX9g",
+  authDomain: "app-ventas-f005e.firebaseapp.com",
+  projectId: "app-ventas-f005e",
+  storageBucket: "app-ventas-f005e.appspot.com",
+  messagingSenderId: "365220245906",
+  appId: "1:365220245906:web:3abe112f510c18f2aa514b"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+ */

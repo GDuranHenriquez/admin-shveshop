@@ -20,9 +20,11 @@ type Props = {
   action : string
   setDataProduct : React.Dispatch<React.SetStateAction<Product>>;
   setProductEdit: React.Dispatch<React.SetStateAction<string | number | null>>;
+  setIsLoadin : React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, updateForm, imgDefault, textButton, action, setDataProduct, setProductEdit }) => {
+const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, updateForm, imgDefault, 
+    textButton, action, setDataProduct, setProductEdit, setIsLoadin }) => {
   const [submittable, setSubmittable] = React.useState(false);
   const dispatch = useCustomDispatch();
   const auth = useAuth()
@@ -64,39 +66,87 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
   }
   
   const submit = () =>{
-    console.log(errors)
-    let isError = false;
-    for(const key in errors) {
-      if (errors[key] === 1) {     
-        isError = true         
-      }      
-    }
-    if(isError){
-      return messageErrorProduct('Faltan datos obligatorios');
-    }
-    if(action === 'createProduct'){          
-      const newProduct : RegisterProduct = {
-        codigo: data.codigo,
-        nombre: data.nombre,
-        descripcion: data.descripcion,
-        lote: data.lote === ''? null : data.lote,
-        p_com_bulto: Number(data.p_com_bulto),
-        unidad_p_bulto: Number(data.unidad_p_bulto),
-        p_venta_bulto: Number(data.p_venta_bulto),
-        p_venta_unidad: Number(data.p_venta_unidad),
-        iva: Number(data.iva),
-        total_bulto: Number(data.total_bulto),
-        cantidad_unidad: Number(data.cantidad_unidad),
-        observacion: data.observacion === "" ? null : data.observacion,
-        categorias: getCategori(data.categoria),
-        img: data.img === imgDefault ? null : data.img,
-        p_venta_mayor: data.p_venta_mayor,
-        cant_min_mayoreo: data.cant_min_mayoreo,
-        venta_por: data.venta_por? data.venta_por : ''
+    try {
+      setIsLoadin(true)
+      let isError = false;
+      for(const key in errors) {
+        if (errors[key] === 1) {     
+          isError = true         
+        }      
       }
-      if(data.ProductoPresentacion){
+      if(isError){
+        return messageErrorProduct('Faltan datos obligatorios');
+      }
+      if(action === 'createProduct'){          
+        const newProduct : RegisterProduct = {
+          codigo: data.codigo,
+          nombre: data.nombre,
+          descripcion: data.descripcion,
+          lote: data.lote === ''? null : data.lote,
+          p_com_bulto: Number(data.p_com_bulto),
+          unidad_p_bulto: Number(data.unidad_p_bulto),
+          p_venta_bulto: Number(data.p_venta_bulto),
+          p_venta_unidad: Number(data.p_venta_unidad),
+          iva: Number(data.iva),
+          total_bulto: Number(data.total_bulto),
+          cantidad_unidad: Number(data.cantidad_unidad),
+          observacion: data.observacion === "" ? null : data.observacion,
+          categorias: getCategori(data.categoria),
+          img: data.img === imgDefault ? null : data.img,
+          p_venta_mayor: data.p_venta_mayor,
+          cant_min_mayoreo: data.cant_min_mayoreo,
+          venta_por: data.venta_por? data.venta_por : ''
+        }
+        if(data.ProductoPresentacion){
+          const tkn = auth.getAccessToken()
+          postProduct(dispatch, tkn, newProduct, data.ProductoPresentacion).then((res) =>{
+            if(res instanceof AxiosError){
+              if(res.response?.status === 404){
+                const error = res.response?.data          
+                messageErrorProduct(error.error)          
+              }        
+              }else if(res === 200){
+                updateForm(dataProducts);
+                form.setFieldsValue(dataProducts);
+                messageSuccessProduct('Producto agregado exitosamente');
+              }
+            }
+            ).catch((error)=>{
+              console.log(error)
+          });  
+        }else{
+          messageErrorProduct('La presentacion del producto es obligatoria');
+        }       
+      }else if(action === 'editProduct'){
+        if(!data.ProductoPresentacion){
+          messageErrorProduct('Debe cargar la presentación del producto');
+          return
+        }   
+        const productEdit: EditProduct = {
+          id: data.id,
+          codigo: data.codigo,
+          nombre: data.nombre,
+          descripcion: data.descripcion,
+          lote: data.lote === ''? null : data.lote,
+          p_com_bulto: Number(data.p_com_bulto),
+          unidad_p_bulto: Number(data.unidad_p_bulto),
+          p_venta_bulto: Number(data.p_venta_bulto),
+          p_venta_unidad: Number(data.p_venta_unidad),
+          iva: Number(data.iva),
+          total_bulto: Number(data.total_bulto),
+          cantidad_unidad: Number(data.cantidad_unidad),
+          observacion: data.observacion === "" ? null : data.observacion,
+          categorias: getCategori(data.categoria),
+          img: data.img === imgDefault ? null : data.img,
+          presentacion: data.ProductoPresentacion?.id,
+          p_venta_mayor: data.p_venta_mayor,
+          cant_min_mayoreo: data.cant_min_mayoreo,
+          venta_por: data.venta_por? data.venta_por : '',
+        }
+
         const tkn = auth.getAccessToken()
-        postProduct(dispatch, tkn, newProduct, data.ProductoPresentacion).then((res) =>{
+
+        putUpdateProduct(dispatch, tkn, productEdit).then((res) =>{
           if(res instanceof AxiosError){
             if(res.response?.status === 404){
               const error = res.response?.data          
@@ -105,63 +155,19 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
             }else if(res === 200){
               updateForm(dataProducts);
               form.setFieldsValue(dataProducts);
-              messageSuccessProduct('Producto agregado exitosamente');
+              messageSuccessProduct('Producto editado exitosamente');
+              setDataProduct(clearDataProducts);
+              setProductEdit(null);
             }
           }
           ).catch((error)=>{
             console.log(error)
-        });  
-      }else{
-        messageErrorProduct('La presentacion del producto es obligatoria');
-      }       
-    }else if(action === 'editProduct'){
-      if(!data.ProductoPresentacion){
-        messageErrorProduct('Debe cargar la presentación del producto');
-        return
-      }   
-      const productEdit: EditProduct = {
-        id: data.id,
-        codigo: data.codigo,
-        nombre: data.nombre,
-        descripcion: data.descripcion,
-        lote: data.lote === ''? null : data.lote,
-        p_com_bulto: Number(data.p_com_bulto),
-        unidad_p_bulto: Number(data.unidad_p_bulto),
-        p_venta_bulto: Number(data.p_venta_bulto),
-        p_venta_unidad: Number(data.p_venta_unidad),
-        iva: Number(data.iva),
-        total_bulto: Number(data.total_bulto),
-        cantidad_unidad: Number(data.cantidad_unidad),
-        observacion: data.observacion === "" ? null : data.observacion,
-        categorias: getCategori(data.categoria),
-        img: data.img === imgDefault ? null : data.img,
-        presentacion: data.ProductoPresentacion?.id,
-        p_venta_mayor: data.p_venta_mayor,
-        cant_min_mayoreo: data.cant_min_mayoreo,
-        venta_por: data.venta_por? data.venta_por : '',
+        });     
       }
-
-      const tkn = auth.getAccessToken()
-
-      putUpdateProduct(dispatch, tkn, productEdit).then((res) =>{
-        if(res instanceof AxiosError){
-          if(res.response?.status === 404){
-            const error = res.response?.data          
-            messageErrorProduct(error.error)          
-          }        
-          }else if(res === 200){
-            updateForm(dataProducts);
-            form.setFieldsValue(dataProducts);
-            messageSuccessProduct('Producto editado exitosamente');
-            setDataProduct(clearDataProducts);
-            setProductEdit(null);
-          }
-        }
-        ).catch((error)=>{
-          console.log(error)
-      });  
-      
-      
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setIsLoadin(false)
     }
   }
 

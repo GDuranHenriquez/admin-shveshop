@@ -65,7 +65,7 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
     }
   }
   
-  const submit = () =>{
+  const submit = async () =>{
     try {
       setIsLoadin(true)
       let isError = false;
@@ -99,10 +99,23 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
         }
         if(data.ProductoPresentacion){
           const tkn = auth.getAccessToken()
-          postProduct(dispatch, tkn, newProduct, data.ProductoPresentacion).then((res) =>{
+          const resp = await postProduct(dispatch, tkn, newProduct, data.ProductoPresentacion);
+
+          if(resp instanceof AxiosError){
+            if(resp.response?.status === 404){
+              const error = resp.response?.data         
+              messageErrorProduct(error.error)          
+            }        
+          }else if(resp === 200){
+            updateForm(dataProducts);
+            form.setFieldsValue(dataProducts);
+            messageSuccessProduct('Producto agregado exitosamente');
+          }
+
+          /* postProduct(dispatch, tkn, newProduct, data.ProductoPresentacion).then((res) =>{
             if(res instanceof AxiosError){
               if(res.response?.status === 404){
-                const error = res.response?.data          
+                const error = res.response?.data         
                 messageErrorProduct(error.error)          
               }        
               }else if(res === 200){
@@ -113,7 +126,7 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
             }
             ).catch((error)=>{
               console.log(error)
-          });  
+          }); */  
         }else{
           messageErrorProduct('La presentacion del producto es obligatoria');
         }       
@@ -141,12 +154,26 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
           presentacion: data.ProductoPresentacion?.id,
           p_venta_mayor: data.p_venta_mayor,
           cant_min_mayoreo: data.cant_min_mayoreo,
-          venta_por: data.venta_por? data.venta_por : '',
+          venta_por: data.venta_por? data.venta_por : ''
         }
 
         const tkn = auth.getAccessToken()
 
-        putUpdateProduct(dispatch, tkn, productEdit).then((res) =>{
+        const res = await putUpdateProduct(dispatch, tkn, productEdit);
+        if(res instanceof AxiosError){
+          if(res.response?.status === 404){
+            const error = res.response?.data          
+            messageErrorProduct(error.error)          
+          }        
+        }else if(res === 200){
+          updateForm(dataProducts);
+          form.setFieldsValue(dataProducts);
+          messageSuccessProduct('Producto editado exitosamente');
+          setDataProduct(clearDataProducts);
+          setProductEdit(null);
+        }       
+
+        /* putUpdateProduct(dispatch, tkn, productEdit).then((res) =>{
           if(res instanceof AxiosError){
             if(res.response?.status === 404){
               const error = res.response?.data          
@@ -162,9 +189,9 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
           }
           ).catch((error)=>{
             console.log(error)
-        });     
+        }); */     
       }
-    } catch (error) {
+    }catch(error) {
       console.log(error)
     }finally{
       setIsLoadin(false)

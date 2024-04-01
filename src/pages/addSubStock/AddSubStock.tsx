@@ -88,7 +88,7 @@ const AddSubStockPage: React.FC = () => {
 
   return (
     <Container>
-      <SearchProduct setListProductSearch={setListProductSearch} setDetailProduct={setDetailProduct}/>
+      <SearchProduct setLoading={setLoading} setListProductSearch={setListProductSearch} setDetailProduct={setDetailProduct}/>
       
       <div className={detailProduct? 'containerCarsConsultProduct': 'containerCarsConsultProductNoDetail'}>
         <div className='containerCards'>
@@ -172,9 +172,12 @@ const Container = styled.div`
       gap: 10px;
       padding: 10px;
       border-right: 1px solid rgba(0, 0, 0, 0.1);
+      overflow-x: auto;
+      max-height: 95%;
     }
     .containerCards{
       border: none;
+      overflow-x: auto;
     }
   }
 
@@ -198,6 +201,7 @@ const Container = styled.div`
       gap: 10px;
       padding: 10px;
       border-right: 1px solid rgba(0, 0, 0, 0.4);
+      overflow-x: auto;
     }
     .containerInfoCard{
       width: 400px;

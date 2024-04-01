@@ -8,9 +8,10 @@ import { useAuth } from '../../../auth/authPro'
 interface Props {
   setListProductSearch: React.Dispatch<React.SetStateAction<ProductSearch[] | null>>;
   setDetailProduct: React.Dispatch<React.SetStateAction<ProductSearch | null>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SearchProduct: React.FC<Props> = ({ setListProductSearch, setDetailProduct }) => {
+const SearchProduct: React.FC<Props> = ({ setListProductSearch, setDetailProduct, setLoading }) => {
   const auth = useAuth();
   const inpSearchProduct = useRef<HTMLInputElement>(null);
   const [textInpSearch, setTextImputSearch] = useState<string>('');
@@ -39,22 +40,29 @@ const SearchProduct: React.FC<Props> = ({ setListProductSearch, setDetailProduct
   };
 
   const searchProduct = async () => {
-    const textInput = textInpSearch;
-    cleanData()
-    if (textInput) {
-      setListProductSearch(null);
-      const tkn = auth.getAccessToken()
-      const response = await getProductIdName(tkn, textInput);
-      if (response.data) {
-        const data = response.data;
-        if(data.length){
-          setListProductSearch(data);
-        }else{
-          setListProductSearch(null)
+    try {
+      setLoading(true)
+      const textInput = textInpSearch;
+      cleanData()
+      if (textInput) {
+        setListProductSearch(null);
+        const tkn = auth.getAccessToken()
+        const response = await getProductIdName(tkn, textInput);
+        if (response.data) {
+          const data = response.data;
+          if(data.length){
+            setListProductSearch(data);
+          }else{
+            setListProductSearch(null)
+          }
+        } else {
+          console.log(response.error);
         }
-      } else {
-        console.log(response.error);
       }
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setLoading(false)
     }
   }
 

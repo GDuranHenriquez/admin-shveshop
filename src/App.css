@@ -20,6 +20,21 @@ body{
   padding: 0;
 }
 
+/*Modals*/
+.modalPrintTags{
+  top: 10px;
+  width: 98% !important;
+  min-height: 95vh !important;
+  overflow-x: auto;
+  padding-bottom: 0 !important;
+}
+.modalPrintTags > .ant-modal-content{
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 95vh !important;
+  
+}
+
 /*Mukafe*/
 .mukafeAppBody > div > .ant-menu-submenu > .ant-menu > .ant-menu-item-selected{
   border: 1px solid rgba(255, 179, 123, 0.2);

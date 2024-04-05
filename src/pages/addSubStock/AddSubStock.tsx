@@ -82,10 +82,6 @@ const AddSubStockPage: React.FC = () => {
     setSelectedOption('1')
   }
 
-  useEffect(() => {
-    console.log(listProductSearch)
-  }, [listProductSearch])
-
   return (
     <Container>
       <SearchProduct setLoading={setLoading} setListProductSearch={setListProductSearch} setDetailProduct={setDetailProduct}/>

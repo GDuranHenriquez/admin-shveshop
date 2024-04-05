@@ -1,0 +1,47 @@
+.cardsContainer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: start;
+  gap: 3mm;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 3mm;
+}
+
+.containerCards{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 1);
+  border-radius: 5px;
+  padding: 1mm;
+  max-width: max-content;
+}
+.conatainerPrice{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+.conatainerPrice > span{
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+.containerCards > p{
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  font-size: 10px;
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
+}

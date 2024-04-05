@@ -1,0 +1,147 @@
+.containerCheckBoxes{
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.barAction{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.containerBntPrint{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.containerBntPrint > p{
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+}
+.containerBntPrint > button{
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgb(1, 134, 1);
+}
+.containerBntPrint > button:hover{
+  cursor: pointer;
+}
+.containerBntPrint > button:disabled{
+  background: gray;
+}
+.containerCheckBoxes > h5 {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.listCheckBoxes{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.checkBoxContainer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.checkBoxContainer > label {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  text-align: start;
+}
+.checkBoxContainer > label:hover {
+  cursor: pointer;
+}
+.checkBoxContainer > input:hover {
+  cursor: pointer;
+}
+
+.conatinerSearchsProduct > h5{
+  margin-bottom: 5px;
+  margin-left: 10px;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.conatinerInfoCardTag{
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 300px;
+  min-height: calc(100vh - 220px);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 0 10px;
+}
+
+.conatinerInfoCardTag > * {
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.conatinerInfoCardTag > :last-child {
+  border-right: none;
+}
+
+.conatinerCards{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  gap: 10px;
+  /* border-right: 1px solid rgba(0, 0, 0, 0.3); */
+}
+.conatinerTags{
+  padding: 10px;
+}
+.containerListTags{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  height: calc(100% - 30px);
+  overflow-x: auto;
+}
+
+.conatinerAllTags{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 220px);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 0 10px;
+  gap: 10px;
+}

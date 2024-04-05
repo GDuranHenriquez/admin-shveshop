@@ -8,7 +8,9 @@ import {
   DesktopOutlined,
   PieChartOutlined,
   CalculatorOutlined,
-  LogoutOutlined
+  LogoutOutlined,
+  UnorderedListOutlined,
+  TagOutlined
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
@@ -62,11 +64,9 @@ const items: MenuItem[] = [
   //getItem('Cerrar sesion', 'logout', <LogoutOutlined className = {`${getClasseIcon(theme)} 'containerLogout'`} />)
   /* getItem('Edit Precios', 'editPrecios', <FileOutlined className={getClasseIcon(theme)}/>), */
   /* getItem('Team', 'sub2', <TeamOutlined className={getClasseIcon(theme)}/>, [getItem('Team 1', '6'), getItem('Team 2', '8')]), */
-  /* getItem('Administar usuarios', 'sub1', <UserOutlined className={getClasseIcon(theme)}/>, [
-    getItem('Tom', '4'),
-    getItem('Bill', '5'),
-    getItem('Alex', '6'),
-  ]), */
+  getItem('Obtener Info.', 'sub1', <UnorderedListOutlined className={getClasseIcon(theme)}/>, [
+    getItem('Obtener etiquetas de precios', 'get-tag-price', <TagOutlined className={getClasseIcon(theme)}/>)
+  ]),
 ];
 
 const theme_select = getTheme(theme)
@@ -90,7 +90,9 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
       case '/panel':
         return 'Historico';
       case '/addSubStock':
-        return 'Atualizar stock';      
+        return 'Atualizar stock';
+      case '/get-tag-price':
+        return 'Obtener Info.'
       default:
         return '' ;
     }
@@ -102,7 +104,9 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
       case '/panel':
         return 'panel';
       case '/addSubStock':
-        return 'addSubStock';   
+        return 'addSubStock'; 
+      case '/get-tag-price':
+        return 'get-tag-price';   
       default:
         return '' ;
     }

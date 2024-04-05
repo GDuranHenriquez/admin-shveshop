@@ -1,7 +1,7 @@
 import styles from './cardProductGetTag.module.css'
-import { ProductSearch } from '../../../redux/slices/products/typesProducts';
+import { ProductSearch } from '../../../redux/slices/products/typesProducts'
 import imgProductDefault from '../../../assets/productDefault.jpeg'
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 
 type TypeTag = {
   id: number,
@@ -13,8 +13,6 @@ interface Props{
   product: ProductSearch,
   updateListTag: (tag: TypeTag, acction: number) => void
 }
-
-
 
 const CardProductGetTag: React.FC<Props> = ({product, updateListTag}) => {
 
@@ -38,8 +36,6 @@ const CardProductGetTag: React.FC<Props> = ({product, updateListTag}) => {
       updateListTag(tag, 0)
     }
   }
-
-
 
   return (
     <div className={styles.containerCard}>

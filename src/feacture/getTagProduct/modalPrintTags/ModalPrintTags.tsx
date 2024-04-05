@@ -1,9 +1,9 @@
 import { Modal } from "antd";
 import React, { useState } from 'react';
-import {ContainerBody, FooterContainer} from "./styleModalBody";
+import {ContainerBody, FooterContainer} from "./styleModalBody"
 import './modalPrintTags.css'
 import PdfCards from "../pdfCards/PdfCards";
-import { regTestNumInteger } from "../../../utils/validations";
+import { regTestNumInteger } from "../../../utils/validations"
 
 type TypeTag = {
   id: number,

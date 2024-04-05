@@ -12,7 +12,7 @@ interface Props {
   tag: TypeTag
 }
 
-const CardTag: React.FC<Props> = ({tag}) => {
+const CardTag: React.FC<Props> = ({ tag }) => {
 
   return (
     <div className={styles.containerCard}>

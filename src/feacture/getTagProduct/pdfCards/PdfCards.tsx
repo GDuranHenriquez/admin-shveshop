@@ -58,16 +58,18 @@ const PdfCards: React.FC<Props> = ({listTags, print, setPrint, openModal, dataPr
     const hct = heightTag + constGap;
     const nCardHr = widthPage / wct;
     const nCardVr = heightPage / hct;
-    const nCardPerPage = nCardHr * nCardVr;
+    const nCardPerPage = Math.floor(nCardHr) * Math.floor(nCardVr);
     const n = listTags.length;
+    console.log(listTags.length)
     if(n <= nCardPerPage){
       nPages = 1
     }else{
-      const resto = n % nCardPerPage;
+      const resto = n % parseInt(nCardPerPage.toFixed(2));
+      const numberPages = (n - resto) / parseInt(nCardPerPage.toFixed(2));      
       if(resto > 0){
-        nPages = resto + 1; 
+        nPages = numberPages + 1; 
       }else{
-        nPages = resto
+        nPages = numberPages
       }
     }
     //obtemose ahora los slices para cada pagina
@@ -76,7 +78,7 @@ const PdfCards: React.FC<Props> = ({listTags, print, setPrint, openModal, dataPr
       listPages.push(listTags)
     }else{
       for(let i = 0; i < nPages; i++){
-        if(i < (nPages - 1)){
+        if(i <= (nPages - 1)){
           const init = i * nCardPerPage;
           const end = (i+1) * nCardPerPage;
           const page = listTags.slice(init, end)
@@ -122,6 +124,7 @@ const PdfCards: React.FC<Props> = ({listTags, print, setPrint, openModal, dataPr
   useEffect(() => {
     if(dataPrint){
       readDataPrint(dataPrint)
+      getNPages()
     }
   }, [dataPrint])
 
@@ -143,7 +146,7 @@ const PdfCards: React.FC<Props> = ({listTags, print, setPrint, openModal, dataPr
     </div> */
 
     return (
-      <div ref={refTags}>
+      <div ref={refTags} className='page'>
         {pages.length ? 
           pages.map((page, index) => (
             <div key={`page${index}`} 

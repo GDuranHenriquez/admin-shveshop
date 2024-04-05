@@ -3,11 +3,12 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: start;
-  gap: 3mm;
+  gap: 1.5mm;
   overflow-x: auto;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 8px;
-  padding: 3mm;
+  padding: 1.5mm;
+  margin-bottom: 10px;
 }
 
 .containerCards{

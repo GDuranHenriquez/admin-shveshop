@@ -34,7 +34,7 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
     lote:'', categoria:[] , p_com_bulto: 0, unidad_p_bulto: 0,
     p_venta_bulto: 0, p_venta_unidad: 0, iva: 0, 
     total_bulto: 0, cantidad_unidad: 0, observacion:'', img: imgDefault, ProductoPresentacion: null,
-    cant_min_mayoreo: 0, p_venta_mayor: 0, venta_por: null
+    cant_min_mayoreo: 0, p_venta_mayor: 0, venta_por: null, ProductoDepartamento: null
   };
 
   // Watch all values
@@ -97,9 +97,10 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
           cant_min_mayoreo: data.cant_min_mayoreo,
           venta_por: data.venta_por? data.venta_por : ''
         }
-        if(data.ProductoPresentacion){
+
+        if(data.ProductoPresentacion && data.ProductoDepartamento){
           const tkn = auth.getAccessToken()
-          const resp = await postProduct(dispatch, tkn, newProduct, data.ProductoPresentacion);
+          const resp = await postProduct(dispatch, tkn, newProduct, data.ProductoPresentacion, data.ProductoDepartamento);
 
           if(resp instanceof AxiosError){
             if(resp.response?.status === 404){
@@ -128,11 +129,21 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
               console.log(error)
           }); */  
         }else{
-          messageErrorProduct('La presentacion del producto es obligatoria');
-        }       
+          if(data.ProductoPresentacion){
+            messageErrorProduct('La presentacion del producto es obligatoria');
+          }else if(data.ProductoDepartamento){
+            messageErrorProduct('El departamento del producto es obligatoria');
+          }
+        }
+        
+        
       }else if(action === 'editProduct'){
         if(!data.ProductoPresentacion){
           messageErrorProduct('Debe cargar la presentación del producto');
+          return
+        }
+        if(!data.ProductoDepartamento){
+          messageErrorProduct('El departamento del producto es obligatoria');
           return
         }   
         const productEdit: EditProduct = {
@@ -152,6 +163,7 @@ const SubmitButton : React.FC<Props> = ({ form, data, errors, dataProducts, upda
           categorias: getCategori(data.categoria),
           img: data.img === imgDefault ? null : data.img,
           presentacion: data.ProductoPresentacion?.id,
+          departamento: data.ProductoDepartamento?.id,
           p_venta_mayor: data.p_venta_mayor,
           cant_min_mayoreo: data.cant_min_mayoreo,
           venta_por: data.venta_por? data.venta_por : ''

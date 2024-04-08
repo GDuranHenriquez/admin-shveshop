@@ -2,6 +2,7 @@ export interface ProductState{
   allProducts: Product[] | [];
   allCategori: Category[] | [];
   allPresentacion: Presentacion[] | [];
+  allDepartamentos: Departamento[] | [];
   rate : TypeRate | null;
 }
 
@@ -25,6 +26,7 @@ export type Product = {
   observacion: string | null;
   categoria: [number] | [] | Category[];
   ProductoPresentacion: Presentacion | null;
+  ProductoDepartamento: Departamento | null;
   p_venta_mayor: number;
   cant_min_mayoreo: number;
   total_v_mayor?: number;
@@ -55,7 +57,8 @@ export type RegisterProduct = {
 
 export type EditProduct = RegisterProduct & {
   id?: number | string;
-  presentacion : number
+  presentacion : number;
+  departamento: number
 }
 
 export type Category = {
@@ -64,6 +67,11 @@ export type Category = {
 };
 
 export type Presentacion = {
+  id: number;
+  nombre: string;
+};
+
+export type Departamento = {
   id: number;
   nombre: string;
 };

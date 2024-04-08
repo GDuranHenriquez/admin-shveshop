@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ProductState, Product, Category, Presentacion, TypeRate } from './typesProducts';
+import { ProductState, Product, Category, Presentacion, TypeRate, Departamento } from './typesProducts';
 
 
 const initialState: ProductState = {
   allProducts: [],
   allCategori: [],
   allPresentacion: [],
+  allDepartamentos: [],
   rate : null,
 }
 
@@ -52,7 +53,18 @@ const productSlices = createSlice({
       newPresentacion.push(action.payload);
       state.allPresentacion = newPresentacion;
     },
-
+    //Departamentos
+    setNewDepartamento: (state, action: PayloadAction<Departamento>) =>{
+      state.allDepartamentos = [...state.allDepartamentos, action.payload]       
+    },
+    setAllDepartamento: (state, action: PayloadAction<Departamento[] | []>) =>{
+      state.allDepartamentos = action.payload;
+    },
+    setUpdateDepartamento: (state, action: PayloadAction<Departamento>) => {
+      const newDepartamento = state.allDepartamentos.filter((depart) => depart.id != action.payload.id);
+      newDepartamento.push(action.payload);
+      state.allDepartamentos = newDepartamento;
+    },
     //rate
     setRate: (state, action: PayloadAction<TypeRate>) => {
       state.rate = action.payload;
@@ -71,6 +83,10 @@ export const {
   setNewPresentacion,
   setUpdatePresentacion,
   setUpdateProduct,
-  setRate } = productSlices.actions;
+  setRate,
+  setAllDepartamento,
+  setNewDepartamento,
+  setUpdateDepartamento
+  } = productSlices.actions;
 
 export default productSlices.reducer;

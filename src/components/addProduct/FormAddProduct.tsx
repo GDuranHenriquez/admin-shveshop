@@ -31,20 +31,25 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
   const { TextArea } = Input;
   const imgRef = useRef(null);
   const regexNumberDecimal = /^([0-9]+\.?[0-9]{0,3})$/;
+
   const storage = getStorage(appFirebase);
+
   const allCategori = useCustomSelector((state) => state.product.allCategori);
   const allProduct = useCustomSelector((state) => state.product.allProducts);
   const allPresentacion = useCustomSelector((state) => state.product.allPresentacion);
+  const allDepartamentos = useCustomSelector((state) => state.product.allDepartamentos);
+
   const dataProducts: Product  = {
     nombre:'', codigo:'', descripcion:'', 
     lote:'', categoria:[] , p_com_bulto: 0, unidad_p_bulto: 0,
     p_venta_bulto: 0, p_venta_unidad: 0, iva: 0, 
     total_bulto: 0, cantidad_unidad: 0, observacion:'', img: productDefault, ProductoPresentacion: null, 
-    cant_min_mayoreo: 0, p_venta_mayor: 0, venta_por: null };
+    cant_min_mayoreo: 0, p_venta_mayor: 0, venta_por: null, ProductoDepartamento: null };
   const errorsData: {[key: string]: number} = {
     nombre:1, codigo:1, descripcion:1, lote:0, categoria:1 , p_com_bulto: 0,
     unidad_p_bulto: 1, p_venta_bulto: 0, p_venta_unidad: 1, iva:0, 
-    total_bulto: 1, cantidad_unidad: 0, observacion:0, presentacion: 1, cant_min_mayoreo: 0, p_venta_mayor: 0, venta_por: 1  
+    total_bulto: 1, cantidad_unidad: 0, observacion:0, presentacion: 1, 
+    cant_min_mayoreo: 0, p_venta_mayor: 0, venta_por: 1, departamento: 1, 
   };
   const optionsVentaPor = [
     {label: '', value:''},
@@ -54,6 +59,8 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
 
   const [options, setOptions] =  useState<{label: string, value: string}[] | undefined>([]);
   const [optionsPresentacion, setOptionsPresentacion] = useState<{label: string, value: string}[] | undefined>([]);
+  const [optionsDepartamento, setOptionsDepartamento] = useState<{label: string, value: string}[] | undefined>([]);
+
   const [_bottom, _setBottom] = useState<TablePaginationPosition>("bottomCenter");
   const [dataTable, setDataTable] = useState<DataType[] | undefined>(undefined);
   const [productEdit, setProductEdit] = useState<number | string | null>(null);  
@@ -135,6 +142,17 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
         return {...error, presentacion : 1}
       })
     }
+    
+    if(dataForm.ProductoDepartamento !== ''){
+      setErrors((error) => {
+        return {...error, departamento : 0}
+      })
+    }else{
+      setErrors((error) => {
+        return {...error, departamento : 1}
+      })
+    }
+
     if(dataForm.categoria !== ''){
       setErrors((error) => {
         return {...error, categoria : 0}
@@ -173,6 +191,17 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
     }else{
       setDataProduct({ ...dataProduct,  ProductoPresentacion: null });
       setErrors({...errors, presentacion: 1})
+    }
+  }
+  //select Departamento
+  const onChangeDepartamento = (value: string) => {
+    if(Number(value) >= 0){
+      const selecDepartamento = allDepartamentos.filter((depart) => depart.id === Number(value));
+      setDataProduct({ ...dataProduct,  ProductoDepartamento: selecDepartamento[0] });
+      setErrors({...errors, departamento: 0})
+    }else{
+      setDataProduct({ ...dataProduct,  ProductoDepartamento: null });
+      setErrors({...errors, departamento: 1})
     }
   }
   //select ventas por
@@ -250,6 +279,12 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
     optionPresentacions.unshift({label: '', value:''});
     setOptionsPresentacion(optionPresentacions);
   }, [allPresentacion]);
+  
+  useEffect(() => {
+    const optionDepartamentos: {label: string, value: string}[] = allDepartamentos.map((op) => ({label: op.nombre, value: op.id.toString()}));
+    optionDepartamentos.unshift({label: '', value:''});
+    setOptionsDepartamento(optionDepartamentos);
+  }, [allDepartamentos]);
 
   useEffect(() => {    
     inpNumericosObli.forEach((element: string) => {
@@ -267,16 +302,23 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
       form.setFieldsValue(null);
       form.setFieldValue('categoria', '');
       form.setFieldValue('ProductoPresentacion', '');
+      form.setFieldValue('ProductoDepartamento', '');
       form.setFieldValue('venta_por', '');
     }else{
       form.setFieldsValue(dataProduct);
       const categoria = dataProduct.categoria[0];
       const presentacion = dataProduct.ProductoPresentacion?.nombre;
+      const departamento = dataProduct.ProductoDepartamento?.nombre;
       const tipoVenta = dataProduct.venta_por;
       if(presentacion){
         form.setFieldValue('ProductoPresentacion', presentacion);
       }else{
         form.setFieldValue('ProductoPresentacion', '');
+      }
+      if(departamento){
+        form.setFieldValue('ProductoDepartamento', departamento);
+      }else{
+        form.setFieldValue('ProductoDepartamento', '');
       }
       if(typeof categoria === "object"){
         form.setFieldValue('categoria', categoria.nombre.toString());
@@ -515,7 +557,29 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
                 />                
           </Form.Item>   
         </Col>
-      </Row>      
+      </Row> 
+      {/*Fila7 */}
+      <Row gutter={24}>
+        <Col span={12}>
+          <Row gutter={24}>
+            <Col span={20}>                
+              <Form.Item name="ProductoDepartamento" label="Departamento" rules={[{ required: true, message: 'Este campo es obligatorio' }]} tooltip="Local al que pertenece el producto">            
+                    <Select
+                      showSearch
+                      placeholder="Selecciona un departamento"
+                      optionFilterProp="children"
+                      onChange={onChangeDepartamento}
+                      filterOption={filterOption}
+                      options={optionsDepartamento}                      
+                    />                
+              </Form.Item>
+            </Col>
+            <Col span={4}>
+              <Button className="buttonCategory" onClick={showModalPresentacion}>+</Button>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
 
       <Form.Item>
         <Space>
@@ -741,7 +805,7 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
       {/*Fila 8*/}
       <Row gutter={24}>
         <Col span={12}>                 
-          <Form.Item name="venta_por" label="Tipo de Venta" rules={[{ required: true }]} tooltip="El tipo de venta se refiere a si el producto de vende en partes unitarias o se vende de acuerdo a una medida de esa porción)">            
+          <Form.Item name="venta_por" label="Tipo de Venta" rules={[{ required: true, message: 'Este campo es obligatorio' }]} tooltip="El tipo de venta se refiere a si el producto de vende en partes unitarias o se vende de acuerdo a una medida de esa porción)">            
             <Select
               showSearch
               placeholder="Select. tipo de venta"
@@ -751,6 +815,26 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
               options={optionsVentaPor}                      
             />                
           </Form.Item>   
+        </Col>
+
+        <Col span={12}>
+          <Row gutter={24}>
+            <Col span={20}>                
+              <Form.Item name="ProductoDepartamento" label="Departamento" rules={[{ required: true }]} tooltip="Local al que pertenece el producto">            
+                    <Select
+                      showSearch
+                      placeholder="Selecciona un departamento"
+                      optionFilterProp="children"
+                      onChange={onChangeDepartamento}
+                      filterOption={filterOption}
+                      options={optionsDepartamento}                      
+                    />                
+              </Form.Item>
+            </Col>
+            <Col span={4}>
+              <Button className="buttonCategory" onClick={showModalPresentacion}>+</Button>
+            </Col>
+          </Row>
         </Col>
       </Row>      
       
@@ -772,7 +856,7 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
   }
   
   //table 
-
+  
   const getDataTable = () =>{
     const dataTable = allProduct.map((element, index) => ({...element, key: index}))
     return dataTable;

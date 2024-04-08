@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import SearchProduct from '../../feacture/addProductStock/searchProduct/SearchProduct'
 import { ProductSearch } from '../../redux/slices/products/typesProducts'
 import CardConsultProduct from '../../components/cardsConsultProduct/CardConsultProduct'

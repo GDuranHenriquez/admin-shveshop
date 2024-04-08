@@ -8,11 +8,14 @@ import { setAllProduct,
   setAllPresentacion, 
   setUpdatePresentacion, 
   setUpdateProduct,
-  setRate
+  setRate,
+  setAllDepartamento,
+  setNewDepartamento,
+  setUpdateDepartamento
 } from ".";
 
 import { Dispatch } from "../../store/store";
-import { Category, Presentacion, EditProduct, RegisterProduct, TypeAddSubProduct, ProductSearch } from "./typesProducts";
+import { Category, Presentacion, EditProduct, RegisterProduct, TypeAddSubProduct, ProductSearch, Departamento } from "./typesProducts";
 
 const basePoint = import.meta.env.VITE_BASENDPOINT_BACK;
 
@@ -41,7 +44,7 @@ export const getAllProducts = async (refreshToken : string, dispatch: Dispatch) 
   
 };
 
-export const postProduct = async (dispatch: Dispatch, refreshToken : string, newProduct: RegisterProduct, presentacion: Presentacion) => {
+export const postProduct = async (dispatch: Dispatch, refreshToken : string, newProduct: RegisterProduct, presentacion: Presentacion, departamento: Departamento) => {
   try {
     const endpoint = basePoint + '/productos';
     const config = {
@@ -50,7 +53,7 @@ export const postProduct = async (dispatch: Dispatch, refreshToken : string, new
       },
       data: null
     };
-    const response = await axios.post(endpoint, { newProduct, presentacion}, config);
+    const response = await axios.post(endpoint, { newProduct, presentacion, departamento}, config);
     dispatch(setNewProduct(response.data));
     return response.status;
   } catch (error) {
@@ -183,6 +186,51 @@ export const putUpdatePresentacion = async (dispatch: Dispatch, body: Presentaci
     return error;
   }
 }
+
+//Departamentos
+export const getAllDepartamentos = async (dispatch: Dispatch) => {
+  try {
+    const endpoint = basePoint + '/departamento';
+    const { data } = await axios.get(endpoint);
+    const allDepartamentos: Departamento[] = [];
+    data.forEach((element: Departamento) => {
+      allDepartamentos.push({id: element.id, nombre: element.nombre.charAt(0).toUpperCase() + element.nombre.slice(1)})
+    }); 
+    dispatch(setAllDepartamento(allDepartamentos));
+  } catch (error) {
+    return error;
+  }
+}
+
+export const postDepartamento = async (dispatch: Dispatch, body: {nombre: string}) => {
+  try {
+    const endpoint = basePoint + `/departamento`;
+    const response = await axios.post(endpoint, body); 
+    dispatch(setNewDepartamento(response.data));
+    return response.status;
+  } catch (error) {
+    if (typeof error === "string") {
+      return error;
+    } else if (error instanceof AxiosError) {
+      return error
+    } else {
+      console.log(error);
+    }
+  }
+}
+
+export const putUpdateDepartamento = async (dispatch: Dispatch, body: Departamento) => {
+  try {
+    const endpoint = basePoint + '/departamento';
+    const response = await axios.put(endpoint, body);
+    dispatch(setUpdateDepartamento(response.data));
+    return response.status
+  } catch (error) {
+    return error;
+  }
+}
+
+//===========================================
 
 export const getRateBCVRedux = async (refreshToken : string,dispatch:Dispatch):Promise<any> =>{
   try {

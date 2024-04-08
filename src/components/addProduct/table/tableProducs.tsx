@@ -8,7 +8,7 @@ import type { InputRef } from 'antd';
 import { DataType } from '../FormAddProduct';
 import productDefault  from '../../../assets/productDefault.jpeg';
 import {EditOutlined} from '@ant-design/icons';
-import { Category, Presentacion, Product } from '../../../redux/slices/products/typesProducts';
+import { Category, Departamento, Presentacion, Product } from '../../../redux/slices/products/typesProducts';
 import './table.css'
 
 const themeSelect = import.meta.env.VITE_TEMA;
@@ -212,6 +212,14 @@ const TableProducts: React.FC<Props> = ( {data , setDataProduct, setProductEdit}
       dataIndex: 'ProductoPresentacion',
       key: 'presentacion',
       render : (presentacion : Presentacion) => presentacion.nombre,
+      className:'columnData'
+    },
+    {
+      title: 'Departamento',
+      width: 100,
+      dataIndex: 'ProductoDepartamento',
+      key: 'departamento',
+      render : (departamento : Departamento) => departamento.nombre,
       className:'columnData'
     },
     {

@@ -30,7 +30,7 @@ type Props = {
 
 const PdfCards: React.FC<Props> = ({listTags, print, setPrint, openModal, dataPrint}) => {
 
-  const constGap = 3
+  const constGap = 4
   const refTags = useRef<HTMLIFrameElement>(null);
   const [widthPage, setWidthPage] = useState<number>(215.9)
   const [heightPage, setHeightPage] = useState<number>(279.4)  

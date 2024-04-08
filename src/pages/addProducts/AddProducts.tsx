@@ -1,17 +1,33 @@
 import React, {useEffect, useState} from 'react'
 import { styled } from "styled-components";
 import { useCustomDispatch } from '../../hooks/redux';
-import { getAllProducts, getAllCategori, getAllPresentacion } from '../../redux/slices/products/actionsProducts';
+import { getAllProducts, getAllCategori, getAllPresentacion, getAllDepartamentos } from '../../redux/slices/products/actionsProducts';
 import Loading from '../../Loading/Loading';
 import FormAddProducts from '../../components/addProduct/FormAddProduct';
 import { useAuth } from '../../auth/authPro';
+
+import { postManyProduct } from '../../utils/tempAllProduct';
 
 const AddProductPage: React.FC = () => {
   const auth = useAuth()
   const dispatch = useCustomDispatch();
   const [isLoadin, setIsLoadin] = useState(false);
 
+  const addAll = async () => {
+    try {
+       setIsLoadin(true)
+      const tk = auth.getAccessToken()
+      await postManyProduct(tk)
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setIsLoadin(false)
+    }
+   
+  }
+
   useEffect(() =>{
+
     const fetchData = async () => {
       try {
         setIsLoadin(true);
@@ -20,8 +36,9 @@ const AddProductPage: React.FC = () => {
           getAllProducts(tkn, dispatch),
           getAllCategori(dispatch),
           getAllPresentacion(dispatch),
+          getAllDepartamentos(dispatch),
         ]);
-
+        
         // Una vez que todas las funciones se resuelven, cambiar el estado a false
         setIsLoadin(false);
       } catch (error) {
@@ -37,6 +54,7 @@ const AddProductPage: React.FC = () => {
   return <Container>
     <FormAddProducts setIsLoadin={setIsLoadin}></FormAddProducts>
     {isLoadin && <Loading/>}
+    <button onClick={addAll}>Add All</button>
   </Container>
 }
 

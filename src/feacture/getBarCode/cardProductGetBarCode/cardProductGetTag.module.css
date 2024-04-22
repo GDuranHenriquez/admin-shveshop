@@ -49,7 +49,7 @@
 }
 
 .containerInfoProduc{
-  height: calc(100% -160px);
+  height: calc(100% - 160px);
   width: calc(100% - 20px);
   display: flex;
   flex-direction: column;

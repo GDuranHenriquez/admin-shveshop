@@ -47,7 +47,7 @@ const SearchProduct: React.FC<Props> = ({ setListProductSearch, setDetailProduct
       if (textInput) {
         setListProductSearch(null);
         const tkn = auth.getAccessToken()
-        const response = await getProductIdName(tkn, textInput);
+        const response = await getProductIdName(tkn, textInput, 0);
         if (response.data) {
           const data = response.data;
           if(data.length){

@@ -5,11 +5,11 @@ import { useAuth } from '../../auth/authPro';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons'
 import { AuthResponse } from '../../auth/typesProtecterRoute'
 import { notification, NotificationArgsProps  } from 'antd'
-import { loginUser } from '../../redux/slices/user/actionUser';
+import { loginUser, singOut } from '../../redux/slices/user/actionUser';
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { useNavigate, Navigate } from 'react-router-dom'
-import { getRateBCVRedux } from '../../redux/slices/products/actionsProducts'
+import { getRateBCVRedux, getAllDepartamentos } from '../../redux/slices/products/actionsProducts'
 import { useCustomDispatch } from '../../hooks/redux'
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error'; 
@@ -38,7 +38,7 @@ const Login : React.FC<Props> = ({setSwithLoginRegister}) => {
       message: title,
       description: descriccion? descriccion:null,
       placement,
-      duration: 1
+      duration: 2
     });
   };
 
@@ -101,7 +101,20 @@ const Login : React.FC<Props> = ({setSwithLoginRegister}) => {
       
       if (loginResponse.pass) {
         
+        
         if (loginResponse.accessToken && loginResponse.refreshToken) {
+          const user = loginResponse.user;
+          const typeUser = ['root', 'user']
+          if(!typeUser.includes(user.level)){
+            openNotificationWithIcon('warning', 'Usuario no tiene atributos para acceder', null, 'bottomRight')
+            await singOut(loginResponse.accessToken)
+            clearImp();
+            setTimeout(() => {
+              return 0;
+            }, 700);
+            return 0;
+          }
+
           const authResponse: AuthResponse = {
             pass: loginResponse.pass,
             user: loginResponse.user,
@@ -111,6 +124,7 @@ const Login : React.FC<Props> = ({setSwithLoginRegister}) => {
           }
           const tkn = loginResponse.accessToken;
           await getRateBCVRedux(tkn, dispatch);
+          await getAllDepartamentos(dispatch);
           clearImp();
           auth.saveUser(authResponse);
         }

@@ -5,10 +5,10 @@ import './modalPrintTags.css'
 import PdfCards from "../pdfCards/PdfCards";
 import { regTestNumInteger } from "../../../utils/validations"
 
-type TypeTag = {
+type TypeBarCode = {
   id: number,
+  code: string,
   name: string,
-  price: string,
 }
 
 type Option = {
@@ -19,28 +19,28 @@ type Option = {
 type Props = {
   openModalPrintTags : boolean;
   setOpenModalPrintTags : React.Dispatch<React.SetStateAction<boolean>>;
-  listTags : TypeTag[]
+  listTags : TypeBarCode[]
 }
 
 type DataPrint = {
-  selectOptionsSheets: Option,
-  selectOptionLeter: Option,
-  sizeTag: string[]
+  selectOptionsSheetsData: Option,
+  selectOptionLeterData: Option,
+  sizeTagData: string[]
 }
 
 
-const ModalPrintTags : React.FC<Props> = ({openModalPrintTags, setOpenModalPrintTags, listTags}) =>{
+const ModalPrintTagsBarCode : React.FC<Props> = ({openModalPrintTags, setOpenModalPrintTags, listTags}) =>{
 
   const [print, setPrint] = useState<boolean>(false)
 
   const [selectOptionsSheets, setSelectOptionsSheets] = useState<Option>({ value: '0', label: 'carta' })
-  const [selectOptionLeter, setSelectOptionLeter] = useState<Option>({ value: '4', label: '24' })
+  const [selectOptionLeter, setSelectOptionLeter] = useState<Option>({ value: '0', label: '6' })
   const [sizeTag, setSizeTag] = useState<string[]>(['5','3']) /* Ancho x Alto */
 
   const [dataPrint, setDataPrint] = useState<DataPrint>({
-    selectOptionsSheets: { value: '0', label: 'carta' },
-    selectOptionLeter: { value: '4', label: '24' },
-    sizeTag: ['5', '3']
+    selectOptionsSheetsData: { value: '0', label: 'carta' },
+    selectOptionLeterData: { value: '0', label: '6' },
+    sizeTagData: ['5', '3']
   })
 
 
@@ -52,19 +52,19 @@ const ModalPrintTags : React.FC<Props> = ({openModalPrintTags, setOpenModalPrint
     {value: '4', label: 'tikect 80mm'}, */
   ] 
   const optionsLeter: Option[] = [
-    {value: '0', label: '10'},
-    {value: '1', label: '12'},
-    {value: '2', label: '16'},
-    {value: '3', label: '18'},
-    {value: '4', label: '24'},
-    {value: '5', label: '28'},
-    {value: '6', label: '36'},
-    {value: '7', label: '48'},
+    {value: '0', label: '6'},
+    {value: '1', label: '8'},
+    {value: '2', label: '10'},
+    {value: '3', label: '12'},
+    {value: '4', label: '16'},
+    {value: '5', label: '24'},
+    {value: '6', label: '28'},
+    {value: '7', label: '36'},
   ]
   
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    const name = event.target.name
+    const name = event.target.name;
     if(name === 'sheeType'){
       const valueSelect = optionsSheets.filter((opt) => opt.value === value)      
       setSelectOptionsSheets(valueSelect[0]);
@@ -75,21 +75,14 @@ const ModalPrintTags : React.FC<Props> = ({openModalPrintTags, setOpenModalPrint
     }
   }
 
- /*  const handleOk = () => {
-    
-  };
-    
-  const clearInput = () => {
-    
-  }; */
   const handleCancel = () => {
     setDataPrint({
-      selectOptionsSheets: { value: '0', label: 'carta' },
-      selectOptionLeter: { value: '4', label: '24' },
-      sizeTag: ['5', '3']
+      selectOptionsSheetsData: { value: '0', label: 'carta' },
+      selectOptionLeterData: { value: '4', label: '6' },
+      sizeTagData: ['5', '3']
     })
     setSelectOptionsSheets({ value: '0', label: 'carta' })
-    setSelectOptionLeter({ value: '4', label: '24' })
+    setSelectOptionLeter({ value: '0', label: '6' })
     setOpenModalPrintTags(false)
   };
   
@@ -115,9 +108,9 @@ const ModalPrintTags : React.FC<Props> = ({openModalPrintTags, setOpenModalPrint
   const handleDataPrint = () => {
     if(sizeTag.length === 2 && sizeTag[0] !== "" && sizeTag[1] !== ""){
       const newDataPrint: DataPrint = {
-        selectOptionLeter: selectOptionLeter,
-        selectOptionsSheets: selectOptionsSheets,
-        sizeTag: sizeTag
+        selectOptionLeterData: selectOptionLeter,
+        selectOptionsSheetsData: selectOptionsSheets,
+        sizeTagData: sizeTag
       }
       setDataPrint(newDataPrint);
     }
@@ -170,7 +163,7 @@ const ModalPrintTags : React.FC<Props> = ({openModalPrintTags, setOpenModalPrint
               </div>
 
               <div className="containerOptions">
-                <label htmlFor="numberLeter">Numero de letra para el precio</label>
+                <label htmlFor="numberLeter">Numero de letra para el nombre</label>
                 <select name="numberLeter" id="numberLeter" value={selectOptionLeter.value} onChange={handleSelectChange}>
                   {optionsLeter.map(option => (
                     <option key={option.value} value={option.value}>
@@ -193,4 +186,4 @@ const ModalPrintTags : React.FC<Props> = ({openModalPrintTags, setOpenModalPrint
     </Modal>
   </>
 }
-export default ModalPrintTags;
+export default ModalPrintTagsBarCode;

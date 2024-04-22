@@ -4,6 +4,7 @@ import axios from "axios"
 import { UserInfo, AuthResponse } from "./typesProtecterRoute"
 import { getAllTipoDni } from "../redux/slices/user/actionUser";
 import { useCustomDispatch } from "../hooks/redux";
+import { getRateBCVRedux, getAllDepartamentos } from "../redux/slices/products/actionsProducts"
 
 interface AuthProviderProps{
   children: React.ReactNode;
@@ -84,6 +85,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
             
             if(userInfo){
               saveSessionInfo(userInfo, newAccessToken, token);
+              await getRateBCVRedux(newAccessToken, dispatch);
+              await getAllDepartamentos(dispatch);
               setIsLoading(false);
               return;
             }

@@ -5,7 +5,7 @@ import { UserInfo } from '../../../auth/typesProtecterRoute';
 
 const initialState: UserStatus = {
   user: null,
-  allTipoDni: []
+  allTipoDni: [],
 }
 
 const userSlice = createSlice({
@@ -20,14 +20,14 @@ const userSlice = createSlice({
     },
     setNewTipoDni: (state, action:PayloadAction<TipoDniType>)=> {
       state.allTipoDni = [...state.allTipoDni, action.payload]
-    }
+    },
   }
 })
 
 export const{
   setUser,
   setAllTipoDni,
-  setNewTipoDni
+  setNewTipoDni,
 } = userSlice.actions;
 
 export default userSlice.reducer;

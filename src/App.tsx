@@ -16,6 +16,7 @@ import AddProductPage from './pages/addProducts/AddProducts'
 import LoginPage from './pages/loginPage/LoginPage.tsx';
 import AddSubStockPage from './pages/addSubStock/AddSubStock.tsx';
 import GetTagPricePage from './pages/printPrice/GetTagPrice.tsx';
+import GetBarCodePage from './pages/printBarCode/GetBarCode.tsx';
 
 function App() {
   const [sidebarOpen, setSidebaropen] = useState(true);
@@ -53,6 +54,10 @@ function App() {
         {
           path: '/get-tag-price',
           element: <GetTagPricePage/>
+        },
+        {
+          path: '/get-barcode',
+          element: <GetBarCodePage/>
         }
       ]
     }

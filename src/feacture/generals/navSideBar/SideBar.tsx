@@ -10,7 +10,8 @@ import {
   CalculatorOutlined,
   LogoutOutlined,
   UnorderedListOutlined,
-  TagOutlined
+  TagOutlined,
+  BarcodeOutlined
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
@@ -65,9 +66,12 @@ const items: MenuItem[] = [
   /* getItem('Edit Precios', 'editPrecios', <FileOutlined className={getClasseIcon(theme)}/>), */
   /* getItem('Team', 'sub2', <TeamOutlined className={getClasseIcon(theme)}/>, [getItem('Team 1', '6'), getItem('Team 2', '8')]), */
   getItem('Obtener Info.', 'sub1', <UnorderedListOutlined className={getClasseIcon(theme)}/>, [
-    getItem('Obtener etiquetas de precios', 'get-tag-price', <TagOutlined className={getClasseIcon(theme)}/>)
+    getItem('Obtener etiquetas de precios', 'get-tag-price', <TagOutlined className={getClasseIcon(theme)}/>),
+    getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
   ]),
+
 ];
+
 
 const theme_select = getTheme(theme)
 const layoutTheme = {
@@ -92,7 +96,9 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
       case '/addSubStock':
         return 'Atualizar stock';
       case '/get-tag-price':
-        return 'Obtener Info.'
+        return 'Obtener Etiquetas.'
+      case '/get-barcode':
+        return 'Obtener Cod. de Barra.'
       default:
         return '' ;
     }
@@ -107,6 +113,8 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
         return 'addSubStock'; 
       case '/get-tag-price':
         return 'get-tag-price';   
+      case '/get-barcode':
+        return 'get-barcode'
       default:
         return '' ;
     }
@@ -149,6 +157,19 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
       setLoading(false)
     }
   }
+  const itemsResponse: MenuItem[] = [
+    getItem('Historico', 'panel', <PieChartOutlined className={getClasseIcon(theme)}/>),
+    getItem('Add/Edit Productos', 'addProduct', <DesktopOutlined className={getClasseIcon(theme)}/>),
+    getItem('Agregar / Restar Stock', 'addSubStock', <CalculatorOutlined className={getClasseIcon(theme)}/>),
+    //getItem('Cerrar sesion', 'logout', <LogoutOutlined className = {`${getClasseIcon(theme)} 'containerLogout'`} />)
+    /* getItem('Edit Precios', 'editPrecios', <FileOutlined className={getClasseIcon(theme)}/>), */
+    /* getItem('Team', 'sub2', <TeamOutlined className={getClasseIcon(theme)}/>, [getItem('Team 1', '6'), getItem('Team 2', '8')]), */
+    getItem('Obtener Info.', 'sub1', <UnorderedListOutlined className={getClasseIcon(theme)}/>, [
+      getItem('Obtener etiquetas de precios', 'get-tag-price', <TagOutlined className={getClasseIcon(theme)}/>),
+      getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
+    ]),
+    
+  ];
 
   useEffect(()=>{
     if(collapsed){
@@ -196,8 +217,9 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
         <div className="demo-logo" />
         <div className='containerMenuBar'>
           <Menu className={`${theme+'Menu'} menuBar`} defaultSelectedKeys={[getMenuDefaultSelect()]} 
-            mode="horizontal" items={items} onClick={onClick}
+            mode="horizontal" items={itemsResponse} onClick={onClick}
           />
+          
         </div>
         
       </Header>

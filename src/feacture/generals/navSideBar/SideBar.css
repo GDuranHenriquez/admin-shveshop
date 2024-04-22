@@ -206,7 +206,7 @@
     align-items: center;
     width: 100%; 
     max-width: 100%;
-    padding: 0px 25px 0 25px;   
+    padding: 0px 25px 0 25px; 
   }
   .mukafeMenu > li > .ant-menu-submenu-title > .anticon svg{
     fill: var(--colorBorderMK) !important;
@@ -217,9 +217,10 @@
   .davirtonMenu > li > .ant-menu-submenu-title > .anticon svg{
     fill: white !important;
   }
-  .feredieMenu > li > .ant-menu-submenu-title > .anticon svg{
+  .feredieMenu > .ant-menu-submenu > .ant-menu-submenu-title > .anticon svg{
     fill: white !important;
   }
+  
   .responseHeaderVarmukafe{
     width: 100%;
     max-width: 100%;
@@ -324,6 +325,32 @@
   .responseBar > .containerMenuBar  > .ant-menu-horizontal > .ant-menu-overflow-item::after {
     display: none !important;
   } 
+
+  .logoutMenuContainer{
+    margin-top: 2px;
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
+    width: 100%;
+    display: flex;
+  }
+
+  .logoutMenuContainer > span{
+    margin: 2px 0;
+    color: white;
+    font-size: 8px;
+    font-family: 'Roboto', sans-serif;
+  }
+  .btnLogout {
+   
+    gap: 3px;
+    background: black;
+    padding: 2px;
+    height: 28px;
+    border-color: white;
+    color: white;
+    font-size: 8px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
 }
 
 @media screen and (max-width: 420px) {
@@ -340,6 +367,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%; 
+    height: max-content !important;
     padding: 0px 25px 0 25px;   
   }
   .mukafeMenu > li > .ant-menu-submenu-title > .anticon svg{

@@ -20,9 +20,9 @@ import { Category, Presentacion, EditProduct, RegisterProduct, TypeAddSubProduct
 const basePoint = import.meta.env.VITE_BASENDPOINT_BACK;
 
 //Productos
-export const getAllProducts = async (refreshToken : string, dispatch: Dispatch) => {
+export const getAllProducts = async (refreshToken : string, dispatch: Dispatch, idDepartamento: number) => {
   try {
-    const endpoint = basePoint + `/productos`;
+    const endpoint = basePoint + `/productos/id_departamento/${idDepartamento}`;
     const config = {
       headers: {
         Authorization: `Bearer ${refreshToken}`,

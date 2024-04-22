@@ -7,10 +7,11 @@ import { useAuth } from '../../../auth/authPro'
 
 interface Props {
   setListProductSearch: React.Dispatch<React.SetStateAction<ProductSearch[] | null>>;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  id_departemento: number;
 }
 
-const TagSearchProduct: React.FC<Props> = ({ setListProductSearch, setLoading }) => {
+const TagSearchProduct: React.FC<Props> = ({ setListProductSearch, setLoading, id_departemento }) => {
   const auth = useAuth();
   const inpSearchProduct = useRef<HTMLInputElement>(null);
   const [textInpSearch, setTextImputSearch] = useState<string>('');
@@ -45,7 +46,7 @@ const TagSearchProduct: React.FC<Props> = ({ setListProductSearch, setLoading })
       if (textInput) {
         setListProductSearch(null);
         const tkn = auth.getAccessToken()
-        const response = await getProductIdName(tkn, textInput);
+        const response = await getProductIdName(tkn, textInput, id_departemento);
         if (response.data) {
           const data = response.data;
           if(data.length){

@@ -24,9 +24,14 @@ export const getDateCountry = async () =>{
   }  
 }
 
-export const getProductIdName = async  (refreshToken: string, wordSearch: string) =>{
+export const getProductIdName = async  (refreshToken: string, wordSearch: string, id_departamento: number) =>{
   try {
-    const endPoiont = baseEndPoint + `/productos/codigo-nombre-ptv/wordSearch/${wordSearch}`;
+    let endPoiont;
+    if(id_departamento === 0){
+      endPoiont = baseEndPoint + `/productos/codigo-nombre-ptv/wordSearch/${wordSearch}/id_departamento/${-1}`;
+    }else{
+      endPoiont = baseEndPoint + `/productos/codigo-nombre-ptv/wordSearch/${wordSearch}/id_departamento/${id_departamento}`;
+    }
     const config = {
       headers: {
         Authorization: `Bearer ${refreshToken}`,

@@ -6,8 +6,6 @@ import { AuthProvider } from './auth/authPro.tsx';
 import ProtectedRoute from './auth/ProtectedRoute.tsx';
 import './App.css'
 
-
-
 //ImportFeactures and pages
 //import SideBar from './feacture/sideBar/SideBar'
 /* import SideBar from './feacture/generals/navSideBar/SideBar.tsx'; */
@@ -64,18 +62,6 @@ function App() {
   ])
 
   return (<>
-      {/* {<BrowserRouter>
-        <div>
-          <Container className={`${theme+'App'} ${sidebarOpen?'sidebarState active':''} containerApp`}>
-            <SideBar _sidebarOpen = {sidebarOpen} setSidebaropen = {setSidebaropen}/>
-            <Routes>
-              <Route path='/panel' element={<PanelPage></PanelPage>} ></Route>
-              <Route path='/addProduct' element={<AddProductPage></AddProductPage>}></Route>
-              <Route path="/" element={<Navigate to="/panel"/>} />
-            </Routes>  
-          </Container> 
-        </div>        
-      </BrowserRouter>} */}
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>

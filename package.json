@@ -18,6 +18,7 @@
     "antd": "^5.10.2",
     "antd-img-crop": "^4.18.0",
     "axios": "^1.6.2",
+    "chroma-js": "^2.4.2",
     "electron-devtools-installer": "^3.2.0",
     "firebase": "^10.5.2",
     "jsbarcode": "^3.11.6",
@@ -30,12 +31,14 @@
     "react-redux": "^8.1.3",
     "react-to-print": "^2.15.1",
     "react-toastify": "^9.1.3",
+    "recharts": "^2.12.6",
     "redux-devtools-extension": "^2.13.9",
     "rsuite": "^5.46.1",
     "sass": "^1.69.5",
     "styled-components": "^6.1.0"
   },
   "devDependencies": {
+    "@types/chroma-js": "^2.4.4",
     "@types/mui-datatables": "^4.3.7",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",

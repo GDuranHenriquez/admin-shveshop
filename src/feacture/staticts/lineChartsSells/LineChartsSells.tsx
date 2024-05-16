@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useCustomSelector } from '../../../hooks/redux';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
+import getConfigCoinIsMlcOrRef from '../../../utils/getConfigCoin';
 import { TipeDataSells } from '../../../redux/slices/statiscts/types';
 
 interface Props {
@@ -9,6 +9,7 @@ interface Props {
 }
 
 const LineChartsSells : React.FC<Props> = ({data}) => {
+  const confiCoin = getConfigCoinIsMlcOrRef()
   const allDepartamentos = useCustomSelector((select) => select.product.allDepartamentos)
   const [listColor, setListColor] = useState<string[]>([])
   const dataColors = [
@@ -33,7 +34,19 @@ const LineChartsSells : React.FC<Props> = ({data}) => {
     }
 
     return colors;
-}
+  }
+
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${label} : ${payload[0].value.toFixed(2)}`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   useEffect(() => {
     if(allDepartamentos){
@@ -69,7 +82,7 @@ const LineChartsSells : React.FC<Props> = ({data}) => {
           <Legend />
           {
             allDepartamentos && listColor ? allDepartamentos.map((depar, index) => {
-              const name = (depar.nombre).toLowerCase() + 'Bs'
+              const name = confiCoin === 'mlc' ? (depar.nombre).toLowerCase() + 'Bs' : (depar.nombre).toLowerCase() + 'Ref'
               if(index === 0){
                 return <Line key={index} type="monotone" dataKey= {name} stroke={listColor[index]} activeDot={{ r: 8 }} />
               }else{

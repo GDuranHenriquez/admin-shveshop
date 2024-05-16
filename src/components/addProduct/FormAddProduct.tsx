@@ -112,7 +112,11 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
   const getErrosFromForm = () => {
     const dataForm = form.getFieldsValue();
     inpNumericosObli.forEach((inp) => {
-      if(typeof dataForm[inp] === 'number' && dataForm[inp] >= 0){
+      if(inp === 'unidad_p_bulto' && typeof dataForm[inp] === 'number' && dataForm[inp] === 0){
+        setErrors((error) => {
+          return {...error, [inp] : 1}
+        })
+      }else if(typeof dataForm[inp] === 'number' && dataForm[inp] >= 0){
         setErrors((error) => {
           return {...error, [inp] : 0}
         })
@@ -267,6 +271,10 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
   const updateForm = (data: Product) => {
     setDataProduct(data);
   }
+
+  useEffect(() => {
+    form.validateFields(['unidad_p_bulto']);
+  }, [form]);
     
   useEffect(() => {
     const optionsCategori: {label: string, value: string}[] = allCategori.map((op) => ({label: op.nombre, value: op.id.toString()}));
@@ -289,7 +297,11 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
   useEffect(() => {    
     inpNumericosObli.forEach((element: string) => {
       const value = dataProduct[element];
-      if(typeof value === 'number'){
+      if(element === 'unidad_p_bulto'){
+        if(value === 0){
+          errors[element] = 1
+        }
+      } else if(typeof value === 'number'){
         if(value >= 0){
           errors[element] = 0
         }
@@ -479,7 +491,12 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
               {
                 pattern: regexNumberDecimal,
                 message: 'Ingresa un numero valido',
+              },
+              {
+                pattern: /^(?:0*[1-9]\d*(?:\.\d{1,3})?|0*\.\d{1,3})$/,
+                message: 'El valor no puede ser cero',
               }
+              
             ]} initialValue={dataProduct.unidad_p_bulto} >
               <Input />
           </Form.Item>
@@ -769,6 +786,10 @@ const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {
               {
                 pattern: regexNumberDecimal,
                 message: 'Ingresa un numero valido',
+              },
+              {
+                pattern: /^(?:0*[1-9]\d*(?:\.\d{1,3})?|0*\.\d{1,3})$/,
+                message: 'El valor no puede ser cero',
               }
             ]} initialValue={dataProduct.unidad_p_bulto} >
               <Input />

@@ -5,6 +5,7 @@ import Loading from '../../Loading/Loading'
 import { useAuth } from '../../auth/authPro'
 import { useNavigate } from 'react-router-dom'
 import { useCustomSelector } from '../../hooks/redux'
+import getConfigCoinIsMlcOrRef from '../../utils/getConfigCoin'
 
 //Types
 import { DataTypeStatistics, 
@@ -21,6 +22,7 @@ import LineChartsSells from '../../feacture/staticts/lineChartsSells/LineChartsS
 
 const PanelPage: React.FC = () =>{
   
+  const configCoin = getConfigCoinIsMlcOrRef()
   const navigate = useNavigate()
   const auth = useAuth()
   const levelUser = auth.getUser()?.level
@@ -181,7 +183,12 @@ const PanelPage: React.FC = () =>{
 
       {dataGraffLineSell ? 
         <div className='containerLineChart'>
-          <p>Total ventas en los ultimos 30 días de cada uno de los departamentos</p>
+          {
+            configCoin === 'mlc' ? <p>Total ventas en Bs de los ultimos 30 días de cada uno de los departamentos</p> 
+            :
+            <p>Total ventas en moneda refencial de los ultimos 30 días de cada uno de los departamentos</p>
+          } 
+          
           <LineChartsSells data={dataGraffLineSell}/>
         </div>
         : null
@@ -189,8 +196,11 @@ const PanelPage: React.FC = () =>{
 
       {dataBarTotalProduct? <div className='containerCharBarOne'>
       <div className='containerBarChartTotalsProducts'>
-          <p>Total venta en los ultimos 30 dias por cada departamento </p>
-          {dataTotalsSellsLassTirtyDay? <GrafBarTotalProducts dataKeyBar="venta en Bs." dataKeyXAxis='name' dataBarTotalProduct={dataTotalsSellsLassTirtyDay}/> : null}
+          <p>Total venta de los ultimos 30 dias por cada departamento </p>
+          {dataTotalsSellsLassTirtyDay && configCoin === 'mlc' ? <GrafBarTotalProducts dataKeyBar="venta en Bs." dataKeyXAxis='name' dataBarTotalProduct={dataTotalsSellsLassTirtyDay}/> 
+          : null}
+          {dataTotalsSellsLassTirtyDay && configCoin === 'ref' ? <GrafBarTotalProducts dataKeyBar="venta Ref." dataKeyXAxis='name' dataBarTotalProduct={dataTotalsSellsLassTirtyDay}/> 
+          : null}
         </div>
 
         <div className='containerBarChartTotalsProducts'>
@@ -208,18 +218,29 @@ const PanelPage: React.FC = () =>{
         </div>
 
         <div className='containerBarChartTotalsProducts'>
-          <p>Total estimado por venta de todo el stock en los distintos departamentos</p>
-           <GrafBarTotalProducts dataKeyBar="Venta total de stock" dataKeyXAxis='name' dataBarTotalProduct={dataBarTotalSellIn}/> 
+          {configCoin === 'mlc' ? <p>Total estimado por venta en moneda local de todo el stock en los distintos departamentos</p> : null}
+          {configCoin === 'ref' ? <p>Total estimado por venta en moneda referencial de todo el stock en los distintos departamentos</p> : null}
+          <GrafBarTotalProducts dataKeyBar="Venta total de stock" dataKeyXAxis='name' dataBarTotalProduct={dataBarTotalSellIn}/>
+          
         </div>                
       </div> : null}
 
-      {dataStatict? <div className='containerInfoTotals'>
+      {dataStatict && configCoin === 'mlc' ? <div className='containerInfoTotals'>
          <p>Tomando en cosideración todos los departamentos y todos los productos en los distintos departamentos se tiene un 
           total de <b>{(dataStatict.totalsProducts.totalProducts).toFixed(2)}</b> productos registrados y <b>{(dataStatict.totalsProducts.totalProductsInStock).toFixed(2)}</b> productos 
           en inventario, ademas por la venta total del inventario, se espera un ingreso de <b>{(dataStatict.totalsProducts.totalEstimatedVenta).toFixed(2)} Bs</b>, 
           teniendo esto en cuenta y considerando que a cada producto se le obtine un <b>30%</b> de rendimiento sobre su costo, se estima que la inversión es de <b>{(dataStatict.totalsProducts.totalEstimatedVenta / 1.3).toFixed(2)} Bs</b>.
         </p>
-      </div> : null}
+      </div> : null} 
+
+      { dataStatict && configCoin === 'ref' ? <div className='containerInfoTotals'>
+          <p>Tomando en cosideración todos los departamentos y todos los productos en los distintos departamentos se tiene un 
+            total de <b>{(dataStatict.totalsProducts.totalProducts).toFixed(2)}</b> productos registrados y <b>{(dataStatict.totalsProducts.totalProductsInStock).toFixed(2)}</b> productos 
+            en inventario, ademas por la venta total del inventario, se espera un ingreso de <b>{(dataStatict.totalsProducts.totalEstimatedVenta).toFixed(2)} Ref.</b>, 
+            teniendo esto en cuenta y considerando que a cada producto se le obtine un <b>30%</b> de rendimiento sobre su costo, se estima que la inversión es de <b>{(dataStatict.totalsProducts.totalEstimatedVenta / 1.3).toFixed(2)} Ref</b>.
+          </p>
+        </div> : null} 
+      
     </div>
     
     {isLoading? <Loading/> : null}

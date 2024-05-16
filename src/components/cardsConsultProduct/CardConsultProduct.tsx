@@ -3,6 +3,7 @@ import React from 'react'
 import { ProductSearch } from '../../redux/slices/products/typesProducts'
 import imgProductDefault from '../../assets/productDefault.jpeg'
 import { useCustomSelector } from '../../hooks/redux'
+import getConfigCoinIsMlcOrRef from '../../utils/getConfigCoin'
 
 interface Props {
   product: ProductSearch;
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const CardConsultProduct : React.FC<Props> = ({ product, handleSelectProduct }) => {
-
+  const configCoin = getConfigCoinIsMlcOrRef()
   const rate = useCustomSelector((state) => state.product.rate);
 
   function capitalizeFirstLetter(text: string) {
@@ -25,7 +26,11 @@ const CardConsultProduct : React.FC<Props> = ({ product, handleSelectProduct }) 
 
       <div className={styles.infoProduct}>
         <p><b>Nombre:</b> {capitalizeFirstLetter(product.nombre)}.</p>
-        <p><b>Precio: </b>{product.p_v_total_unidad} bs. <b>/</b> {rate? (product.p_v_total_unidad / rate.tasa).toFixed(2) : '??'} Ref.</p>
+        {configCoin === 'mlc' ? <p><b>Precio: </b>{product.p_v_total_unidad} bs. <b>/</b> {rate? (product.p_v_total_unidad / rate.tasa).toFixed(2) : '??'} Ref.</p> 
+        :
+        <p><b>Precio: </b>{rate ? (product.p_v_total_unidad * rate.tasa).toFixed(2) : '--'} bs. <b>/</b> {(product.p_v_total_unidad).toFixed(2)} Ref.</p>
+        }
+        
         <p><b>Disponible:</b> {`${product.cantidad_unidad} ${product.venta_por}`}. / {`${product.total_bulto} Bultos`}.</p>
       </div>
       <div className={styles.containerButton}>

@@ -17,7 +17,20 @@ interface Props {
 const GrafBarTotalProducts: React.FC<Props> = ({dataBarTotalProduct, dataKeyXAxis, dataKeyBar}) => {
 
   const renderCustomBarLabel = ({ _payload, x, y, width, _height, value } : any) => {
-    return <text x={x + width / 2} y={y} fill="#666" textAnchor="middle" dy={-6}>{`${value}`}</text>;
+    return <text x={x + width / 2} y={y} fill="#666" textAnchor="middle" dy={-6}>{`${value.toFixed(2)}`}</text>;
+  };
+  
+
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${label} : ${payload[0].value.toFixed(2)}`}</p>
+        </div>
+      );
+    }
+
+    return null;
   };
 
   return (
@@ -32,7 +45,7 @@ const GrafBarTotalProducts: React.FC<Props> = ({dataBarTotalProduct, dataKeyXAxi
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey= {dataKeyXAxis} scale="point" padding={{ left: 40, right: 40 }}/>
           <YAxis />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
           <Legend />
           <Bar dataKey = {dataKeyBar} fill="#8884d8" barSize={40} background={{ fill: '#eee' }} label={renderCustomBarLabel}  /> 
       </BarChart>

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './pdfCards.module.css'
 import { useReactToPrint } from 'react-to-print'
+import getConfigCoinIsMlcOrRef from '../../../utils/getConfigCoin'
 
 type TypeTag = {
   id: number,
@@ -29,7 +30,7 @@ type Props = {
 }
 
 const PdfCards: React.FC<Props> = ({listTags, print, setPrint, openModal, dataPrint}) => {
-
+  const configCoin = getConfigCoinIsMlcOrRef()
   const constGap = 4
   const refTags = useRef<HTMLIFrameElement>(null);
   const [widthPage, setWidthPage] = useState<number>(215.9)
@@ -165,7 +166,11 @@ const PdfCards: React.FC<Props> = ({listTags, print, setPrint, openModal, dataPr
                     }}>
                     <div className={styles.conatainerPrice}>
                       <span id={styles.price} style={{fontSize: `${fontSizePrice}mm`, fontWeight: 600}}>{tag.price}</span>
-                      <span style={{fontSize: `${fontSizePrice / 1.5}mm`, fontWeight: 600, height: '100%', display: 'flex', justifyContent:'end'}}>Bs.</span>
+                      {configCoin === 'mlc' ?
+                        <span style={{fontSize: `${fontSizePrice / 1.5}mm`, fontWeight: 600, height: '100%', display: 'flex', justifyContent:'end'}}>Bs.</span> 
+                        :
+                        <span style={{fontSize: `${fontSizePrice / 2}mm`, fontWeight: 600, height: '100%', display: 'flex', justifyContent:'end'}}>REF.</span>
+                      }
                     </div>
                     <p>{tag.name}.</p>
                   </div>

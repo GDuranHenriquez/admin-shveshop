@@ -26,7 +26,7 @@
 }
 
 .infoProduct > p{
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   padding: 0;
   margin: 0;
@@ -40,7 +40,7 @@
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  bottom: 5px;
+  bottom: 10px;
   height: 20px;
 }
 

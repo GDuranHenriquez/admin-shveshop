@@ -2,6 +2,7 @@ import styles from './cardProductGetTag.module.css'
 import { ProductSearch } from '../../../redux/slices/products/typesProducts'
 import imgProductDefault from '../../../assets/productDefault.jpeg'
 import React, {useState} from 'react'
+import getConfigCoinIsMlcOrRef from '../../../utils/getConfigCoin'
 
 type TypeTag = {
   id: number,
@@ -15,7 +16,7 @@ interface Props{
 }
 
 const CardProductGetTag: React.FC<Props> = ({product, updateListTag}) => {
-
+  const configCoin = getConfigCoinIsMlcOrRef()
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const handleChange = () => {
@@ -47,8 +48,17 @@ const CardProductGetTag: React.FC<Props> = ({product, updateListTag}) => {
       </div>
       <div className={styles.containerInfoProduc}>
         <p><b>Nombre:</b> {product.nombre}</p>
-        <p><b>Precio Unit:</b> {(product.p_v_total_unidad).toFixed(2)} bs.</p>
-        <p><b>Precio: Mayor:</b> {(product.total_v_mayor).toFixed(2)} bs.</p>
+        { configCoin === 'mlc' ? <>
+            <p><b>Precio Unit:</b> {(product.p_v_total_unidad).toFixed(2)} bs.</p>
+            <p><b>Precio: Mayor:</b> {(product.total_v_mayor).toFixed(2)} bs.</p>
+          </>
+          :
+          <>
+            <p><b>Precio Unit:</b> {(product.p_v_total_unidad).toFixed(2)} REF.</p>
+            <p><b>Precio: Mayor:</b> {(product.total_v_mayor).toFixed(2)} REF.</p>
+          </>
+        }
+        
       </div>
     </div>
   )

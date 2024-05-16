@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import styles from './cardBarCode.module.css'
 import JsBarcode from 'jsbarcode'
+import Loading from '../../../Loading/Loading'
 
 type TypeBarCode = {
   id: number,
@@ -23,9 +24,8 @@ interface Styles {
 const CardBarCode: React.FC<Props> = ({ barCode, stylesProps }) => {
 
   const barcodeRef = useRef<HTMLImageElement>(null);
-  
-  
-  useEffect(() => {
+    
+  useEffect( () => {
     if (barcodeRef.current && barCode.code) {
       JsBarcode(barcodeRef.current, barCode.code, {
         format: 'CODE128',

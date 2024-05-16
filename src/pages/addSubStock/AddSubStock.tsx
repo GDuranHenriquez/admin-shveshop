@@ -218,6 +218,7 @@ const Container = styled.div`
         flex-direction: column;
         justify-content: start;
         align-items: center;
+        overflow-y: auto;
         .containerInputadd{
           width: 100%;
           display: flex;

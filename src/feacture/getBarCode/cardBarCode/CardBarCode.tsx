@@ -1,7 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect } from 'react'
 import styles from './cardBarCode.module.css'
 import JsBarcode from 'jsbarcode'
-import Loading from '../../../Loading/Loading'
 
 type TypeBarCode = {
   id: number,

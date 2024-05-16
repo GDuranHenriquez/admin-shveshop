@@ -36,18 +36,7 @@ const LineChartsSells : React.FC<Props> = ({data}) => {
     return colors;
   }
 
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip">
-          <p className="label">{`${label} : ${payload[0].value.toFixed(2)}`}</p>
-        </div>
-      );
-    }
-
-    return null;
-  };
-
+  
   useEffect(() => {
     if(allDepartamentos){
       const n = allDepartamentos.length

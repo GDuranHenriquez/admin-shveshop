@@ -16,7 +16,7 @@ interface Props {
 
 const GrafBarTotalProducts: React.FC<Props> = ({dataBarTotalProduct, dataKeyXAxis, dataKeyBar}) => {
 
-  const renderCustomBarLabel = ({ _payload, x, y, width, _height, value } : any) => {
+  const renderCustomBarLabel = ({  x, y, width, value } : any) => {
     return <text x={x + width / 2} y={y} fill="#666" textAnchor="middle" dy={-6}>{`${value.toFixed(2)}`}</text>;
   };
   

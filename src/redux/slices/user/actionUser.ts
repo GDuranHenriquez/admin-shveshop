@@ -193,7 +193,7 @@ export async function getLinkForgotPassword(email : string ) : Promise<{message 
   try {
     const endPointFront = import.meta.env.VITE_MY_ENDPOINT;
     const endPoint = baseEndPoint + `/sign-in-out/consult-reset-password`
-    const response = await axios.post(endPoint, {email, endPointFront});
+    const response = await axios.post(endPoint, {email, endPoint : endPointFront});
     return { code: response.status, message: response.data.message}
     
   } catch (error) {

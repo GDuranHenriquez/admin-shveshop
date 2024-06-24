@@ -156,3 +156,60 @@ export const posNewTipoDni = async(dispatch: Dispatch, body: NewTipoDni) =>{
   }
 
 }
+
+export async function postResetPassword(password : string, token: string ) : Promise<{message : string} | {code: number, message: string}> {
+  try {
+    const config = {
+      headers :{
+        Authorization: `Bearer ${token}`
+      },
+      data: null
+    } 
+    const endPoint = baseEndPoint + `/sign-in-out/confirm-reset-password`
+    const response = await axios.post(endPoint, {password}, config);
+    return { code: response.status, message: response.data.message}
+    
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response && error.response.status === 400) {
+      const dataError = {
+        code: error.response.status,
+        message: error.response.data.error
+      }
+      return dataError || { error: 'Error interno' };
+    } else if (error instanceof AxiosError) {
+      // Manejar otros errores de Axios
+      if(error.response?.data.error  === 'jwt expired'){
+        return { code: error.status, message: 'Token expirado o invalido' };
+      }
+      return { code: error.status, message: error.response?.data.error };
+    } else {
+      // Manejar cualquier otro error
+      return { message: 'Algo salio mal' };
+    }
+  }
+}
+
+export async function getLinkForgotPassword(email : string ) : Promise<{message : string} | {code: number, message: string}> {
+  try {
+    const endPointFront = import.meta.env.VITE_MY_ENDPOINT;
+    const endPoint = baseEndPoint + `/sign-in-out/consult-reset-password`
+    const response = await axios.post(endPoint, {email, endPointFront});
+    return { code: response.status, message: response.data.message}
+    
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response && error.response.status === 400) {
+      const dataError = {
+        code: error.response.status,
+        message: error.response.data.error
+      }
+      return dataError || { error: 'Error interno' };
+    } else if (error instanceof AxiosError) {
+      // Manejar otros errores de Axios
+      return { code: error.status, message: error.message };
+    } else {
+      // Manejar cualquier otro error
+      console.log(error)
+      return { message: 'Algo salio mal' };
+    }
+  }
+}

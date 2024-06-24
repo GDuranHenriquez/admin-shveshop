@@ -15,6 +15,7 @@ import LoginPage from './pages/loginPage/LoginPage.tsx';
 import AddSubStockPage from './pages/addSubStock/AddSubStock.tsx';
 import GetTagPricePage from './pages/printPrice/GetTagPrice.tsx';
 import GetBarCodePage from './pages/printBarCode/GetBarCode.tsx';
+import ResetPasswordPage from './pages/resetPasswword/ResetPassword.tsx';
 
 function App() {
   const [sidebarOpen, setSidebaropen] = useState(true);
@@ -32,6 +33,10 @@ function App() {
     {
       path: "/",
       element: <LoginPage/>,
+    },
+    {
+      path: '/auth/reset-password',
+      element: <ResetPasswordPage/>
     },
     {
       path: "/",

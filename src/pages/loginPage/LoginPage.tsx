@@ -3,6 +3,7 @@ import styles from './loginPage.module.css'
 import Login from '../../components/login/Login'
 import fontLogin from '../../assets/img/fonLoging.jpg'
 import Register from '../../components/register/Register'
+import ForgotPassword from '../../components/forgotPassword/ForgotPassword'
 
 const LoginPage : React.FC =  () => {
 
@@ -15,6 +16,8 @@ const LoginPage : React.FC =  () => {
       </div>
       {swithLoginRegister === 'toLogin' ? <Login setSwithLoginRegister={setSwithLoginRegister}/> 
         : 
+        swithLoginRegister === 'toForgotPasswod' ? <ForgotPassword setChangeView={setSwithLoginRegister}/>
+        :
         <Register setSwithLoginRegister={setSwithLoginRegister}/>
       }
       

@@ -16,10 +16,10 @@ type NotificationType = 'success' | 'info' | 'warning' | 'error';
 type NotificationPlacement = NotificationArgsProps['placement'];
 
 interface Props {
-  setSwithLoginRegister: React.Dispatch<React.SetStateAction<string>>
+  setSwithLoginRegister: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Login : React.FC<Props> = ({setSwithLoginRegister}) => {
+const Login : React.FC<Props> = ({ setSwithLoginRegister}) => {
   const navigate = useNavigate()
   const auth = useAuth()
   const dispatch = useCustomDispatch()
@@ -193,6 +193,10 @@ const Login : React.FC<Props> = ({setSwithLoginRegister}) => {
     return <Navigate to="/panel"></Navigate>;
   }
 
+  const changeToForgotPassword = () : void => {
+    setSwithLoginRegister('toForgotPasswod')
+  }
+
   return (
     <div className={styles.containerLogin}>
       <div className={styles.bodyLoginContainer}>
@@ -228,6 +232,10 @@ const Login : React.FC<Props> = ({setSwithLoginRegister}) => {
           <span>Para crear una cuenta has click </span>
           <button onClick={switchToRegister}>aquí</button>
         </div>
+        
+      </div>
+      <div className={styles.containerSwichView}>
+        <span>Olvido su contraseña click <button onClick={changeToForgotPassword}>aquí</button></span>
       </div>
       <ToastContainer></ToastContainer> 
       {isLoading && <Loading/>}

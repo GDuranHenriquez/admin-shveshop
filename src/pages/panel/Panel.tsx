@@ -71,6 +71,7 @@ const PanelPage: React.FC = () =>{
 
   useEffect(() => {
     const levelUser = auth.getUser()?.level
+    console.log(auth.getAccessToken())
     if(levelUser && levelUser !== 'root'){
       navigate('/addProduct')
     }
@@ -123,7 +124,7 @@ const PanelPage: React.FC = () =>{
       if (sellsData && sellsData.length) {
         const firstSell = sellsData[0];
         const namesFirstData = Object.keys(firstSell)
-        let totalsLessThirtyDay : DataTypeSellsLastThirty = {}
+        const totalsLessThirtyDay : DataTypeSellsLastThirty = {}
 
         for (let d = 0; d < namesFirstData.length; d++) {
           const element = namesFirstData[d];

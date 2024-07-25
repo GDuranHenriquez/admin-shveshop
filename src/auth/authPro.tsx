@@ -16,12 +16,20 @@ const AuthContext = createContext({
   isAuthenticated: false,
   isAdmin: false,
   getAccessToken: () => ({} as string),
-  saveUser: (_authResponse: AuthResponse) => {},  
+  saveUser: (_authResponse: AuthResponse) => {
+    // This function is intentionally left empty.
+  },  
   getRefreshToken: () => ({} as string | null),
   getUser: () => ({} as UserInfo | undefined),
-  getAccess: () => {},
-  signOut: () => {},
-  saveDataUser: (_user: UserInfo) => {},
+  getAccess: () => {
+    // This function is intentionally left empty.
+  },
+  signOut: () => {
+    // This function is intentionally left empty.
+  },
+  saveDataUser: (_user: UserInfo) => {
+    // This function is intentionally left empty.
+  },
 });
 
 

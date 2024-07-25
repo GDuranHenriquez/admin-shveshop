@@ -21,6 +21,7 @@ export type ValidationErrorRegister = {
 export const regTestEmail = /\S+@\S+\.\S+/;
 export const regTestPassword = /(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$*_])/;
 export const regTestNumInteger = /^\d*$/;
+export const regexNumberDecimal = /^([0-9]+\.?[0-9]{0,3})$/;
 
 export const validation = (userData: userData) => {
   const error: { email?: string; password?: string, name?: string, last_name?: string } = {};

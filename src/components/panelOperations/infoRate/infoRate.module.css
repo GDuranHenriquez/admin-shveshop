@@ -1,0 +1,55 @@
+.containerInfoRate{
+  width: 200px;
+  max-width: 300px;
+  margin-top: 20px;
+}
+
+.containerValueRate{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+#butonEditRate{
+  padding: 2px;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+}
+
+#butonEditRate:hover{
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.275);
+}
+
+.containerButons{ 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px; 
+}
+
+.showButons{
+  display: flex;
+  margin-top: 5px;
+}
+.showButons > label{
+  font-size: 14px;
+  font-weight: 500;
+}
+.hideButons{
+  display: none;
+}
+.conatinerImput{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.inputRate{
+  width: 70%;
+}

@@ -11,7 +11,8 @@ import {
   LogoutOutlined,
   UnorderedListOutlined,
   TagOutlined,
-  BarcodeOutlined
+  BarcodeOutlined,
+  FormOutlined
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
@@ -59,6 +60,7 @@ const  getClasseIcon = (item:string)=> {
 }
 
 const itemsAdmin: MenuItem[] = [
+  getItem('Panel de operaciones', 'panel-operaciones', <FormOutlined className={getClasseIcon(theme)}/>),
   getItem('Add/Edit Productos', 'addProduct', <DesktopOutlined className={getClasseIcon(theme)}/>),
   getItem('Agregar / Restar Stock', 'addSubStock', <CalculatorOutlined className={getClasseIcon(theme)}/>),
   //getItem('Cerrar sesion', 'logout', <LogoutOutlined className = {`${getClasseIcon(theme)} 'containerLogout'`} />)
@@ -73,6 +75,7 @@ const itemsAdmin: MenuItem[] = [
 
 const itemsRoot: MenuItem[] = [
   getItem('Historico', 'panel', <PieChartOutlined className={getClasseIcon(theme)}/>),
+  getItem('Panel de operaciones', 'panel-operaciones', <FormOutlined className={getClasseIcon(theme)}/>),
   getItem('Add/Edit Productos', 'addProduct', <DesktopOutlined className={getClasseIcon(theme)}/>),
   getItem('Agregar / Restar Stock', 'addSubStock', <CalculatorOutlined className={getClasseIcon(theme)}/>),
   //getItem('Cerrar sesion', 'logout', <LogoutOutlined className = {`${getClasseIcon(theme)} 'containerLogout'`} />)
@@ -137,7 +140,7 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
 
   const onClick: MenuProps['onClick'] = (e) =>{
     if(e.key === 'logout'){
-
+      handleSingOut()
     }else{
       setOpenMenu(e.key);
       navigate('/' + e.key);
@@ -173,6 +176,7 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
   }
   const itemsResponseRoot: MenuItem[] = [
     getItem('Historico', 'panel', <PieChartOutlined className={getClasseIcon(theme)}/>),
+    getItem('Panel de operaciones', 'panel-operaciones', <FormOutlined className={getClasseIcon(theme)}/>),
     getItem('Add/Edit Productos', 'addProduct', <DesktopOutlined className={getClasseIcon(theme)}/>),
     getItem('Agregar / Restar Stock', 'addSubStock', <CalculatorOutlined className={getClasseIcon(theme)}/>),
     //getItem('Cerrar sesion', 'logout', <LogoutOutlined className = {`${getClasseIcon(theme)} 'containerLogout'`} />)
@@ -182,9 +186,10 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
       getItem('Obtener etiquetas de precios', 'get-tag-price', <TagOutlined className={getClasseIcon(theme)}/>),
       getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
     ]),
-    
+    getItem('Salir', 'logout', <LogoutOutlined className={getClasseIcon(theme)}/>)
   ];
   const itemsResponseAdmin: MenuItem[] = [
+    getItem('Panel de operaciones', 'panel-operaciones', <FormOutlined className={getClasseIcon(theme)}/>),
     getItem('Add/Edit Productos', 'addProduct', <DesktopOutlined className={getClasseIcon(theme)}/>),
     getItem('Agregar / Restar Stock', 'addSubStock', <CalculatorOutlined className={getClasseIcon(theme)}/>),
     //getItem('Cerrar sesion', 'logout', <LogoutOutlined className = {`${getClasseIcon(theme)} 'containerLogout'`} />)
@@ -192,8 +197,9 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
     /* getItem('Team', 'sub2', <TeamOutlined className={getClasseIcon(theme)}/>, [getItem('Team 1', '6'), getItem('Team 2', '8')]), */
     getItem('Obtener Info.', 'sub1', <UnorderedListOutlined className={getClasseIcon(theme)}/>, [
       getItem('Obtener etiquetas de precios', 'get-tag-price', <TagOutlined className={getClasseIcon(theme)}/>),
-      getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
+      getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>),
     ]),
+    getItem('Salir', 'logout', <LogoutOutlined className={getClasseIcon(theme)}/>)
     
   ];
 
@@ -244,6 +250,7 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
         <div className='containerMenuBar'>
           <Menu className={`${theme+'Menu'} menuBar`} defaultSelectedKeys={[getMenuDefaultSelect()]} 
             mode="horizontal" items={user === 'root' ? itemsResponseRoot: itemsResponseAdmin} onClick={onClick}
+            
           />
           
         </div>

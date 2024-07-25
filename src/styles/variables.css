@@ -1,0 +1,147 @@
+:root {
+  --font-family: 'Cairo', sans-serif;
+  --Cairo-laight: '300';
+  --logo-font-color: #ff6600;
+  --logo-font-color-06: rgba(255, 102, 0, 0.6);
+  --logo-font-color-hover: #ff6600f1;
+  --black-color: #000;
+  --withe-hover-button: #f4eaea;
+  --bacgroung-general: rgb(255, 255, 255);
+  --border-buton-color: rgba(0, 0, 0, 0.275);
+  --font-family: 'Roboto', sans-serif;
+  --font-size: 16px;
+  --border-radius: 4px;
+}
+
+
+.button-send{
+  background: var(--logo-font-color);
+  border: 1px solid var(--border-buton-color);
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.button-send:hover{
+  background: var(--logo-font-color-hover);
+  color: #fff;
+}
+
+.button-cancel{
+  background: #fff;
+  border: 1px solid var(--logo-font-color);
+  color: var(--logo-font-color);
+  color: var(--logo-font-color);
+}
+
+.button-cancel:hover{
+  background: var(--withe-hover-button);
+  border: 1px solid var(--logo-font-color);
+  color: var(--logo-font-color);
+}
+
+.standar-page{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.div3d {
+  transform:
+    perspective(1000px)
+    rotateY(0deg);
+  /* transition: transform 1s ease 0s; */
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow:
+    rgba(0, 0, 0, 0.03) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.07) 0px 1px 0px 0px,
+    rgba(0, 0, 0, 0.04) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 5px 10px 0px;
+  padding: 10px;
+}
+
+.div3d:hover{
+  transform: perspective(800px) rotateY(0deg);
+}
+
+.nav3d {
+  transform:
+    perspective(1000px)
+    rotateY(0deg);
+  transition: transform 1s ease 0s;
+  border-radius: 0 0 10px 10px;
+  border-bottom: 1px solid var(--logo-font-color-06);
+  box-shadow:
+    rgba(0, 0, 0, 0.03) 0px 0px 0px 1px,
+    rgba(0, 0, 0, 0.07) 0px 1px 0px 0px,
+    rgba(0, 0, 0, 0.04) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 5px 10px 0px;
+
+  &:hover {
+    transform: perspective(800px) rotateY(0deg);
+  }
+}
+
+.inputGlobal{
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 3px 5px;
+  text-align: start;
+  justify-content: center;
+}
+
+/* butonsGlobal */
+
+.btnCancel-gb{
+  background: transparent;
+  color: red;
+  font-weight: 600;
+  border-color: red;
+  font-family: 'Roboto', sans-serif;
+  width: max-content;
+  padding: 3px;
+  border-radius: 5px;
+}
+.btnCancel-gb:active{
+  background: rgba(191, 2, 0, 0.3) !important;
+  transform: scale(0.9);
+}
+.btnCancel-gb:focus{ 
+  border-color: red;
+  outline: 1px solid black;
+}
+.btnCancel-gb:hover{ 
+  border-color: red;
+  outline: 1px solid black;
+  cursor: pointer;
+}
+
+.btnRegister-gb{
+  background: transparent;
+  color: black;
+  font-weight: 500;
+  border-color: rgba(0, 0, 0, 0.5);
+  font-family: 'Roboto', sans-serif;
+  width: max-content;
+  padding: 5px;
+  border-radius: 5px;
+}
+.btnRegister-gb:not([disabled]):active {
+  background: rgb(32, 94, 32) !important;
+  transform: scale(0.9);
+}
+.btnRegister-gb:focus{ 
+  border-color: white;
+  outline: 1px solid black;
+}
+.btnRegister-gb:hover{ 
+  border-color: white;
+  outline: 1px solid black;
+  border-color: rgba(43, 81, 151, 0.8);
+  color: blue;
+  cursor: pointer;
+}

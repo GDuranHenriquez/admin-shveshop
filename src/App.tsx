@@ -16,6 +16,7 @@ import AddSubStockPage from './pages/addSubStock/AddSubStock.tsx';
 import GetTagPricePage from './pages/printPrice/GetTagPrice.tsx';
 import GetBarCodePage from './pages/printBarCode/GetBarCode.tsx';
 import ResetPasswordPage from './pages/resetPasswword/ResetPassword.tsx';
+import PageTablaOperaciones from './pages/tablaOperaciones/TablaOperacionesPage.tsx';
 
 function App() {
   const [sidebarOpen, setSidebaropen] = useState(true);
@@ -23,7 +24,7 @@ function App() {
 
   useEffect(() => {
     document.body.classList.add(theme+'AppBody'); 
-
+    
     return () => {
       document.body.classList.remove(theme+'AppBody'); 
     };
@@ -61,6 +62,10 @@ function App() {
         {
           path: '/get-barcode',
           element: <GetBarCodePage/>
+        },
+        {
+          path: '/panel-operaciones',
+          element: <PageTablaOperaciones/>
         }
       ]
     }

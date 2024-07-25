@@ -257,5 +257,30 @@ export const getRateBCVRedux = async (refreshToken : string,dispatch:Dispatch):P
   }
 }
 
+export const postRateBCVRedux = async (refreshToken : string, dispatch:Dispatch, rate: number):Promise<any> =>{
+  try {
+    const endPoint = basePoint + '/venta/update-rate'
+    const config = {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+      data: null
+    };
+    const response = await axios.post(endPoint, {rate: rate}, config);
+    const dollar = response.data;
+    dispatch(setRate(dollar))
+    return dollar;
+  } catch (error) {
+    if (typeof error === "string") {
+      return {error: error};
+    } else if (error instanceof Error) {
+      const message = error.message;
+      return {error: message};
+    } else {
+      return {error: 'Algo ha salido mal'}
+    }
+  }
+}
+
 
 

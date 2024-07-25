@@ -54,6 +54,8 @@ const  getClasseIcon = (item:string)=> {
       return 'davirtonIconBar'
     case 'feredie':
       return 'feredieIconBar'
+    case 'mundochocolate':
+      return 'mundochocolateIconBar'
     default:
       return ''
   }
@@ -224,7 +226,7 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
         onCollapse={(value) => setCollapsed(value)}
         >
         <div className={`${styles.logo} ${collapsed? styles.collapsed :''} ${theme+'Logo'}`}>
-          <img src={getLogo(theme)} alt="Logo Mukafe" />
+          <img src={getLogo(theme)} alt={`Logo ${theme}`} />
         </div>
         <div className="demo-logo-vertical" />
           <Menu className={theme+'Menu'} defaultSelectedKeys={[getMenuDefaultSelect()]} 

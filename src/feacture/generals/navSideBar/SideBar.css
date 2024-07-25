@@ -30,6 +30,15 @@
 .mukafe > .ant-layout-sider-trigger > span > svg{
   fill: var(--colorMK) !important;
 }
+
+.mundochocolate  > .ant-layout-sider-trigger{
+  border-top: 2px solid rgba(239, 125, 0, 1) !important;
+  background: transparent !important;
+}
+.mundochocolate > .ant-layout-sider-trigger > span > svg{
+  fill: var(--colorMK) !important;
+}
+
 .feredie > .ant-layout-sider-trigger{
   border-top: 2px solid rgba(255, 255, 255, 1) !important;
   background: transparent !important;
@@ -67,6 +76,9 @@
 .mukafeLogo{
   border-bottom: 2px solid rgba(239, 125, 0, 1);
 }
+.mundochocolateLogo{
+  border-bottom: 2px solid rgba(239, 125, 0, 1);
+}
 .shLogo{
   border-bottom: 2px solid rgba(0, 0, 0, 1);
 }
@@ -80,6 +92,9 @@
 .mukafeIconBar{
   fill: rgba(239, 125, 0, 1) !important;
 }
+.mundochocolateIconBar{
+  fill: rgba(239, 125, 0, 1) !important;
+}
 .shIconBar{
   fill: rgba(0, 0, 0, 1) !important;
 }
@@ -88,6 +103,11 @@
 }
 
 .mukafeMenu{
+  background: var(--backgrounMenuMK);
+  color: var(--colorMK);
+  font-weight: bold;
+}
+.mundochocolateMenu{
   background: var(--backgrounMenuMK);
   color: var(--colorMK);
   font-weight: bold;
@@ -116,6 +136,17 @@
   color: var(--colorBorder);
   font-weight: bold;
 }
+/* mundochocolate */
+.mundochocolateMenu > .ant-menu-item:hover{
+  background: rgba(255, 255, 255, 0.5) !important;
+  color: var(--colorMK) !important;
+}
+.mundochocolateMenu > .ant-menu-item-selected{
+  background: white !important;
+  color: var(--colorBorder);
+  font-weight: bold;
+}
+
 .davirtonMenu > .ant-menu-item-selected{
   background: rgba(255, 255, 255, 1) !important;
   color: black !important;
@@ -147,6 +178,9 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
+}
+.ant-layout-sider-children > .mundochocolateLogo > img{
+  border-radius: 5px;
 }
 
 
@@ -211,6 +245,9 @@
   .mukafeMenu > li > .ant-menu-submenu-title > .anticon svg{
     fill: var(--colorBorderMK) !important;
   }
+  .mundochocolateMenu{
+    fill: var(--colorBorderMK) !important;
+  }
   .shMenu > li > .ant-menu-submenu-title > .anticon svg{
     fill: var(--colorSH) !important;
   }
@@ -222,6 +259,13 @@
   }
   
   .responseHeaderVarmukafe{
+    width: 100%;
+    max-width: 100%;
+    background: var(--backgrounMenuMK);
+    color: var(--colorMK);
+    font-weight: bold;
+  }
+  .responseHeaderVarmundochocolate{
     width: 100%;
     max-width: 100%;
     background: var(--backgrounMenuMK);
@@ -263,6 +307,28 @@
   .mukafeIconBar > svg{
     fill: var(--colorBorderMK) !important;
   }
+
+  /* mundochocolate */
+  .mundochocolateLogo{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+    border-radius: 8px;
+  }
+  .mundochocolateLogo > img{
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+  }
+  .mundochocolateIconBar > svg{
+    fill: var(--colorBorderMK) !important;
+  }
+
   .shIconBar > svg{
     fill: black !important;
   }
@@ -373,6 +439,9 @@
   .mukafeMenu > li > .ant-menu-submenu-title > .anticon svg{
     fill: var(--colorBorderMK) !important;
   }
+  .mundochocolate > li > .ant-menu-submenu-title > .anticon svg{
+    fill: var(--colorBorderMK) !important;
+  }
   .shMenu > li > .ant-menu-submenu-title > .anticon svg{
     fill: var(--colorSH) !important;
   }
@@ -383,6 +452,12 @@
     fill: white !important;
   }
   .responseHeaderVarmukafe{
+    width: 100%;
+    background: var(--backgrounMenuMK);
+    color: var(--colorMK);
+    font-weight: bold;
+  }
+  .responseHeaderVarmundochocolate{
     width: 100%;
     background: var(--backgrounMenuMK);
     color: var(--colorMK);
@@ -421,6 +496,26 @@
     height: 48px;
   }
   .mukafeIconBar > svg{
+    fill: var(--colorBorderMK) !important;
+  }
+  /* mundochocolate */
+  .mundochocolateLogo{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom: none;
+    border-radius: 8px;
+  }
+  .mundochocolateLogo > img{
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+  }
+  .mundochocolateIconBar > svg{
     fill: var(--colorBorderMK) !important;
   }
   .shIconBar > svg{

@@ -214,6 +214,11 @@ export const FooterContainer = styled.div`
     background: white !important;
     color: black !important;
   }
+  .clearmundochocolate{
+    background: white !important;
+    color: black !important;
+  }
+
   .oksh{
     background: rgba(254 , 208, 208, 1) !important;
     color: black !important;
@@ -230,6 +235,10 @@ export const FooterContainer = styled.div`
     background: rgba(28, 19, 22, 1) !important;
     color: rgba(255, 179, 123, 1) !important;
   }
+  .okmundochocolate{
+    background: rgba(28, 19, 22, 1) !important;
+    color: rgba(255, 179, 123, 1) !important;
+  }
   .oksh:hover{
     border-color: white !important;
     background: rgba(254 , 208, 208, 0.8) !important;
@@ -243,6 +252,10 @@ export const FooterContainer = styled.div`
     background: rgba(0 , 0, 0, 0.8) !important;
   }
   .okmukafe:hover{
+    border-color: white !important;
+    background: rgba(28, 19, 22, 0.9) !important;
+  }
+  .okmundochocolate:hover{
     border-color: white !important;
     background: rgba(28, 19, 22, 0.9) !important;
   }

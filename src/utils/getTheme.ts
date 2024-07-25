@@ -28,6 +28,12 @@ export const getTheme = (themeName: string) =>{
     contornoLogo: 'rgba(239, 125, 0, 1)',
     texColor: 'rgba(255, 179, 123, 1)',
   }
+  const theme_mundochocolate = {
+    backGroundBarSide: 'rgba(28, 19, 22, 1)',
+    letraLogo: 'rgba(235, 143, 74, 1)',
+    contornoLogo: 'rgba(239, 125, 0, 1)',
+    texColor: 'rgba(255, 179, 123, 1)',
+  }
   const theme_sh = {
     backGroundBarSide: 'rgba(254 , 208, 208, 1)',
     letraLogo: 'rgba(0, 0, 0, 1)',
@@ -57,6 +63,8 @@ export const getTheme = (themeName: string) =>{
       return theme_davirton;  
     case 'feredie':
       return theme_feredie  
+    case 'mundochocolate':
+      return theme_mundochocolate;
     default:
       return defaultTheme
   }

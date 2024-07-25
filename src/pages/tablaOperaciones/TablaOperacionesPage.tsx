@@ -12,6 +12,7 @@ const PageTablaOperaciones : React.FC = () => {
 
   //const configCoin = getConfigCoinIsMlcOrRef()
   const rate = useCustomSelector((select) => select.product.rate)
+  const confiRate = import.meta.env.VITE_RATE_CONFIG
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   
@@ -48,7 +49,7 @@ const PageTablaOperaciones : React.FC = () => {
 
   return <>
     <Container>
-      <InfoRateComponent rate={rate} setIsLoading = {setIsLoading} messageErrorProduct={messageErrorProduct} messageSuccessProduct={messageSuccessProduct}/>
+      {confiRate && confiRate === 'MANUAL' ? <InfoRateComponent rate={rate} setIsLoading = {setIsLoading} messageErrorProduct={messageErrorProduct} messageSuccessProduct={messageSuccessProduct}/> : null}
       {isLoading && <Loading/>}
     </Container>
     <ToastContainer></ToastContainer>

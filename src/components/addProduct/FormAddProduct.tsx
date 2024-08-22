@@ -21,7 +21,7 @@ interface Props {
   setIsLoadin : React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const theme = import.meta.env.VITE_TEMA;
+const theme = import.meta.env.VITE_TEMA === 'generico' ? 'davirton' : import.meta.env.VITE_TEMA;
 
 
 const FormAddProducts: React.FC<Props> = ({setIsLoadin}) => {

@@ -25,7 +25,8 @@ interface Props{
   setSidebaropen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const  theme  = import.meta.env.VITE_TEMA;
+const  theme  = import.meta.env.VITE_TEMA === 'generico' ? 'davirton' : import.meta.env.VITE_TEMA;
+const logo_theme = import.meta.env.VITE_TEMA
 const { Sider, Header } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -56,6 +57,8 @@ const  getClasseIcon = (item:string)=> {
       return 'feredieIconBar'
     case 'mundochocolate':
       return 'mundochocolateIconBar'
+    case 'generico':
+      return 'davirton'
     default:
       return ''
   }
@@ -226,7 +229,7 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
         onCollapse={(value) => setCollapsed(value)}
         >
         <div className={`${styles.logo} ${collapsed? styles.collapsed :''} ${theme+'Logo'}`}>
-          <img src={getLogo(theme)} alt={`Logo ${theme}`} />
+          <img src={getLogo(logo_theme)} alt={`Logo ${theme}`} />
         </div>
         <div className="demo-logo-vertical" />
           <Menu className={theme+'Menu'} defaultSelectedKeys={[getMenuDefaultSelect()]} 

@@ -28,7 +28,7 @@ interface CustomTableMeta {
 const ModalCategori : React.FC<Props> = ({openModalCategori, setOpenModalCategori}) =>{
   const dispatch = useCustomDispatch();
   const allCategori = useCustomSelector((state) => state.product.allCategori);
-  const themeSelect = import.meta.env.VITE_TEMA;
+  const themeSelect = import.meta.env.VITE_TEMA === 'generico' ? 'davirton' : import.meta.env.VITE_TEMA;
 
   const [categori, setCategori] = useState<string>('')
   const [editCategory, setEditCategory] = useState<Array<number | boolean | string> | null>(null);

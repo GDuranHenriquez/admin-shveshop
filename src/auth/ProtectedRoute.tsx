@@ -11,7 +11,7 @@ interface Props{
 
 const  ProtectedRoute: React.FC<Props> = ({ _sidebarOpen, setSidebaropen }) => {
   const auth = useAuth();
-  const theme = import.meta.env.VITE_TEMA
+  const theme = import.meta.env.VITE_TEMA === 'generico' ? 'davirton' : import.meta.env.VITE_TEMA
   const user = auth.getUser()
   const typeUser = ['root', 'user']
   

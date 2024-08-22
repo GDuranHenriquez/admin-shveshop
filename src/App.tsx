@@ -20,7 +20,7 @@ import PageTablaOperaciones from './pages/tablaOperaciones/TablaOperacionesPage.
 
 function App() {
   const [sidebarOpen, setSidebaropen] = useState(true);
-  const theme = import.meta.env.VITE_TEMA
+  const theme = import.meta.env.VITE_TEMA === 'generico' ? 'davirton' : import.meta.env.VITE_TEMA
 
   useEffect(() => {
     document.body.classList.add(theme+'AppBody'); 

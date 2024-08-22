@@ -3,6 +3,7 @@ import logoSH from '../assets/logos/sh.png';
 import logoDavirton from '../assets/logos/logo64x64.png';
 import logoFeredie from '../assets/logos/RFeredie2.png';
 import logoChoco from '../assets/logos/logoChoco.jpg'
+import generico from '../assets/logos/generico.png'
 
 export const getLogo = (nameTheme: string) => {
   switch (nameTheme) {
@@ -16,6 +17,8 @@ export const getLogo = (nameTheme: string) => {
       return logoFeredie
     case 'mundochocolate':
       return logoChoco
+    case 'generico':
+      return generico
     default:
       return logoMukafe;  
   }
@@ -65,6 +68,8 @@ export const getTheme = (themeName: string) =>{
       return theme_feredie  
     case 'mundochocolate':
       return theme_mundochocolate;
+    case 'generico':
+      return theme_davirton; 
     default:
       return defaultTheme
   }

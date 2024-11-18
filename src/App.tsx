@@ -17,6 +17,7 @@ import GetTagPricePage from './pages/printPrice/GetTagPrice.tsx';
 import GetBarCodePage from './pages/printBarCode/GetBarCode.tsx';
 import ResetPasswordPage from './pages/resetPasswword/ResetPassword.tsx';
 import PageTablaOperaciones from './pages/tablaOperaciones/TablaOperacionesPage.tsx';
+import ManageOrdersPage from './pages/manageOrders/ManageOrderPage.tsx';
 
 function App() {
   const [sidebarOpen, setSidebaropen] = useState(true);
@@ -66,6 +67,10 @@ function App() {
         {
           path: '/panel-operaciones',
           element: <PageTablaOperaciones/>
+        },
+        {
+          path: '/list-orders', 
+          element: <ManageOrdersPage/>
         }
       ]
     }

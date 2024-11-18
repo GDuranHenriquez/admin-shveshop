@@ -1,9 +1,10 @@
+@layer mantine, mantine-datatable;
 :root {
   --font-family: 'Cairo', sans-serif;
   --Cairo-laight: '300';
-  --logo-font-color: #ff6600;
-  --logo-font-color-06: rgba(255, 102, 0, 0.6);
-  --logo-font-color-hover: #ff6600f1;
+  --logo-font-color: rgba(254 , 208, 208, 1);
+  --logo-font-color-06: rgba(254 , 208, 208, 0.8);
+  --logo-font-color-hover: rgba(254 , 208, 208, 0.8);
   --black-color: #000;
   --withe-hover-button: #f4eaea;
   --bacgroung-general: rgb(255, 255, 255);
@@ -16,14 +17,19 @@
 
 .button-send{
   background: var(--logo-font-color);
-  border: 1px solid var(--border-buton-color);
   border: 1px solid #fff;
-  color: #fff;
+  color: #000;
+  padding: 6px;
+  border-radius: 8px;
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
 }
 
 .button-send:hover{
+  cursor: pointer;
   background: var(--logo-font-color-hover);
-  color: #fff;
+  color: #000;
 }
 
 .button-cancel{
@@ -144,4 +150,48 @@
   border-color: rgba(43, 81, 151, 0.8);
   color: blue;
   cursor: pointer;
+}
+
+.mantine-datatable{
+  border: none;
+}
+.mantine-datatable-header{
+  background-color: #bac084 ;
+  color: rgba(255, 255, 255, 1);
+}
+.mantine-datatable-header > tr > th{
+  background-color: #bac084;
+  border: none;
+}
+.mantine-datatable-header > tr > th > div > div > svg{
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.mantine-Table-table{
+  border: none;
+}
+.mantine-Table-table > tbody{
+  border: none;
+}
+.mantine-Table-table > tbody > tr > td{
+  border: none;
+}
+.mantine-ScrollArea-viewport{
+  border: none !important;
+}
+
+.mantine-Modal-content{
+  min-width: 60% !important;
+}
+
+@media (max-width: 1280px) {
+  .mantine-Modal-content {
+    min-width: 80% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .mantine-Modal-content {
+    min-width: 90% !important;
+  }
 }

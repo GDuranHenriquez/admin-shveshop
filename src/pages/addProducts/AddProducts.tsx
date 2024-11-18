@@ -40,7 +40,6 @@ const AddProductPage: React.FC = () => {
   return <Container>
     <FormAddProducts setIsLoadin={setIsLoadin}></FormAddProducts>
     {isLoadin && <Loading/>}
-    
   </Container>
 }
 

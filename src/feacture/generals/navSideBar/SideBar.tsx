@@ -12,7 +12,8 @@ import {
   UnorderedListOutlined,
   TagOutlined,
   BarcodeOutlined,
-  FormOutlined
+  FormOutlined,
+  FileDoneOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
@@ -75,6 +76,10 @@ const itemsAdmin: MenuItem[] = [
     getItem('Obtener etiquetas de precios', 'get-tag-price', <TagOutlined className={getClasseIcon(theme)}/>),
     getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
   ]),
+  getItem('Gestión de pedidos', 'sub2', <FileDoneOutlined className={getClasseIcon(theme)}/>, [
+    getItem('Lista de pedidos', 'list-orders', <UnorderedListOutlined className={getClasseIcon(theme)}/>),
+    //getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
+  ]),
 
 ];
 
@@ -89,6 +94,10 @@ const itemsRoot: MenuItem[] = [
   getItem('Obtener Info.', 'sub1', <UnorderedListOutlined className={getClasseIcon(theme)}/>, [
     getItem('Obtener etiquetas de precios', 'get-tag-price', <TagOutlined className={getClasseIcon(theme)}/>),
     getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
+  ]),
+  getItem('Gestión de pedidos', 'sub2', <FileDoneOutlined className={getClasseIcon(theme)}/>, [
+    getItem('Lista de pedidos', 'list-orders', <UnorderedListOutlined className={getClasseIcon(theme)}/>),
+    //getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
   ]),
 
 ];
@@ -121,10 +130,13 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
         return 'Obtener Etiquetas.'
       case '/get-barcode':
         return 'Obtener Cod. de Barra.'
+      case '/list-orders':
+        return 'Lista de pedidos';
       default:
         return '' ;
     }
   }
+  
   const getMenuDefaultSelect = () =>{
     switch (location.pathname) {
       case '/addProduct':
@@ -136,7 +148,9 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
       case '/get-tag-price':
         return 'get-tag-price';   
       case '/get-barcode':
-        return 'get-barcode'
+        return 'get-barcode';
+      case '/list-orders':
+        return 'Lista de pedidos';
       default:
         return '' ;
     }
@@ -191,6 +205,10 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
       getItem('Obtener etiquetas de precios', 'get-tag-price', <TagOutlined className={getClasseIcon(theme)}/>),
       getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
     ]),
+    getItem('Gestión de pedidos', 'sub2', <FileDoneOutlined className={getClasseIcon(theme)}/>, [
+      getItem('Lista de pedidos', 'list-orders', <UnorderedListOutlined className={getClasseIcon(theme)}/>),
+      //getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
+    ]),
     getItem('Salir', 'logout', <LogoutOutlined className={getClasseIcon(theme)}/>)
   ];
   const itemsResponseAdmin: MenuItem[] = [
@@ -203,6 +221,10 @@ const SideBar: React.FC<Props> = ({setSidebaropen }) => {
     getItem('Obtener Info.', 'sub1', <UnorderedListOutlined className={getClasseIcon(theme)}/>, [
       getItem('Obtener etiquetas de precios', 'get-tag-price', <TagOutlined className={getClasseIcon(theme)}/>),
       getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>),
+    ]),
+    getItem('Gestión de pedidos', 'sub2', <FileDoneOutlined className={getClasseIcon(theme)}/>, [
+      getItem('Lista de pedidos', 'list-orders', <UnorderedListOutlined className={getClasseIcon(theme)}/>),
+      //getItem('Obtener Cod. de Barras', 'get-barcode', <BarcodeOutlined className={getClasseIcon(theme)}/>)
     ]),
     getItem('Salir', 'logout', <LogoutOutlined className={getClasseIcon(theme)}/>)
     

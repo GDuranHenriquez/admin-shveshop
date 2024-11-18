@@ -1,0 +1,42 @@
+:root {
+  --font-family: 'Roboto', sans-serif;
+  --Cairo-laight: '300';
+  --logo-font-color: #d81e05;
+  --logo-font-color-06: rgba(255, 102, 0, 0.6);
+  --logo-font-color-hover: rgba(191, 6, 6, 0.8);
+  --black-color: rgb(7, 12, 15);
+  --withe-hover-button: #f4eaea;
+  --bacgroung-general: rgba(255, 255, 255, 1);
+  --border-buton-color: rgba(7, 12, 15, 0.275);
+  --font-family: 'Roboto', sans-serif;
+  --font-size: 16px;
+  --border-radius: 4px;
+}
+
+.cellDescription{
+  max-width: 400px !important;
+}
+
+.datatables{
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.tagSubCategory{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 450px;
+}
+.tagSubCategory > span {
+  width: max-content;
+  font-size: 14px;
+  background: var(--withe-hover-button);
+  border: none;
+  border-radius: 8px;
+  padding: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
+}

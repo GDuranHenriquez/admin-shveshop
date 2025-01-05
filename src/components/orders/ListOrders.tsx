@@ -6,15 +6,15 @@ import 'mantine-datatable/styles.layer.css';
 import { useCustomSelector } from "../../hooks/redux";
 import { TypeOrder } from "../../redux/slices/orders/typesOrders";
 
-interface Props {
+/* interface Props {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
+} */
 
-const ListOrders : React.FC<Props> = ({ setIsLoading }) => {
+const ListOrders : React.FC = (/* { setIsLoading } */) => {
 
   const allOrders = useCustomSelector((state) => state.order.allOrders);
   const [records, setRecords] = useState<TypeOrder[]>([]);
-  const [selectedIds, setSelectedIds] = useState<number[]>([]); 
+  //const [selectedIds, setSelectedIds] = useState<number[]>([]); 
   
   /* const getAbonoFromOrder = (abono: TypeAbono[] ) : number => {
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './modalCreateOrder.module.css';
-import { Modal, Button } from '@mantine/core';
+import { Modal } from '@mantine/core';
 
 interface Props {
   isOpen: boolean;

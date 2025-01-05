@@ -43,7 +43,7 @@ const ManageOrdersPage : React.FC = ({}) => {
     <div>
       <button className="button-send" onClick={handleOpenModalCreateOrder}>Crear pedido</button>
     </div>
-    <ListOrders setIsLoading={setIsLoading}/>
+    <ListOrders /* setIsLoading={setIsLoading} *//>
     <ModalCreateOrder isOpen={openModalCreateOrder} setIsOpen={setOpenModalCreateOrder}/>
     {isLoading && <Loading/>}
   </Container>
